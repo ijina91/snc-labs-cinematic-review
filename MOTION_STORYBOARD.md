@@ -1,5 +1,8 @@
 # Motion storyboard
 
+> 2026-11-04 변경 상태: 체크마크 3D 연출을 제거하고 외부 무료 영상 제작으로 전환 중입니다. 현재는 새 원본 첫 프레임을 적용한 상태이며, 영상은 사람 인증 대기입니다. 아래 기존 WebGL 구현·60건 QA·Lighthouse 수치는 이전 커밋 cc6a428의 기록입니다. 현재 변경 사항과 실제 생성 상태는 [영상 제작 상태](docs/video/PRODUCTION_STATUS.md)를 확인하세요. 새 검증 결과는 별도로 기록합니다.
+
+
 The hero remains a short white-to-blue entrance (2.1s atmosphere, light sweep complete by 2.25s). The longer experience is a **six-chapter native-scroll introduction** after it, rather than a timed loading screen. The reference reel's measured 12.42s is an edited demonstration, not the site's required reading time.
 
 ## Six-chapter introduction

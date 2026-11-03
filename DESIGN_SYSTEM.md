@@ -1,5 +1,8 @@
 # SNC Premium Web Experience design system
 
+> 2026-11-04 변경 상태: 체크마크 3D 연출을 제거하고 외부 무료 영상 제작으로 전환 중입니다. 현재는 새 원본 첫 프레임을 적용한 상태이며, 영상은 사람 인증 대기입니다. 아래 기존 WebGL 구현·60건 QA·Lighthouse 수치는 이전 커밋 cc6a428의 기록입니다. 현재 변경 사항과 실제 생성 상태는 [영상 제작 상태](docs/video/PRODUCTION_STATUS.md)를 확인하세요. 새 검증 결과는 별도로 기록합니다.
+
+
 ## Scroll introduction
 
 Maintain SNC white/blue/sky/navy/ink while extending the experience through six native-scroll chapters. The visual language is sculptural systems: a smooth signature loop, an asymmetric protective envelope, interwoven data flows and curved interface fragments. Reject repeated pillars/boards, checkerboard ring segments, coarse edges and meaningless particles. Continuous ribbon normals, MSAA and native-or-higher render resolution preserve clean surfaces. Use generated studio reflections rather than external imagery.

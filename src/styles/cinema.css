@@ -23,17 +23,6 @@
   pointer-events: none;
   overflow: clip;
 }
-.hero-orbit {
-  position: absolute;
-  width: 78vw;
-  height: 78vw;
-  right: -22vw;
-  top: -21vw;
-  border: 1px solid #ffffffa3;
-  border-radius: 50%;
-  box-shadow: 0 0 0 7vw #ffffff0f, 0 0 0 7.05vw #ffffff63,
-    0 0 0 18vw #ffffff08, 0 0 0 18.05vw #ffffff30;
-}
 .hero-outline {
   position: absolute;
   right: -1.5vw;

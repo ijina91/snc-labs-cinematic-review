@@ -1,5 +1,7 @@
 # SNC Labs
 
+현재 디자인 변경 및 무료 영상 제작 상태: [제작 기록](docs/video/PRODUCTION_STATUS.md). 외부 영상은 사람 인증 대기이며, 운영 배포하지 않았습니다.
+
 SNC의 회사 소개와 ESH·안전작업허가 관련 시스템 개발, SAP & Enterprise, Web Engineering, 공개 GitHub 활동을 소개하는 Vite + Vanilla JS 웹사이트입니다.
 
 ## 실행 및 검증

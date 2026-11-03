@@ -1,5 +1,8 @@
 # QA report
 
+> 2026-11-04 변경 상태: 체크마크 3D 연출을 제거하고 외부 무료 영상 제작으로 전환 중입니다. 현재는 새 원본 첫 프레임을 적용한 상태이며, 영상은 사람 인증 대기입니다. 아래 기존 WebGL 구현·60건 QA·Lighthouse 수치는 이전 커밋 cc6a428의 기록입니다. 현재 변경 사항과 실제 생성 상태는 [영상 제작 상태](docs/video/PRODUCTION_STATUS.md)를 확인하세요. 새 준비본의 자동 검증은 60/60 통과했습니다(아래 기록과 구분). [현재 QA 원본](docs/verification/qa-film-preparation.json). 외부 영상 원본·재생·성능 검증은 미완료입니다.
+
+
 Dates: 2026-11-03–04 (KST). Tested production build on Windows using Playwright 1.64.1, Microsoft Edge 156, axe-core through @axe-core/playwright 4.14.0. Four viewports: 390×844, 768×1080, 1440×1080 and 1920×1080. Mobile/touch emulation is enabled where relevant.
 
 ## Automated coverage
@@ -59,3 +62,8 @@ Internal target: 99/100; scoring cannot override failed checks.
 Automated axe is not a complete accessibility certification. Safari, Firefox, physical phones, assistive-technology sessions and field Web Vitals have not been tested here. GitHub states use controlled fixtures for repeatability; production uses the real unauthenticated public endpoint with a safe fallback. GitHub Pages build/output and root paths are verified locally; a production rollout/real deployed redesign check is intentionally pending user approval. No main merge or production deploy is part of this delivery.
 
 Remote status at initial [PR #1](https://github.com/snclabs/snclabs.github.io/pull/1) submission: GitHub Actions `action_required`, awaiting repository-maintainer approval for an external-fork workflow. Remote Ubuntu/Chromium execution is therefore unverified; reported passes are local Edge results.
+
+
+## 2026-11-04 최종 정지 배경 준비본
+
+전체 회귀 60/60 통과 후 배경을 전체 stage에 배치하는 시각 수정을 진행했다. 이 수정의 추가 16건 중 15건은 첫 실행에서 통과했고, 모바일 키보드 검사는 native PageUp이 끝나기 전에 다음 Enter를 입력해 실패했다. 기본 스크롤이 안정된 뒤 다음 키보드 동작을 수행하도록 검사 순서를 수정했고, 동일 키보드 흐름을 네 화면 크기에서 다시 실행해 4/4 통과했다. 실패한 16건 실행을 16/16 성공으로 표기하지 않는다. 현재 소스의 레이아웃·axe·화이트 진입·6개 장면은 추가 검사와 재검사로 확인했다. 실제 외부 영상 원본은 없으므로 영상 품질·재생·성능은 검증하지 않았다.

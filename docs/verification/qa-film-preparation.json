@@ -1,0 +1,35 @@
+{
+  "tool": "Playwright + axe-core",
+  "revision": "SNC spatial film preparation; static original poster, no rotating check; external video not generated",
+  "startTime": "2026-11-03T22:16:37.075Z",
+  "duration": 766340.995,
+  "expected": 60,
+  "skipped": 0,
+  "unexpected": 0,
+  "flaky": 0,
+  "viewports": [
+    390,
+    768,
+    1440,
+    1920
+  ],
+  "scope": "Current static preparation only. Actual external video decoding, quality, duration and scroll playback are not yet verified.",
+  "finalLayoutInitialRun": {
+    "startTime": "2026-11-03T22:31:08.408Z",
+    "duration": 147662.60499999998,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0,
+    "note": "15 passed; the 390px keyboard anchor assertion ran before native PageUp scrolling settled. Test sequencing fixed; four-view retest passed. No failed run is counted as a passing run."
+  },
+  "finalLayoutKeyboardRetest": {
+    "startTime": "2026-11-03T22:34:31.085Z",
+    "duration": 69889.697,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "note": "All four viewports passed after waiting for native PageUp scrolling to settle. Includes focus, #about URL and in-viewport assertions."
+  }
+}

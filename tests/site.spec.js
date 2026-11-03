@@ -196,17 +196,33 @@ test('six-chapter introduction follows native scroll, reverses, and supports key
     if (index === 1 || index === 2) expect((await new AxeBuilder({ page }).include('.journey-stage').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
   }
   await journeyChapter(page, 1);
-  await expect.poll(() => page.locator('#journey').getAttribute('data-scene-position')).toBe('1.000');
-  await page.locator('[data-chapter-target="3"]').focus();
-  await page.locator('[data-chapter-target="3"]').press('Enter');
-  await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter','3');
-  await expect(page.locator('[data-chapter-target="3"]')).toBeFocused();
+  // Native scroll coordinates round to whole CSS pixels on mobile.
+  await expect.poll(async () => Math.abs(Number(await page.locator('#journey').getAttribute('data-scene-position')) - 1)).toBeLessThan(.003);
+  await expect(page.locator('.journey-nav, .journey-counter')).toHaveCount(0);
+  const previous = await page.evaluate(() => scrollY);
+  await page.keyboard.press('PageDown');
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(previous);
+  await page.keyboard.press('PageUp');
+  await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '1');
+  // PageUp uses the browser's own animated scroll. Let that input finish
+  // before starting a different keyboard navigation action.
+  await page.evaluate(() => new Promise(resolve => {
+    let quiet;
+    const done = () => { removeEventListener('scroll', wait); resolve(); };
+    const wait = () => { clearTimeout(quiet); quiet = setTimeout(done, 200); };
+    addEventListener('scroll', wait, { passive: true }); wait();
+  }));
+  await page.locator('.journey-top a').focus();
+  await expect(page.locator('.journey-top a')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#about$/);
+  await expect(page.locator('#about')).toBeInViewport();
   await expect(page.locator('.journey-top a')).toHaveAttribute('href','#about');
   await expect(page.locator('.journey-bottom a')).toHaveAttribute('href','#contact');
 });
 
-test('optional WebGL failure retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
-  await page.route('**/assets/JourneyScene-*.js',route=>route.abort());
+test('missing decorative image retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
+  await page.route('**/assets/media/snc-spatial-poster.webp',route=>route.abort());
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
@@ -214,11 +230,11 @@ test('optional WebGL failure retains scroll chapters and reduced motion restores
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced','true');
   expect(await page.locator('.journey-panel[aria-hidden="true"]').count()).toBe(0);
-  await expect(page.locator('.journey-nav')).toBeHidden();
+  await expect(page.locator('.journey-nav, .journey-counter')).toHaveCount(0);
   expect(await page.locator('.journey-panel').count()).toBe(6);
 });
 
-test('3D resources are deferred until scroll and settle into a rendered or fallback scene', async ({ page }) => {
+test('scroll enhancement preserves layout and the fallback never fetches former 3D resources', async ({ page }) => {
   const requests=[];
   page.on('request', request=>{ if(/JourneyScene-/.test(request.url()))requests.push(request.url()); });
   await page.goto('/'); await page.waitForTimeout(350);
@@ -227,10 +243,9 @@ test('3D resources are deferred until scroll and settle into a rendered or fallb
   await enterJourney(page);
   const after = await page.locator('#about').evaluate(el => el.getBoundingClientRect().top + scrollY);
   expect(Math.abs(after - before)).toBeLessThan(2);
-  const simple = await page.evaluate(() => navigator.connection?.saveData === true || navigator.hardwareConcurrency <= 2);
-  if (simple) expect(requests).toHaveLength(0);
-  else await expect.poll(()=>requests.length).toBeGreaterThan(0);
-  await expect(page.locator('#journey')).toHaveAttribute('data-renderer',/webgl|poster/,{timeout:20000});
+  expect(requests).toHaveLength(0);
+  await expect(page.locator('.journey-canvas')).toHaveCount(0);
+  await expect(page.locator('#journey')).toHaveAttribute('data-renderer',/video|poster/,{timeout:20000});
   await journeyChapter(page,4);
   await expect(page.locator('.journey-panel').nth(4).locator('h3')).toHaveText('각각의 기술이 만나,하나의 흐름이 됩니다.');
 });
