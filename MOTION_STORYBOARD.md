@@ -1,10 +1,10 @@
 # Motion storyboard
 
-All times are authored design targets, not reference-video observations. User steering: begin on white and introduce blue progressively, like a short cinematic sequence. The final hero uses a 1.7s finite light wash; text is readable immediately. A separate nested tint deepens with native scrolling, then the navy technology chapter provides contrast.
+All times are authored design targets, not reference-video observations. User steering: begin on white and introduce blue progressively, then make the composition fullscreen and more spectacular while preserving SNC colors. The fullscreen hero uses a 2.1s finite light wash and a single light sweep finishing at 2.25s; text is readable immediately. A separate nested tint deepens with native scrolling, then the viewport-height navy technology chapter provides contrast.
 
 | Chapter | Purpose | Implementation | Fallback |
 |---|---|---|---|
-| Hero, 0–1.7s | Introduce SNC's connection motif and message | One GSAP timeline: white → drifting blue light wash → ribbon surface and brand → title lines → CTAs/cue. Text starts readable in HTML; the supporting paragraph stays stationary. | Static fully visible composition |
+| Hero, 0–2.25s | Introduce SNC's connection motif at fullscreen scale | One GSAP timeline: white → blue atmosphere and orbital curves → oversized check rotates/translates into position → type/CTA → finite light sweep clears. SNC outline type anchors the lower scene. Supporting paragraph stays stationary. | Static fully visible composition |
 | Hero exit | Connect first view to company introduction | Small transform on a dedicated nested graphic group; no pinning. Intro and scroll motion own different elements. | Static ribbon |
 | About | Pace the company explanation | ScrollTrigger mask/transform reveal of heading lines; supporting paragraph remains readable. | Normal document flow |
 | Services | Explain the three verified areas | Native details interaction; CSS hover highlight and subtle icon transform. No artificial services or fake performance stats. | Native keyboard disclosures |

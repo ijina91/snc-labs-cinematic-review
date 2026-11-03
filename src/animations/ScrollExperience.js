@@ -10,7 +10,7 @@ export function initScrollExperience() {
     if (!profile.simple) {
       const heroScroll = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .7 } });
       heroScroll.to('.hero-scroll-tint', { opacity: .45, duration: .7, ease: 'none' }, 0);
-      if (profile.desktop) heroScroll.to('.hero-art-scroll', { y: 65, rotation: -3, duration: 1, ease: 'none' }, 0);
+      if (profile.desktop) heroScroll.to('.hero-art-scroll', { y: 120, rotation: -6, scale: .9, duration: 1, ease: 'none' }, 0);
     }
     // Initialize only nearby sections. Async callbacks are registered with the
     // GSAP context so media changes and pagehide also revert their animations.

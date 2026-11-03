@@ -6,13 +6,13 @@ Date: 2026-11-03. Production build served from `http://127.0.0.1:4180/`. Lightho
 
 | Profile | Performance | Accessibility | SEO | LCP | CLS | TBT |
 |---|---:|---:|---:|---:|---:|---:|
-| Mobile 1 | 90 | 100 | 100 | 2.511s | 0 | 138.5ms |
-| Mobile 2 | 95 | 100 | 100 | 2.043s | 0 | 101ms |
-| Mobile 3 | 97 | 100 | 100 | 2.033s | 0 | 78ms |
-| Mobile median | **95** | **100** | **100** | **2.043s** | **0** | **101ms** |
-| Desktop 1 | **100** | **100** | **100** | **0.558s** | **0.0000062** | **0ms** |
+| Mobile 1 | 94 | 100 | 100 | 2.488s | 0.0000225 | 105ms |
+| Mobile 2 | 95 | 100 | 100 | 2.371s | 0.0000225 | 127ms |
+| Mobile 3 | 90 | 100 | 100 | 2.507s | 0.0000225 | 265ms |
+| Mobile median | **94** | **100** | **100** | **2.488s** | **0.0000225** | **127ms** |
+| Desktop 1 | **99** | **100** | **100** | **0.605s** | **0.0000486** | **0ms** |
 
-Median mobile and the desktop sample meet the lab targets. Mobile sample 1 exceeds the LCP goal by approximately 11ms; the goal was not met in every sample. Lighthouse still flags forced reflow, dependency chains and render-blocking work; these are improvement opportunities, not hidden successes. Machine-readable final summaries are included in `docs/verification/performance.json`.
+These are fresh measurements of the fullscreen revision, replacing the framed-hero measurements. Median mobile and the desktop sample meet the lab targets. Mobile sample 3 exceeds the LCP goal by approximately 7ms; the goal was not met in every sample. Lighthouse still flags forced reflow, dependency chains and render-blocking work; these are improvement opportunities, not hidden successes. Machine-readable final summaries are included in `docs/verification/performance.json`.
 
 Goal: LCP ≤2.5s, CLS ≤0.1, Lighthouse Performance ≥90, Accessibility ≥95, field INP ≤200ms. A lab report does not establish field INP. Total Blocking Time is reported independently and is not relabeled as INP.
 
@@ -20,7 +20,7 @@ Raw final reports are `artifacts/performance/mobile-{1,2,3}.{json,html}`, `deskt
 
 ## Interaction probe
 
-Observed maximum Event Timing duration: **320ms at 390px**, **152ms at 1440px**, both with 4× CPU slowdown. The mobile sample exceeds the 200ms interaction target; it is disclosed as a remaining lab interaction-performance limit. No field-INP pass is claimed. Full event samples are included in `docs/verification/interactions.json`.
+Observed maximum Event Timing duration in the fullscreen revision: **256ms at 390px**, **160ms at 1440px**, both with 4× CPU slowdown. The mobile sample exceeds the 200ms interaction target; it is disclosed as a remaining lab interaction-performance limit. No field-INP pass is claimed. Full event samples are included in `docs/verification/interactions.json`.
 
 `npm run probe` runs real click/key interactions on mobile and desktop under 4× CPU slowdown, observing Event Timing entries at a 16ms threshold. It covers disclosures and mobile menu/Escape. This small synthetic sample is not a percentile or real-user INP. An absent entry means no observed qualifying event, not a measured zero. Raw output: `artifacts/performance/interactions.json`.
 
@@ -32,11 +32,11 @@ An earlier desktop-labeled run accidentally used mobile settings; it is excluded
 
 ## Asset budget and delivery
 
-- Static HTML: approximately 18.59KB (5.39KB gzip).
-- CSS: 27.04KB (6.55KB gzip).
+- Static HTML: approximately 19.13KB (5.53KB gzip).
+- CSS: 32.14KB (7.67KB gzip), including the fullscreen scene variant.
 - Main application JS: 7.66KB (3.27KB gzip).
-- Hero module: 0.77KB (0.44KB gzip); shared GSAP core: 70.04KB (27.53KB gzip).
-- Scroll module: 45.59KB (18.95KB gzip), requested after scrolling starts.
+- Hero module: 1.14KB (0.55KB gzip); shared GSAP core: 70.04KB (27.53KB gzip).
+- Scroll module: 45.60KB (18.96KB gzip), requested after scrolling starts.
 - Three locally hosted font subsets: approximately 122KB total; no external font request.
 - No hero raster/video download, WebGL context, infinite animation loop or runtime test engine. Decorative graphics are SVG/CSS. Font and graphic dimensions reserve layout space.
 

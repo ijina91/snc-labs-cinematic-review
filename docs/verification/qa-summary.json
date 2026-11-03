@@ -1,5 +1,6 @@
 {
   "tool": "Playwright",
+  "revision": "Fullscreen scene",
   "viewports": [
     390,
     768,
@@ -10,7 +11,7 @@
   "unexpected": 0,
   "skipped": 0,
   "flaky": 0,
-  "durationMs": 350929.523,
+  "durationMs": 283194.809,
   "fullPageAxeViolations": [
     {
       "width": 390,

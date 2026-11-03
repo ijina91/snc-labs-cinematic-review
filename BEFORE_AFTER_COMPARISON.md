@@ -4,7 +4,7 @@ Baseline: production main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Baseline s
 
 | Area | Before | After |
 |---|---|---|
-| First impression | Static white/blue two-column composition | Panoramic white stage; progressive blue light; dimensional SNC check and finite 1.7s timeline |
+| First impression | Static white/blue two-column composition | Edge-to-edge viewport-height stage; progressive blue atmosphere; oversized SNC check, outline typography, orbital curves and finite 2.25s timeline |
 | Identity | Company/service introduction | Same verified introduction, larger hierarchy and generous spacing |
 | Expertise | Native service disclosures | Data-backed static service components, always-visible inquiry links, native keyboard details |
 | Technology | No explanatory chapter | Responsive SVG connects ESH, SAP and Web work to SNC and system operation; upward scrolling reverses paths |
@@ -29,5 +29,7 @@ Local walkthrough: `artifacts/cinematic-preview.webm`. Static captures cannot de
 Positive pass: the SNC check is a recognizable brand anchor, white space and large Korean typography establish hierarchy, the navy diagram gives the page a purposeful contrast, and each service leads to a real inquiry action. Mobile rearranges the diagram vertically rather than squeezing desktop nodes. No green, client logos or invented statistics appear.
 
 Negative pass: examined all four full-page layouts for clipping, horizontal overflow, excessive repetition and unreadable small labels; checked desktop/mobile chapter captures and native disclosure states. Identified low-contrast project/status labels and corrected their tokens. Removed unnecessary hero perspective and moving body copy after measured startup cost. Corrected retry focus loss caused by disabling a focused native button. No unresolved critical visual or interaction defect was found in the tested states.
+
+Fullscreen pass: inspected 1440px and 390px first views after removing the inset frame. Larger check remains separated from the headline; mobile stacks the graphic below the copy. The stronger blue background required ink-colored scene captions/footer/navigation: old muted labels would only achieve about 2.2–4.1:1 over representative sky-blue stops. Ink #182334 provides at least 6.4:1 against those sampled blue stops. This manual gradient contrast check supplements axe, which cannot reliably assess every layered gradient.
 
 These are two separate criteria passes by the implementing agent, not independent people or an executed Impeccable skill. Exact unavailable tools and limits are disclosed in REFERENCE_ANALYSIS.md and QA_REPORT.md.

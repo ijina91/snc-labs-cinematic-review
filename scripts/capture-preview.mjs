@@ -7,7 +7,7 @@ const browser = await chromium.launch({ channel: 'msedge', headless: true });
 for (const [name, width, height] of [['desktop', 1440, 1000], ['mobile', 390, 844]]) {
   const page = await browser.newPage({ viewport: { width, height } });
   await page.route('**/api.github.com/**', (route) => route.fulfill({ json: [] }));
-  await page.goto(url); await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(2200);
+  await page.goto(url); await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(2800);
   await page.screenshot({ path: `docs/previews/${name}.png` });
   if (name === 'desktop') {
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -19,7 +19,7 @@ for (const [name, width, height] of [['desktop', 1440, 1000], ['mobile', 390, 84
 const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, recordVideo: { dir: 'artifacts/recordings', size: { width: 1280, height: 800 } } });
 const page = await context.newPage(); const video = page.video();
 await page.route('**/api.github.com/**', (route) => route.fulfill({ json: [] }));
-await page.goto(url); await page.waitForTimeout(2300);
+await page.goto(url); await page.waitForTimeout(2900);
 for (const selector of ['#about', '#expertise', '#technology', '#opensource', '#contact']) {
   await page.locator(selector).evaluate((el) => window.scrollTo({ top: el.offsetTop - 88, behavior: 'smooth' }));
   await page.waitForTimeout(selector === '#technology' ? 1800 : 1200);

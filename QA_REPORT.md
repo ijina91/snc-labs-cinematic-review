@@ -8,6 +8,10 @@ Final full regression: **48/48 passed**, 12 cases at each of the four viewports.
 
 Twelve cases per viewport cover preserved text/assets/SEO/links and overflow; keyboard disclosures and mobile touch/menu focus; WCAG 2 A/AA and 2.1 AA axe scans; safe public project rendering and filtering; failure/retry; loading/empty states; actual seven-second request deadline; reduced motion and live preference changes; no JavaScript; blocked optional motion module; reversible SVG scroll progression; and the white initial frame followed by blue progression.
 
+The fullscreen revision adds explicit assertions that the hero starts at x=0, spans the viewport width, and fills at least the available viewport height below the header. Layered sky-blue backgrounds are also reviewed manually for small-text contrast; scene captions/navigation/footer use ink rather than the former muted gray.
+
+The opening frame also asserts the check's faint 0.08 opacity before the optional animation module is released, then full opacity at completion. This prevents a full-color graphic flashing before the white-to-blue sequence starts. No-JS and failed-animation tests verify that their static graphic remains fully visible. The no-JS contexts explicitly use each project's viewport/touch settings.
+
 Project success/error color contrast is checked in addition to the full-page axe scan. Tests assert no page exceptions, broken local asset requests, missing anchor targets or horizontal overflow in the tested chapters. Native phone href and all three service-to-contact links are verified. Tests do not initiate a telephone call.
 
 Commands: `npm ci`, `npm test`, `npm audit --audit-level=moderate`, `git diff --check`. Raw evidence: `artifacts/qa/results.json`, `axe-{width}.json`, four full-page PNGs and retained traces on failure. CI repeats npm ci/build/Playwright on Ubuntu Chromium and uploads its own results; a local pass is not a claim that a pending remote run passed.
@@ -43,7 +47,7 @@ Internal target: 99/100; scoring cannot override failed checks.
 | Reviewable delivery and deployment boundary | 5 | 5 |
 | Total | 100 | 98 |
 
-98 is an internal assessment, not an external benchmark. The 99 target is not claimed: manual screen-reader/physical-device verification and real-user INP remain unverified. The mobile synthetic interaction probe reached 320ms under 4× slowdown; the performance report records this limit and every Lighthouse sample. No cosmetic change was made merely to increase a subjective score.
+98 is an internal assessment, not an external benchmark. The 99 target is not claimed: manual screen-reader/physical-device verification and real-user INP remain unverified. The latest fullscreen mobile synthetic interaction probe reached 256ms under 4× slowdown; the performance report records this limit and every Lighthouse sample. No cosmetic change was made merely to increase a subjective score.
 
 ## Limits and production boundary
 

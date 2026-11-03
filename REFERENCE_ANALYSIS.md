@@ -4,6 +4,8 @@ Reference: https://www.instagram.com/reel/DfRaUziOLLU/
 
 Checked 2026-11-03. Connected web retrieval returned “Online fetch throttled”. The local browser connector returned “Local browser use is disabled in Work settings”. The reel was **not viewed**; its composition, transitions, timing, author and assets are unverified. No claim of recreation or visual analysis is made. No reference media is copied.
 
+Fullscreen revision: retried the public reel URL on 2026-11-03 with a direct HTTP request. Instagram returned HTTP 200 HTML, but no playable video or video URL was available in that response. The clip still has not been viewed. The new fullscreen composition responds to the user's explicit visual direction, rather than claiming to reconstruct unseen footage.
+
 ## Independent direction
 
 SNC's own blue check becomes a folded ribbon connecting company identity, the three verified business areas, and a system/operations diagram. A short entrance sequence gives way to ordinary document scrolling. No scroll hijack, video backdrop, particles or WebGL dependency.

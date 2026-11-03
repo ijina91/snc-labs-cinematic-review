@@ -11,6 +11,11 @@ test('preserved content, assets, links and responsive layout', async ({ page }, 
   page.on('response', (response) => { if (response.url().startsWith('http://127.0.0.1') && response.status() >= 400) failed.push(response.url()); });
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('SNC, 기술로가능성을 잇다.');
+  const stage = await page.locator('.hero-stage').boundingBox();
+  const header = await page.locator('.site-header').boundingBox();
+  expect(stage.x).toBe(0);
+  expect(Math.abs(stage.width - page.viewportSize().width)).toBeLessThan(1);
+  expect(stage.height).toBeGreaterThanOrEqual(page.viewportSize().height - header.height - 1);
   for (const name of ['ESH Systems', 'SAP & Enterprise', 'Web Engineering']) await expect(page.locator('.service-card h3').filter({ hasText: name })).toBeVisible();
   expect(await page.locator('link[rel="canonical"]').getAttribute('href')).toBe('https://snclabs.github.io/');
   expect(await page.locator('a[href="tel:+8223545001"]').count()).toBeGreaterThan(0);
@@ -122,20 +127,22 @@ test('reduced motion, reverse scrolling and preference changes', async ({ page }
   expect(await page.locator('.hero-line').first().evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
 });
 
-test('no JavaScript still exposes company content, disclosures and navigation', async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false }); const page = await context.newPage();
+test('no JavaScript still exposes company content, disclosures and navigation', async ({ browser }, info) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: info.project.use.viewport, isMobile: info.project.use.isMobile, hasTouch: info.project.use.hasTouch }); const page = await context.newPage();
   await page.goto('http://127.0.0.1:4173/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.locator('.service-card')).toHaveCount(3);
   await page.locator('.service-detail').first().locator('summary').click();
   await expect(page.locator('.service-detail__body').first()).toBeVisible();
   await expect(page.locator('.no-script-nav')).toBeVisible();
+  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
   await expect(page.getByText('02-354-5001', { exact: true })).toBeVisible(); await context.close();
 });
 
 test('optional motion bundle failure does not hide content or break navigation', async ({ page }) => {
   await page.route('**/assets/CinematicExperience-*.js', (route) => route.abort()); await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
   await page.getByRole('link', { name: 'SNC의 기술 알아보기', exact: true }).click();
   await expect(page).toHaveURL(/#expertise$/); await expect(page.locator('.service-card')).toHaveCount(3);
 });
@@ -159,7 +166,9 @@ test('white first frame progressively gains brand-blue background', async ({ pag
   await page.goto('/');
   await expect(page.locator('.hero-stage')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   await expect(page.locator('.hero-ambient')).toHaveCSS('opacity', '0');
+  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '0.08');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   release();
   await expect.poll(() => page.locator('.hero-ambient').evaluate((el) => Number(getComputedStyle(el).opacity))).toBeGreaterThan(.99);
+  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
 });

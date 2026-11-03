@@ -2,7 +2,7 @@
 
 ## Result
 
-Rebuilt SNC Labs as a runnable white-based corporate website with a finite white-to-blue entrance, a custom folded SNC check, three verified service components, and a reversible SVG business/system diagram. Kept Vite, semantic HTML, CSS and vanilla JavaScript. No React or WebGL migration.
+Rebuilt SNC Labs as a runnable white-based corporate website with a finite white-to-blue entrance, a custom folded SNC check, three verified service components, and a reversible SVG business/system diagram. The latest revision replaces the rounded inset hero with a full-width, viewport-height stage, larger typography/check geometry, orbital curves, outline SNC lettering and a finite light sweep. Kept Vite, semantic HTML, CSS and vanilla JavaScript. No React or WebGL migration.
 
 The Instagram reel was inaccessible; this is an independent design. See REFERENCE_ANALYSIS.md for actual tool and skill availability. No unavailable skill is recorded as executed.
 
@@ -23,7 +23,7 @@ GitHub requests are deferred until the section approaches the viewport. Loading,
 
 ## Motion and resilience
 
-Content is visible before animation loads. Hero text stays readable on white while blue light accumulates over 1.7 seconds. The explanatory paragraph is stationary to protect LCP. GSAP loads separately; ScrollTrigger waits for the first native scroll and initializes nearby chapters. Reduced motion, failed animation imports and JavaScript-disabled browsing retain content and phone links. Scoped contexts, observers, fetches and event listeners are disposed on page lifecycle/preference changes.
+Content is visible before animation loads. Hero text stays readable on white while blue light accumulates over 2.1 seconds; the one-time light sweep ends by 2.25 seconds. The explanatory paragraph is stationary to protect LCP. GSAP loads separately; ScrollTrigger waits for the first native scroll and initializes nearby chapters. Reduced motion, failed animation imports and JavaScript-disabled browsing retain content and phone links. Scoped contexts, observers, fetches and event listeners are disposed on page lifecycle/preference changes.
 
 ## Assets and dependencies
 

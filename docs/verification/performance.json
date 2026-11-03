@@ -20,12 +20,12 @@
       "deviceScaleFactor": 1.75,
       "disabled": false
     },
-    "performance": 90,
+    "performance": 94,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 2511.3519,
-    "cls": 0,
-    "tbt": 138.5,
+    "lcp": 2487.86015,
+    "cls": 0.00002252095491819546,
+    "tbt": 105,
     "failedAudits": [
       {
         "id": "mainthread-work-breakdown",
@@ -73,9 +73,9 @@
     "performance": 95,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 2042.7678999999998,
-    "cls": 0,
-    "tbt": 101,
+    "lcp": 2370.68925,
+    "cls": 0.00002252095491819546,
+    "tbt": 127,
     "failedAudits": [
       {
         "id": "mainthread-work-breakdown",
@@ -120,12 +120,12 @@
       "deviceScaleFactor": 1.75,
       "disabled": false
     },
-    "performance": 97,
+    "performance": 90,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 2032.9202500000001,
-    "cls": 0,
-    "tbt": 78.00000000000023,
+    "lcp": 2507.1616,
+    "cls": 0.00002252095491819546,
+    "tbt": 265,
     "failedAudits": [
       {
         "id": "mainthread-work-breakdown",
@@ -170,11 +170,11 @@
       "deviceScaleFactor": 1,
       "disabled": false
     },
-    "performance": 100,
+    "performance": 99,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 558.2806,
-    "cls": 0.000006171649829298365,
+    "lcp": 604.88805,
+    "cls": 0.00004855326670015338,
     "tbt": 0,
     "failedAudits": [
       {

@@ -1,12 +1,18 @@
 # SNC Premium Web Experience design system
 
+## Fullscreen revision — 2026-11-03
+
+User requests a more spectacular full-screen composition while retaining SNC color. Replace the rounded inset hero with an edge-to-edge, viewport-height stage. Keep white at entry; accumulate sky/primary blue across the full background. Enlarged dimensional brand check occupies the right half, with SNC outline typography and concentric architectural curves behind it. One finite light sweep introduces depth; no infinite particles or neon. Header remains legible. Main headline stays left aligned and immediately readable. Technology chapter also fills at least a viewport. Mobile becomes a vertical text/graphic scene rather than a scaled desktop canvas.
+
+Tokens remain #FFFFFF / #216BE4 / #36A4ED / #21386D / #182334, with SNC Sans for Korean and SNC Display for Latin. Scene gutters 6.1vw on desktop, 40/28px on tablet/mobile; hero type 7.4vw desktop and 12.2vw mobile. Layout: `[ full-width header ] / [ large message | oversized check, blue atmosphere ] / [ scene footer ]`. The specific SNC check carries the visual impact; reject a generic globe, stock video or WebGL effect.
+
 ## Tokens
 
 Primary blue `#216BE4`; sky `#36A4ED`; deep navy `#21386D`; ink `#182334`; white `#FFFFFF`. Supporting surfaces are blue/white tints; text uses neutral/slate shades tested for contrast. No green or unrelated accent palette.
 
-Typography: locally hosted, licensed/subset Korean sans and condensed Latin display. Large Korean title (desktop approximately 88–112px; mobile 44–56px), section titles 38–64px; body 15–18px. Short readable line lengths. Font fallback and explicit hero/graphic dimensions prevent layout shifts.
+Typography: locally hosted, licensed/subset Korean sans and condensed Latin display. Fullscreen Korean title (desktop 70–145px; mobile 40–68px), section titles 35–56px; body 12–18px depending on viewport. Short readable line lengths. Font fallback and explicit hero/graphic dimensions prevent layout shifts.
 
-Layout: 1280px maximum content; 24/40/64px adaptive gutters. White panoramic hero, open company-introduction grid, three independent service components, a contrasting navy technology chapter, GitHub editorial/panel split, and large white telephone CTA.
+Layout: 1280px maximum reading content; 24/40/64px adaptive gutters. The hero deliberately exceeds that grid to fill the viewport width with 6.1vw scene gutters. Open company-introduction grid, three independent service components, a viewport-height navy technology chapter, GitHub editorial/panel split, and large white telephone CTA.
 
 ```text
 logo          navigation                 contact
