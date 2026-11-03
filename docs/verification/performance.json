@@ -23,9 +23,9 @@
     "performance": 94,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 2487.86015,
+    "lcp": 2517.33065,
     "cls": 0.00002252095491819546,
-    "tbt": 105,
+    "tbt": 76.5,
     "failedAudits": [
       {
         "id": "mainthread-work-breakdown",
@@ -73,13 +73,18 @@
     "performance": 95,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 2370.68925,
+    "lcp": 2504.6126,
     "cls": 0.00002252095491819546,
-    "tbt": 127,
+    "tbt": 87,
     "failedAudits": [
       {
         "id": "mainthread-work-breakdown",
         "title": "Minimize main-thread work",
+        "score": 0
+      },
+      {
+        "id": "bf-cache",
+        "title": "Page prevented back/forward cache restoration",
         "score": 0
       },
       {
@@ -120,12 +125,12 @@
       "deviceScaleFactor": 1.75,
       "disabled": false
     },
-    "performance": 90,
+    "performance": 95,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 2507.1616,
+    "lcp": 2439.4374,
     "cls": 0.00002252095491819546,
-    "tbt": 265,
+    "tbt": 109,
     "failedAudits": [
       {
         "id": "mainthread-work-breakdown",
@@ -170,12 +175,12 @@
       "deviceScaleFactor": 1,
       "disabled": false
     },
-    "performance": 99,
+    "performance": 96,
     "accessibility": 100,
     "seo": 100,
-    "lcp": 604.88805,
+    "lcp": 736.2873,
     "cls": 0.00004855326670015338,
-    "tbt": 0,
+    "tbt": 148,
     "failedAudits": [
       {
         "id": "forced-reflow-insight",

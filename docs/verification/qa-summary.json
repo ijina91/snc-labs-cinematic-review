@@ -1,17 +1,17 @@
 {
   "tool": "Playwright",
-  "revision": "Fullscreen scene",
+  "revision": "Six-chapter cinematic story; continuous signature and organic geometry",
   "viewports": [
     390,
     768,
     1440,
     1920
   ],
-  "expected": 48,
+  "expected": 60,
   "unexpected": 0,
   "skipped": 0,
   "flaky": 0,
-  "durationMs": 283194.809,
+  "durationMs": 546861.617,
   "fullPageAxeViolations": [
     {
       "width": 390,

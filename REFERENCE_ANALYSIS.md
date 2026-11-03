@@ -1,19 +1,33 @@
-# Reference analysis and tool availability
+# Reference analysis
 
 Reference: https://www.instagram.com/reel/DfRaUziOLLU/
 
-Checked 2026-11-03. Connected web retrieval returned “Online fetch throttled”. The local browser connector returned “Local browser use is disabled in Work settings”. The reel was **not viewed**; its composition, transitions, timing, author and assets are unverified. No claim of recreation or visual analysis is made. No reference media is copied.
+## What was actually observed
 
-Fullscreen revision: retried the public reel URL on 2026-11-03 with a direct HTTP request. Instagram returned HTTP 200 HTML, but no playable video or video URL was available in that response. The clip still has not been viewed. The new fullscreen composition responds to the user's explicit visual direction, rather than claiming to reconstruct unseen footage.
+After the user opened the reel, the in-app browser successfully exposed its playing video. Native media metadata reported **12.421223 seconds**, 1440×2560. Watched one full loop and inspected screenshots at approximately 1.19, 3.88, 4.01, 6.28, 8.80 and 11.14 seconds. Earlier HTTP-only attempts could not play it; the successful browser observation supersedes the earlier unavailable-reference report.
 
-## Independent direction
+| Playback region | Observed composition |
+|---|---|
+| Around 1.2s | A luminous fragmented ring occupies a large dark canvas; oversized typography anchors the lower view |
+| Around 3.9–4.0s | Blocks/fragments move through depth as the camera approaches the structure |
+| Around 6.3s | Architectural columns and a small central object form a passage |
+| Around 8.8s | Camera travel continues between tall structures; connected elements recede into depth |
+| Around 11.1s | A quieter dark scene introduces a new large message |
 
-SNC's own blue check becomes a folded ribbon connecting company identity, the three verified business areas, and a system/operations diagram. A short entrance sequence gives way to ordinary document scrolling. No scroll hijack, video backdrop, particles or WebGL dependency.
+The reel is a filmed monitor with editorial overlay. Its total duration is measurable; the underlying site's full length, code, frame rate and exact scroll-to-animation implementation are not established by this clip. Do not confuse a twelve-second edited reel with a required twelve-second website.
 
-## Skills inventory
+## SNC translation
 
-Searched installed skill roots with hidden files and junction following. Read and apply `frontend-design`; read `agent-browser` discovery instructions; discovered/read the related `playwright-browser-test` and `playwright-e2e` scoped execution contracts. The agent-browser executable is not installed: headless Playwright is the explicit requested fallback, using installed Microsoft Edge.
+Preserve the reference's large scale, spatial continuity, camera movement and scene-to-scene narrative. Author a six-chapter SNC introduction: company → ESH → SAP → Web → connection → inquiry. A native-scroll stage spans 6.6 viewport heights, with readable holds and camera transitions. The viewer controls pace and can reverse, jump chapters, or skip to normal company information.
 
-The following exact skills were not found: cinematic-web-experience, video-to-superprompt, ui-ux-pro-max, impeccable, gsap-skills, scroll-craft, motion-design-agent-skills, threejs-skills, playwright, axe-core, lighthouse. No missing skill is claimed as executed. Use GSAP's actual library, Playwright/axe/Lighthouse actual tools, an authored motion storyboard, and a documented manual visual critique. Impeccable-style review is a manual fallback, not execution of an unavailable skill.
+Keep SNC white, primary blue, sky blue, navy and ink. Do not copy the red/black palette, crypto subject matter, typography, video/model assets, branding or claims. All geometry is authored in code for SNC. No downloaded reference media enters the repository or deployed site.
 
-Runtime addition justified by brief: GSAP. Development tools justified by required verification: Playwright, axe-core integration, Lighthouse. No React, Three.js, animation plugin suite or agent-browser installation.
+User review refined the geometry: replace regular pillars/stacked boards with asymmetric protective curves, interwoven data ribbons and curved interface fragments. Replace the initially segmented signature ring with a seamless smooth ribbon and improve anti-aliasing/render resolution.
+
+## Skills and actual tools
+
+Installed skills were searched with hidden files/junctions. Applied frontend-design; read agent-browser discovery guidance, related playwright-browser-test/playwright-e2e contracts, and computer-use/browser documentation. Actual reference inspection used the in-app browser. Actual implementation uses GSAP and Three.js; verification uses Playwright, axe and Lighthouse. The agent-browser CLI is absent.
+
+Exact unavailable skills: cinematic-web-experience, video-to-superprompt, ui-ux-pro-max, impeccable, gsap-skills, scroll-craft, motion-design-agent-skills, threejs-skills, playwright, axe-core, lighthouse. No unavailable skill is claimed as executed. Manual storyboard/design review and real test tools are the alternatives.
+
+Three.js is justified by the actual perspective-camera journey and original curved geometry; it loads after scroll near the introduction. No React or animation-plugin-suite migration. Low-power, reduced-motion and WebGL-failure paths keep the introduction accessible.

@@ -2,6 +2,7 @@ import './style.css';
 import { initNavigation } from './components/ResponsiveNavigation.js';
 import { initGithubProjects } from './components/GithubProjects.js';
 import { initServiceInteractions } from './components/ServiceInteractions.js';
+import { initScrollJourney } from './components/ScrollJourney.js';
 let cleanups = [];
 let disposeMotion, disposeScroll, scrollEvents;
 let motionGeneration = 0;
@@ -37,7 +38,7 @@ async function startMotion() {
 function start() {
   reduced.addEventListener('change', startMotion);
   document.querySelector('#year').textContent = String(new Date().getFullYear());
-  cleanups = [initNavigation(), initGithubProjects(), initServiceInteractions()];
+  cleanups = [initNavigation(), initGithubProjects(), initServiceInteractions(), initScrollJourney()];
   startMotion();
 }
 window.addEventListener('pagehide', () => {

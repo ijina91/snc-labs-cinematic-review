@@ -1,12 +1,14 @@
 # QA report
 
-Date: 2026-11-03. Tested production build on Windows using Playwright 1.64.1, Microsoft Edge 156, axe-core through @axe-core/playwright 4.14.0. Four viewports: 390×844, 768×1080, 1440×1080 and 1920×1080. Mobile/touch emulation is enabled where relevant.
+Dates: 2026-11-03–04 (KST). Tested production build on Windows using Playwright 1.64.1, Microsoft Edge 156, axe-core through @axe-core/playwright 4.14.0. Four viewports: 390×844, 768×1080, 1440×1080 and 1920×1080. Mobile/touch emulation is enabled where relevant.
 
 ## Automated coverage
 
-Final full regression: **48/48 passed**, 12 cases at each of the four viewports. Full-page axe scans report **zero violations** in the tested WCAG tags; project success/error contrast checks also pass. No critical defect remains in the tested scope.
+Final six-chapter regression: **60/60 passed**, 15 cases at each viewport, zero skipped/flaky/unexpected cases (9.1 minutes). Full-page axe and the light/navy story scans report zero violations in the tested WCAG tags. No critical defect remains in the tested scope. The earlier interrupted run's tablet anchor/SVG failure was corrected and verified before this full rerun.
 
 Twelve cases per viewport cover preserved text/assets/SEO/links and overflow; keyboard disclosures and mobile touch/menu focus; WCAG 2 A/AA and 2.1 AA axe scans; safe public project rendering and filtering; failure/retry; loading/empty states; actual seven-second request deadline; reduced motion and live preference changes; no JavaScript; blocked optional motion module; reversible SVG scroll progression; and the white initial frame followed by blue progression.
+
+Three additional cases per viewport exercise every story chapter, upward reversal, keyboard scene controls, light/navy scene axe scans, optional WebGL-module failure, reduced-motion restoration of all text, and deferral of 3D requests until scroll. Low-core/save-data hardware is allowed to choose the specified poster path. Separate visual probes confirmed actual WebGL rendering at 390, 768 and 1440px; the full suite also checks 1920px interaction/layout.
 
 The fullscreen revision adds explicit assertions that the hero starts at x=0, spans the viewport width, and fills at least the available viewport height below the header. Layered sky-blue backgrounds are also reviewed manually for small-text contrast; scene captions/navigation/footer use ink rather than the former muted gray.
 
@@ -24,6 +26,9 @@ Commands: `npm ci`, `npm test`, `npm audit --audit-level=moderate`, `git diff --
 | Focus lost after retry | Setting disabled on the focused native button moved focus to the body; use aria-disabled with an in-flight guard, then focus result link before hiding | Explicit focused-result assertion at all four widths |
 | Expensive startup measurements | All ScrollTriggers and font transforms initialized together; split hero/scroll imports, initialize nearby chapters after scroll, await settled fonts | Lighthouse repeated with the final production build |
 | Back-to-top target ineffective | Sticky header target did not reliably move document scroll | Moved top anchor to body; contact-to-logo assertion |
+| Story initialization shifted later anchors | Static chapters reserved 6 viewports but enhancement used 6.6; reserve the same 6.6-height layout before initialization | About-position delta asserted below 2px; tablet SVG/reversal focused rerun passed |
+| Rigid business geometry and broken-looking ring | User review found pillar/board repetition and segmented/aliased edges; replace with asymmetric continuous ribbons/curved interfaces, join normals, enable MSAA and higher density | Fresh chapter captures and native-scroll visual review |
+| Mobile passed-object overlap | Wider mobile camera distance left the preceding model in front of the next scene | Cull passed objects; inspect 390/768px chapters |
 | One axe transport failure in an earlier concurrent run | JSON transport error, with no corresponding axe violations | Isolated rescan passed; final suite uses one worker |
 
 The initial regression failures and intermediate measurements are retained locally. They are not presented as successful runs. Scroll targets in the test harness were also corrected to inspect chapter content rather than relying on a sticky header's position.
@@ -47,10 +52,10 @@ Internal target: 99/100; scoring cannot override failed checks.
 | Reviewable delivery and deployment boundary | 5 | 5 |
 | Total | 100 | 98 |
 
-98 is an internal assessment, not an external benchmark. The 99 target is not claimed: manual screen-reader/physical-device verification and real-user INP remain unverified. The latest fullscreen mobile synthetic interaction probe reached 256ms under 4× slowdown; the performance report records this limit and every Lighthouse sample. No cosmetic change was made merely to increase a subjective score.
+98 is an internal assessment, not an external benchmark. The 99 target is not claimed: manual screen-reader/physical-device verification and real-user INP remain unverified. The final six-chapter synthetic interaction probe reached 200ms mobile / 192ms desktop under 4× slowdown with WebGL active. The mobile median lab LCP misses 2.5s by approximately 5ms; the performance report records every sample. No cosmetic change was made merely to increase a subjective score.
 
 ## Limits and production boundary
 
 Automated axe is not a complete accessibility certification. Safari, Firefox, physical phones, assistive-technology sessions and field Web Vitals have not been tested here. GitHub states use controlled fixtures for repeatability; production uses the real unauthenticated public endpoint with a safe fallback. GitHub Pages build/output and root paths are verified locally; a production rollout/real deployed redesign check is intentionally pending user approval. No main merge or production deploy is part of this delivery.
 
-Remote status at initial [PR #1](https://github.com/snclabs/snclabs.github.io/pull/1) submission: GitHub Actions `action_required`, awaiting repository-maintainer approval for an external-fork workflow. Remote Ubuntu/Chromium execution is therefore unverified; the 48 passes above are the completed local Edge run.
+Remote status at initial [PR #1](https://github.com/snclabs/snclabs.github.io/pull/1) submission: GitHub Actions `action_required`, awaiting repository-maintainer approval for an external-fork workflow. Remote Ubuntu/Chromium execution is therefore unverified; reported passes are local Edge results.

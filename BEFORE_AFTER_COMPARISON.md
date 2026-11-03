@@ -6,6 +6,7 @@ Baseline: production main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Baseline s
 |---|---|---|
 | First impression | Static white/blue two-column composition | Edge-to-edge viewport-height stage; progressive blue atmosphere; oversized SNC check, outline typography, orbital curves and finite 2.25s timeline |
 | Identity | Company/service introduction | Same verified introduction, larger hierarchy and generous spacing |
+| Introduction journey | No multi-scene camera narrative | Six native-scroll chapters with original SNC-colored 3D, readable holds, reversible camera travel and direct chapter/skip/contact controls |
 | Expertise | Native service disclosures | Data-backed static service components, always-visible inquiry links, native keyboard details |
 | Technology | No explanatory chapter | Responsive SVG connects ESH, SAP and Web work to SNC and system operation; upward scrolling reverses paths |
 | Public projects | Silent fallback on API failure | Explicit loading, empty, success, timeout/error and focused retry; safe public-only metadata |
@@ -21,6 +22,12 @@ Baseline: production main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Baseline s
 - [After, desktop first view](docs/previews/desktop.png)
 - [After, mobile first view](docs/previews/mobile.png)
 - [After, technology chapter](docs/previews/technology.png)
+- [SNC introduction, smooth signature loop](docs/previews/journey-snc.png)
+- [ESH, asymmetric protective form](docs/previews/journey-esh.png)
+- [SAP, interwoven business/data flows](docs/previews/journey-sap.png)
+- [Web, curved interface fragments](docs/previews/journey-web.png)
+- [Connected capabilities](docs/previews/journey-connect.png)
+- [Mobile introduction](docs/previews/journey-mobile.png)
 
 Local walkthrough: `artifacts/cinematic-preview.webm`. Static captures cannot demonstrate timing or the first white frame. The Playwright white-frame test explicitly holds the optional animation module, verifies white/readable content, releases it and observes blue-opacity progression. SVG tests verify both scroll directions. Capture scripts and test sources are included for reproduction.
 
@@ -33,3 +40,5 @@ Negative pass: examined all four full-page layouts for clipping, horizontal over
 Fullscreen pass: inspected 1440px and 390px first views after removing the inset frame. Larger check remains separated from the headline; mobile stacks the graphic below the copy. The stronger blue background required ink-colored scene captions/footer/navigation: old muted labels would only achieve about 2.2–4.1:1 over representative sky-blue stops. Ink #182334 provides at least 6.4:1 against those sampled blue stops. This manual gradient contrast check supplements axe, which cannot reliably assess every layered gradient.
 
 These are two separate criteria passes by the implementing agent, not independent people or an executed Impeccable skill. Exact unavailable tools and limits are disclosed in REFERENCE_ANALYSIS.md and QA_REPORT.md.
+
+The final user-review pass replaced rigid pillars and stacked planes with asymmetric curved structures. The first signature ring's segmented/pixelated appearance was corrected using continuous geometry, joined normals and improved anti-aliasing/resolution. Mobile camera review also found a passed SAP object obscuring the Web scene; passed-object culling corrected that overlap. Fresh chapter screenshots and the extended walkthrough demonstrate these changes.

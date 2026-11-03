@@ -1,5 +1,11 @@
 # SNC Premium Web Experience design system
 
+## Scroll introduction
+
+Maintain SNC white/blue/sky/navy/ink while extending the experience through six native-scroll chapters. The visual language is sculptural systems: a smooth signature loop, an asymmetric protective envelope, interwoven data flows and curved interface fragments. Reject repeated pillars/boards, checkerboard ring segments, coarse edges and meaningless particles. Continuous ribbon normals, MSAA and native-or-higher render resolution preserve clean surfaces. Use generated studio reflections rather than external imagery.
+
+Copy sits left of the 3D view on desktop and below it on mobile. Readable gradient plates, independent chapter-navigation surfaces and a permanent inquiry exit protect usability. Six chapters use explicit sequence indicators; users control their reading time. Two navy scenes give contrast within a white/blue overall site. Reduced-motion/static reading preserves every factual paragraph.
+
 ## Fullscreen revision — 2026-11-03
 
 User requests a more spectacular full-screen composition while retaining SNC color. Replace the rounded inset hero with an edge-to-edge, viewport-height stage. Keep white at entry; accumulate sky/primary blue across the full background. Enlarged dimensional brand check occupies the right half, with SNC outline typography and concentric architectural curves behind it. One finite light sweep introduces depth; no infinite particles or neon. Header remains legible. Main headline stays left aligned and immediately readable. Technology chapter also fills at least a viewport. Mobile becomes a vertical text/graphic scene rather than a scaled desktop canvas.

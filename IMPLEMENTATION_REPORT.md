@@ -2,9 +2,9 @@
 
 ## Result
 
-Rebuilt SNC Labs as a runnable white-based corporate website with a finite white-to-blue entrance, a custom folded SNC check, three verified service components, and a reversible SVG business/system diagram. The latest revision replaces the rounded inset hero with a full-width, viewport-height stage, larger typography/check geometry, orbital curves, outline SNC lettering and a finite light sweep. Kept Vite, semantic HTML, CSS and vanilla JavaScript. No React or WebGL migration.
+Rebuilt SNC Labs as a runnable white-based corporate website with a finite white-to-blue entrance, a custom folded SNC check, three verified service components, and a reversible SVG business/system diagram. The fullscreen hero leads into a six-chapter spatial introduction, with larger typography, original blue geometry and reversible camera travel. Kept Vite, semantic HTML, CSS and vanilla JavaScript. No React migration.
 
-The Instagram reel was inaccessible; this is an independent design. See REFERENCE_ANALYSIS.md for actual tool and skill availability. No unavailable skill is recorded as executed.
+After the user opened Instagram, the 12.42-second reel was viewed and sampled across a complete loop. See REFERENCE_ANALYSIS.md for observed frames and actual tool/skill availability. The SNC implementation uses original geometry and keeps its own palette/content; no unavailable skill is recorded as executed.
 
 ## Preserved behavior
 
@@ -19,6 +19,10 @@ The Instagram reel was inaccessible; this is an independent design. See REFERENC
 
 `src/data/services.js` holds verified service data. `ServiceCards.js` and the Vite HTML transform render complete static HTML at build time, including logos and disclosures. `ResponsiveNavigation.js`, `ServiceInteractions.js` and `GithubProjects.js` own independent interactions. `MotionPreferences.js` identifies reduced motion and lightweight-device preferences. `CinematicExperience.js` owns the finite hero timeline; `ScrollExperience.js` owns lazy ScrollTrigger scenes and reversible SVG paths. Styles are split into tokens, site and responsive files.
 
+`src/data/journey.js` and `JourneyMarkup.js` add six build-time-rendered introduction chapters. `components/ScrollJourney.js` gates initialization on scrolling/proximity/preferences. `animations/ScrollJourney.js` owns the native-scroll chapter controller, keyboard navigation, progress and lifecycle. `JourneyScene.js` owns the lazy Three.js perspective scene. A 6.6-viewport CSS-sticky stage lets users read, travel forward/backward and skip to normal company information or contact. Render only during progress changes and settling, never an endless idle loop.
+
+The three business scenes use an asymmetric ESH protective ribbon, interwoven SAP streams and curved Web interface fragments. User review replaced the rigid pillar/board motif. The signature loop is now a continuous smooth surface with joined normals; anti-aliasing and improved pixel density address the initially broken-looking segmented ring. Studio lighting is generated in code. Mobile culls already-passed objects before they obscure the next scene.
+
 GitHub requests are deferred until the section approaches the viewport. Loading, success, empty, failure, seven-second abort and retry states remain useful. Retry retains keyboard focus with aria-disabled and a guarded request, then moves focus to the resulting link before hiding the button. Responses cannot inject HTML or reveal private repositories. There is no token in runtime code.
 
 ## Motion and resilience
@@ -27,7 +31,9 @@ Content is visible before animation loads. Hero text stays readable on white whi
 
 ## Assets and dependencies
 
-Locally hosted, subsetted OFL fonts total approximately 122 KB. Reserved font names were replaced with SNC Sans and SNC Display. Source licenses ship beside fonts; see LICENSES.md. All decorative graphics are authored inline SVG/CSS. GSAP is the only runtime addition. Playwright, axe and Lighthouse are development tools. npm ci and the final build have been run; npm audit reports no known vulnerabilities at the tested lockfile.
+Locally hosted, regenerated OFL font subsets total approximately 124 KB. Reserved font names were replaced with SNC Sans and SNC Display. Source licenses ship beside fonts; see LICENSES.md. Graphics are original SVG/CSS and procedural 3D. Runtime additions are GSAP and **Three.js 0.187.0**, justified by actual spatial camera travel/curved geometry. The Three.js scene is approximately 576KB (147KB gzip), deferred until scrolling near the introduction. The build's >500KB optional-chunk warning is disclosed, not suppressed. Low-core/save-data devices avoid that import; WebGL failure uses the SVG story, and reduced motion/no-JS retain normal reading flow.
+
+Playwright, axe and Lighthouse are development tools. A fresh npm ci completed after releasing this workspace's locked Windows esbuild processes; preview servers were restarted. The tested lockfile audit reports no known vulnerabilities. Rendering resources (including the generated environment texture) are released on lifecycle/preference cleanup and WebGL context loss.
 
 ## Delivery boundary
 

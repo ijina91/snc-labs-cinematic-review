@@ -2,207 +2,356 @@
   {
     "width": 390,
     "cpuSlowdown": 4,
+    "renderer": "webgl",
     "unsupported": false,
     "samples": [
       {
-        "duration": 256,
-        "type": "pointerdown"
+        "duration": 200,
+        "type": "pointerdown",
+        "phase": "journey-entry"
       },
       {
-        "duration": 256,
-        "type": "pointerup"
+        "duration": 200,
+        "type": "pointerup",
+        "phase": "journey-entry"
       },
       {
-        "duration": 256,
-        "type": "click"
+        "duration": 200,
+        "type": "click",
+        "phase": "journey-entry"
       },
       {
-        "duration": 56,
-        "type": "keydown"
+        "duration": 40,
+        "type": "pointerdown",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 56,
-        "type": "keypress"
+        "duration": 40,
+        "type": "pointerup",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 56,
-        "type": "click"
+        "duration": 40,
+        "type": "click",
+        "phase": "journey-navigation"
       },
       {
         "duration": 24,
-        "type": "keyup"
+        "type": "keydown",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 184,
-        "type": "pointerdown"
+        "duration": 24,
+        "type": "keypress",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 184,
-        "type": "pointerup"
-      },
-      {
-        "duration": 184,
-        "type": "click"
-      },
-      {
-        "duration": 40,
-        "type": "keydown"
+        "duration": 24,
+        "type": "click",
+        "phase": "journey-navigation"
       },
       {
         "duration": 40,
-        "type": "keypress"
+        "type": "keyup",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 40,
-        "type": "click"
+        "duration": 144,
+        "type": "pointerdown",
+        "phase": "service-details"
       },
       {
-        "duration": 40,
-        "type": "keyup"
+        "duration": 144,
+        "type": "pointerup",
+        "phase": "service-details"
       },
       {
-        "duration": 160,
-        "type": "pointerdown"
-      },
-      {
-        "duration": 160,
-        "type": "pointerup"
-      },
-      {
-        "duration": 160,
-        "type": "click"
-      },
-      {
-        "duration": 72,
-        "type": "keydown"
-      },
-      {
-        "duration": 72,
-        "type": "keypress"
-      },
-      {
-        "duration": 72,
-        "type": "click"
-      },
-      {
-        "duration": 56,
-        "type": "keyup"
-      },
-      {
-        "duration": 136,
-        "type": "pointerdown"
-      },
-      {
-        "duration": 136,
-        "type": "pointerup"
-      },
-      {
-        "duration": 136,
-        "type": "click"
+        "duration": 144,
+        "type": "click",
+        "phase": "service-details"
       },
       {
         "duration": 88,
-        "type": "keydown"
+        "type": "keydown",
+        "phase": "service-details"
       },
       {
-        "duration": 56,
-        "type": "keyup"
+        "duration": 88,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 88,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 72,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 104,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 104,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 104,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 104,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 80,
+        "type": "keydown",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 80,
+        "type": "keypress",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 80,
+        "type": "click",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 64,
+        "type": "keyup",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 104,
+        "type": "pointerdown",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 104,
+        "type": "pointerup",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 104,
+        "type": "click",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 40,
+        "type": "keydown",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 32,
+        "type": "keyup",
+        "phase": "mobile-menu"
       }
     ],
-    "maxObservedDurationMs": 256,
-    "note": "Synthetic click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
+    "maxObservedDurationMs": 200,
+    "note": "Synthetic journey entry/chapter navigation, disclosure and menu click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
   },
   {
     "width": 1440,
     "cpuSlowdown": 4,
+    "renderer": "webgl",
     "unsupported": false,
     "samples": [
       {
-        "duration": 160,
-        "type": "pointerdown"
+        "duration": 136,
+        "type": "pointerdown",
+        "phase": "journey-entry"
       },
       {
-        "duration": 160,
-        "type": "pointerup"
+        "duration": 136,
+        "type": "pointerup",
+        "phase": "journey-entry"
       },
       {
-        "duration": 160,
-        "type": "click"
-      },
-      {
-        "duration": 40,
-        "type": "keydown"
-      },
-      {
-        "duration": 40,
-        "type": "keypress"
-      },
-      {
-        "duration": 40,
-        "type": "click"
-      },
-      {
-        "duration": 56,
-        "type": "keyup"
-      },
-      {
-        "duration": 96,
-        "type": "pointerdown"
-      },
-      {
-        "duration": 96,
-        "type": "pointerup"
-      },
-      {
-        "duration": 96,
-        "type": "click"
-      },
-      {
-        "duration": 72,
-        "type": "keydown"
-      },
-      {
-        "duration": 72,
-        "type": "keypress"
-      },
-      {
-        "duration": 72,
-        "type": "click"
+        "duration": 136,
+        "type": "click",
+        "phase": "journey-entry"
       },
       {
         "duration": 48,
-        "type": "keyup"
+        "type": "pointerdown",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 88,
-        "type": "pointerdown"
+        "duration": 48,
+        "type": "pointerup",
+        "phase": "journey-navigation"
       },
       {
-        "duration": 88,
-        "type": "pointerup"
-      },
-      {
-        "duration": 88,
-        "type": "click"
-      },
-      {
-        "duration": 40,
-        "type": "keydown"
+        "duration": 48,
+        "type": "click",
+        "phase": "journey-navigation"
       },
       {
         "duration": 40,
-        "type": "keypress"
+        "type": "keydown",
+        "phase": "journey-navigation"
       },
       {
         "duration": 40,
-        "type": "click"
+        "type": "keypress",
+        "phase": "journey-navigation"
+      },
+      {
+        "duration": 40,
+        "type": "click",
+        "phase": "journey-navigation"
+      },
+      {
+        "duration": 40,
+        "type": "keyup",
+        "phase": "journey-navigation"
+      },
+      {
+        "duration": 192,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 192,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 192,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 40,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 40,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 40,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 32,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "click",
+        "phase": "service-details"
       },
       {
         "duration": 64,
-        "type": "keyup"
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 72,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 72,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 72,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 64,
+        "type": "keyup",
+        "phase": "service-details"
       }
     ],
-    "maxObservedDurationMs": 160,
-    "note": "Synthetic click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
+    "maxObservedDurationMs": 192,
+    "note": "Synthetic journey entry/chapter navigation, disclosure and menu click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
   }
 ]
