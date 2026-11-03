@@ -33,4 +33,6 @@ Locally hosted, subsetted OFL fonts total approximately 122 KB. Reserved font na
 
 Feature branch: `feat/cinematic-experience`, based on main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Organization write permissions are unavailable to the local authenticated account; review delivery uses the public fork `ijina91/snc-labs-cinematic-review` and a cross-repository PR into `snclabs/snclabs.github.io:main`. No production merge or deployment is authorized by this delivery. The PR workflow builds/tests only; deployment jobs also reject non-main manual dispatch.
 
+Submitted [PR #1](https://github.com/snclabs/snclabs.github.io/pull/1). At initial submission GitHub Actions returned `action_required`: the first external-fork workflow requires repository-maintainer approval. Remote CI has not passed or deployed; local regression evidence remains available. Main was verified unchanged after PR creation.
+
 QA, performance measurements, visual comparison and remaining verification limits are recorded separately. Local ignored artifacts contain raw audit JSON/HTML, test traces and a short walkthrough video.

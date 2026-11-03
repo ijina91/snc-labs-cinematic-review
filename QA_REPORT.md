@@ -48,3 +48,5 @@ Internal target: 99/100; scoring cannot override failed checks.
 ## Limits and production boundary
 
 Automated axe is not a complete accessibility certification. Safari, Firefox, physical phones, assistive-technology sessions and field Web Vitals have not been tested here. GitHub states use controlled fixtures for repeatability; production uses the real unauthenticated public endpoint with a safe fallback. GitHub Pages build/output and root paths are verified locally; a production rollout/real deployed redesign check is intentionally pending user approval. No main merge or production deploy is part of this delivery.
+
+Remote status at initial [PR #1](https://github.com/snclabs/snclabs.github.io/pull/1) submission: GitHub Actions `action_required`, awaiting repository-maintainer approval for an external-fork workflow. Remote Ubuntu/Chromium execution is therefore unverified; the 48 passes above are the completed local Edge run.
