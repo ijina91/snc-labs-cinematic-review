@@ -1,0 +1,32 @@
+{
+  "tool": "Playwright",
+  "viewports": [
+    390,
+    768,
+    1440,
+    1920
+  ],
+  "expected": 48,
+  "unexpected": 0,
+  "skipped": 0,
+  "flaky": 0,
+  "durationMs": 350929.523,
+  "fullPageAxeViolations": [
+    {
+      "width": 390,
+      "violations": 0
+    },
+    {
+      "width": 768,
+      "violations": 0
+    },
+    {
+      "width": 1440,
+      "violations": 0
+    },
+    {
+      "width": 1920,
+      "violations": 0
+    }
+  ]
+}

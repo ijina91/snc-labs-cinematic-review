@@ -1,0 +1,5 @@
+export const services = [
+  { id: 'esh', name: 'ESH Systems', label: '현장과 안전을 위한 시스템', description: 'ESH와 안전작업허가 업무를 이해하고, 현장에 필요한 시스템을 개발합니다.', detail: '현장의 업무 흐름을 살피고 필요한 기능을 구현합니다. 안전작업허가 관련 시스템 개발도 함께 수행합니다.', tags: ['ESH', '안전작업허가', '시스템 개발'], icon: '<path d="m24 5 15 6v12c0 9-8 16-15 20C17 39 9 32 9 23V11L24 5Z"/><path d="m17 23 5 5 11-13"/>' },
+  { id: 'sap', name: 'SAP & Enterprise', label: '기업의 업무를 잇는 기술', description: '기업의 업무와 데이터가 자연스럽게 이어지도록 시스템을 개발하고 운영합니다.', detail: '업무의 맥락을 바탕으로 SAP 및 기업 시스템의 개발과 운영을 지원합니다. 필요한 기술을 실제 업무 환경에 맞춰 연결합니다.', tags: ['SAP', '기업 시스템', '운영 지원'], icon: '<rect x="6" y="7" width="16" height="16" rx="3"/><rect x="26" y="25" width="16" height="16" rx="3"/><path d="M22 15h12v10M14 23v10h12"/>' },
+  { id: 'web', name: 'Web Engineering', label: '사람의 일에 가까운 웹 경험', description: '복잡한 기능을 명확하고 편리하게. 업무 환경을 고려한 웹 시스템을 만듭니다.', detail: '사용자의 일과 업무 흐름을 이해하고 웹 기반 시스템을 개발합니다. 기능과 사용 경험이 함께 작동하는 방식을 고민합니다.', tags: ['웹 개발', '업무 시스템', '사용자 경험'], icon: '<rect x="5" y="8" width="38" height="31" rx="4"/><path d="M5 17h38m-25 7-5 5 5 5m12-10 5 5-5 5m-9 1 5-14"/>' },
+];

@@ -1,0 +1,208 @@
+[
+  {
+    "width": 390,
+    "cpuSlowdown": 4,
+    "unsupported": false,
+    "samples": [
+      {
+        "duration": 320,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 320,
+        "type": "pointerup"
+      },
+      {
+        "duration": 320,
+        "type": "click"
+      },
+      {
+        "duration": 64,
+        "type": "keydown"
+      },
+      {
+        "duration": 64,
+        "type": "keypress"
+      },
+      {
+        "duration": 64,
+        "type": "click"
+      },
+      {
+        "duration": 48,
+        "type": "keyup"
+      },
+      {
+        "duration": 176,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 176,
+        "type": "pointerup"
+      },
+      {
+        "duration": 176,
+        "type": "click"
+      },
+      {
+        "duration": 104,
+        "type": "keydown"
+      },
+      {
+        "duration": 104,
+        "type": "keypress"
+      },
+      {
+        "duration": 104,
+        "type": "click"
+      },
+      {
+        "duration": 160,
+        "type": "keyup"
+      },
+      {
+        "duration": 128,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 128,
+        "type": "pointerup"
+      },
+      {
+        "duration": 128,
+        "type": "click"
+      },
+      {
+        "duration": 80,
+        "type": "keydown"
+      },
+      {
+        "duration": 80,
+        "type": "keypress"
+      },
+      {
+        "duration": 80,
+        "type": "click"
+      },
+      {
+        "duration": 56,
+        "type": "keyup"
+      },
+      {
+        "duration": 128,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 128,
+        "type": "pointerup"
+      },
+      {
+        "duration": 128,
+        "type": "click"
+      },
+      {
+        "duration": 72,
+        "type": "keydown"
+      },
+      {
+        "duration": 64,
+        "type": "keyup"
+      }
+    ],
+    "maxObservedDurationMs": 320,
+    "note": "Synthetic click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
+  },
+  {
+    "width": 1440,
+    "cpuSlowdown": 4,
+    "unsupported": false,
+    "samples": [
+      {
+        "duration": 88,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 88,
+        "type": "pointerup"
+      },
+      {
+        "duration": 88,
+        "type": "click"
+      },
+      {
+        "duration": 104,
+        "type": "keydown"
+      },
+      {
+        "duration": 104,
+        "type": "keypress"
+      },
+      {
+        "duration": 104,
+        "type": "click"
+      },
+      {
+        "duration": 112,
+        "type": "keyup"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup"
+      },
+      {
+        "duration": 112,
+        "type": "click"
+      },
+      {
+        "duration": 120,
+        "type": "keydown"
+      },
+      {
+        "duration": 120,
+        "type": "keypress"
+      },
+      {
+        "duration": 120,
+        "type": "click"
+      },
+      {
+        "duration": 80,
+        "type": "keyup"
+      },
+      {
+        "duration": 88,
+        "type": "pointerdown"
+      },
+      {
+        "duration": 88,
+        "type": "pointerup"
+      },
+      {
+        "duration": 88,
+        "type": "click"
+      },
+      {
+        "duration": 152,
+        "type": "keydown"
+      },
+      {
+        "duration": 152,
+        "type": "keypress"
+      },
+      {
+        "duration": 152,
+        "type": "click"
+      },
+      {
+        "duration": 112,
+        "type": "keyup"
+      }
+    ],
+    "maxObservedDurationMs": 152,
+    "note": "Synthetic click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
+  }
+]

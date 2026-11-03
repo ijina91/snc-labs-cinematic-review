@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const html = await fs.readFile('dist/index.html', 'utf8');
+for (const text of ['SNC, 기술로', 'ESH Systems', 'SAP &amp; Enterprise', 'Web Engineering', 'tel:+8223545001', 'https://snclabs.github.io/']) assert(html.includes(text), `Missing preserved content: ${text}`);
+assert(!html.includes('<!-- SNC_'), 'Build-time content marker not rendered');
+assert(!/hynix|sk하이닉스|shcho@|010.?8745|\bSHE\b/i.test(html), 'Unapproved/removed content');
+for (const file of ['favicon.svg', 'robots.txt', 'sitemap.xml', 'social-cover.png', 'assets/fonts/snc-sans-regular.woff2', 'assets/fonts/snc-sans-bold.woff2', 'assets/fonts/snc-display.woff2']) await fs.access(path.join('dist', file));
+for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)/g)) await fs.access(path.join('dist', match[1]));
+const deploy = await fs.readFile('.github/workflows/deploy.yml', 'utf8');
+assert.equal((deploy.match(/if: github.ref == 'refs\/heads\/main'/g) || []).length, 2, 'Both deployment jobs must reject feature refs');
+const workflow = await fs.readFile('.github/workflows/quality.yml', 'utf8');
+assert(workflow.includes('pull_request:') && !workflow.includes('deploy-pages'), 'PR workflow must not deploy');
+console.log('Preserved content, assets, SEO, removed content and main-only deployment guards: PASS');

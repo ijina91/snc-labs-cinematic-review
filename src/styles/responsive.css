@@ -1,0 +1,827 @@
+@media(min-width:1700px) {
+  .hero-layout {
+    min-height: 780px;
+  }
+  .hero h1 {
+    font-size: 104px;
+  }
+  .hero-art-intro {
+    height: 620px;
+  }
+}
+
+@media(max-width:1200px) {
+  :root {
+    --gutter: 40px;
+  }
+  .desktop-nav {
+    margin-left: 0;
+    gap: 25px;
+  }
+  .hero-layout {
+    min-height: 620px;
+  }
+  .hero h1 {
+    font-size: 6.65vw;
+    letter-spacing: -3.7px;
+  }
+  .hero-art-intro {
+    height: 470px;
+  }
+  .hero-support>p {
+    font-size: 13px;
+  }
+  .hero-kicker {
+    font-size: 11px;
+    margin-bottom: 29px;
+  }
+  .hero-actions {
+    gap: 20px;
+  }
+  .button {
+    font-size: 12px;
+    padding-inline: 20px;
+    gap: 26px;
+  }
+  .section {
+    padding-block: 95px;
+  }
+  .about-grid {
+    gap: 45px;
+  }
+  .about-copy>p {
+    font-size: 14px;
+  }
+  .expertise {
+    padding-top: 20px;
+  }
+  .service-card {
+    padding: 25px;
+  }
+  .service-card h3 {
+    font-size: 23px;
+  }
+  .service-domain {
+    font-size: 9px;
+  }
+  .service-description {
+    font-size: 13px;
+    min-height: 84px;
+  }
+  .technology-heading>p {
+    font-size: 12px;
+  }
+  .opensource {
+    gap: 60px;
+  }
+  .repo-state h3 {
+    font-size: 28px;
+  }
+  .contact {
+    padding-block: 65px 50px;
+  }
+}
+
+@media(max-width:900px) {
+  :root {
+    --gutter: 28px;
+  }
+  .header-inner {
+    height: 78px;
+  }
+  .desktop-nav,.header-contact {
+    display: none;
+  }
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 44px;
+    width: 44px;
+    border: 1px solid #d8e3f2;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .menu-toggle>span {
+    width: 17px;
+    height: 1px;
+    background: #4f6a92;
+    transition: transform .2s;
+  }
+  .menu-toggle[aria-expanded=true]>span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded=true]>span:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+  .hero {
+    padding: 14px 16px 0;
+  }
+  .hero-layout {
+    min-height: 535px;
+    padding-top: 30px;
+    padding-bottom: 75px;
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .hero h1 {
+    font-size: 6.5vw;
+    letter-spacing: -2.5px;
+  }
+  .hero-art-intro {
+    height: 380px;
+    width: 120%;
+    margin-left: -13%;
+  }
+  .hero-support>p {
+    font-size: 12px;
+  }
+  .hero-actions {
+    gap: 16px;
+    margin-top: 26px;
+  }
+  .hero-kicker {
+    font-size: 9px;
+    margin-bottom: 25px;
+  }
+  .button {
+    font-size: 11px;
+    padding: 13px 17px;
+    min-height: 49px;
+    gap: 23px;
+  }
+  .quiet-link {
+    font-size: 10px;
+    gap: 9px;
+  }
+  .art-note {
+    font-size: 8px;
+  }
+  .art-note--top {
+    right: 6%;
+  }
+  .hero-bottom>span:nth-child(2) {
+    display: none;
+  }
+  .hero-bottom {
+    font-size: 9px;
+  }
+  .section {
+    padding-block: 75px;
+  }
+  .section-heading {
+    margin-bottom: 34px;
+  }
+  .section-title {
+    font-size: 36px;
+    letter-spacing: -1.3px;
+  }
+  .section-caption {
+    font-size: 10px;
+  }
+  .about-grid {
+    gap: 35px;
+    grid-template-columns: 1.15fr 1fr;
+  }
+  .about-copy>p {
+    font-size: 12px;
+  }
+  .about-connection {
+    font-size: 12px;
+    gap: 14px;
+    margin-top: 45px;
+  }
+  .about-connection>div {
+    gap: 12px;
+  }
+  .expertise {
+    padding-top: 10px;
+  }
+  .expertise .section-title {
+    margin-bottom: 35px;
+  }
+  .service-grid {
+    gap: 14px;
+  }
+  .service-card {
+    padding: 21px 19px;
+    border-radius: 15px;
+  }
+  .service-card__top {
+    display: block;
+    margin-bottom: 31px;
+  }
+  .service-icon {
+    height: 44px;
+    width: 44px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+  .service-icon svg {
+    height: 30px;
+    width: 30px;
+  }
+  .service-card h3 {
+    font-size: 22px;
+  }
+  .service-label {
+    font-size: 11px;
+    min-height: 38px;
+  }
+  .service-description {
+    font-size: 12px;
+    min-height: 104px;
+    margin-top: 17px;
+  }
+  .service-detail summary {
+    font-size: 11px;
+    min-height: 52px;
+  }
+  .service-contact {
+    font-size: 11px;
+  }
+  .service-detail__body>p {
+    font-size: 12px;
+  }
+  .technology-heading {
+    gap: 25px;
+  }
+  .technology-heading>p {
+    font-size: 11px;
+  }
+  .connection-map {
+    height: 640px;
+    margin-top: 35px;
+    margin-bottom: 30px;
+  }
+  .flow-svg--desktop {
+    display: none;
+  }
+  .flow-svg--mobile {
+    display: block;
+  }
+  .map-inputs {
+    height: auto;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    flex-direction: row;
+    gap: 12px;
+  }
+  .map-inputs li {
+    max-width: none;
+    width: 33.333%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px 7px;
+    gap: 8px;
+  }
+  .map-inputs li>span:nth-child(2) {
+    font-size: 12px;
+  }
+  .map-inputs li>small {
+    font-size: 9px;
+  }
+  .map-hub {
+    top: 56.25%;
+    height: 115px;
+    width: 115px;
+  }
+  .map-output {
+    top: 84.375%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%,-25%);
+    text-align: center;
+    min-width: 250px;
+    padding: 19px 25px;
+  }
+  .map-output .signal-dot {
+    margin-bottom: 8px;
+  }
+  .map-output h3 {
+    font-size: 19px;
+  }
+  .map-output p {
+    font-size: 11px;
+    margin-top: 8px;
+  }
+  .technology-principles {
+    gap: 25px;
+  }
+  .technology-principles h3 {
+    font-size: 16px;
+  }
+  .technology-principles p {
+    font-size: 11px;
+  }
+  .opensource {
+    gap: 35px;
+  }
+  .github-copy>p:not(.eyebrow) {
+    font-size: 12px;
+  }
+  .repo-state {
+    padding: 28px;
+  }
+  .repo-state h3 {
+    font-size: 26px;
+  }
+  .repo-state p {
+    font-size: 11px;
+  }
+  .github-panel__header {
+    padding: 13px 23px;
+  }
+  .github-panel__header>span {
+    font-size: 11px;
+  }
+  .github-panel__footer {
+    font-size: 9px;
+    padding-inline: 22px;
+    flex-wrap: wrap;
+    gap: 6px 9px;
+  }
+  .github-panel__footer button {
+    font-size: 10px;
+  }
+  .contact {
+    padding-block: 55px 40px;
+  }
+  .contact-title {
+    font-size: 66px;
+    letter-spacing: -2.8px;
+  }
+  .contact-orb {
+    height: 80px;
+    width: 80px;
+  }
+  .contact-orb>span {
+    font-size: 49px;
+  }
+  .contact-bottom>p {
+    font-size: 11px;
+  }
+  .phone-link {
+    gap: 18px;
+  }
+  .phone-link strong {
+    font-size: 23px;
+  }
+  .phone-link>span:first-child {
+    font-size: 10px;
+  }
+  .footer-top {
+    gap: 20px;
+  }
+  .footer-top nav {
+    gap: 17px;
+    font-size: 10px;
+  }
+  .footer-top>span {
+    font-size: 10px;
+  }
+  .footer-bottom {
+    font-size: 9px;
+  }
+}
+
+@media(max-width:600px) {
+  :root {
+    --gutter: 24px;
+  }
+  .brand-mark {
+    width: 62px;
+    height: 29px;
+  }
+  .brand>span {
+    font-size: 27px;
+  }
+  .hero {
+    padding: 0 10px;
+  }
+  .hero-stage {
+    border-radius: 19px;
+  }
+  .hero-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 35px;
+    padding-bottom: 58px;
+    gap: 5px;
+    min-height: 0;
+    width: calc(100% - 36px);
+  }
+  .hero-copy {
+    width: 100%;
+  }
+  .hero-kicker {
+    font-size: 9px;
+    margin-bottom: 25px;
+  }
+  .hero h1 {
+    font-size: clamp(38px,11.3vw,64px);
+    letter-spacing: -2px;
+    line-height: 1.26;
+  }
+  .hero-support>p {
+    font-size: 12px;
+    line-height: 1.95;
+    margin-top: 23px;
+  }
+  .hero-actions {
+    gap: 24px;
+    margin-top: 26px;
+  }
+  .button {
+    font-size: 11px;
+    padding: 14px 19px;
+    min-height: 50px;
+    gap: 22px;
+  }
+  .quiet-link {
+    font-size: 11px;
+    gap: 12px;
+  }
+  .hero-art-intro {
+    height: 300px;
+    width: 100%;
+    margin: 12px 0 0;
+  }
+  .ribbon-art {
+    height: 114%;
+    width: 114%;
+    top: -5%;
+    left: -7%;
+  }
+  .art-note--top {
+    top: 1%;
+    right: 1%;
+    font-size: 8px;
+  }
+  .art-note--bottom {
+    left: 4%;
+    bottom: -2%;
+    font-size: 8px;
+  }
+  .scroll-cue {
+    bottom: 5px;
+    left: 0;
+    font-size: 9px;
+  }
+  .scroll-cue__line {
+    width: 23px;
+  }
+  .hero-bottom {
+    width: calc(100% - 36px);
+    padding-block: 18px;
+    font-size: 8px;
+  }
+  .section {
+    padding-block: 62px;
+  }
+  .section-heading {
+    align-items: start;
+    margin-bottom: 30px;
+    gap: 20px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    gap: 8px;
+  }
+  .section-caption {
+    font-size: 9px;
+    text-align: right;
+    max-width: 145px;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .section-title {
+    font-size: clamp(27px,7.8vw,42px);
+    letter-spacing: -1.2px;
+    line-height: 1.45;
+  }
+  .about-copy {
+    max-width: none;
+    padding: 0;
+  }
+  .about-copy>p {
+    font-size: 14px;
+    line-height: 2;
+    margin-bottom: 17px;
+  }
+  .inline-link {
+    font-size: 12px;
+  }
+  .about-connection {
+    margin-top: 35px;
+    padding-block: 22px;
+    flex-wrap: wrap;
+    gap: 13px 10px;
+    font-size: 11px;
+    justify-content: start;
+  }
+  .about-connection>div {
+    flex: 0 0 25px;
+    gap: 0;
+  }
+  .about-connection i {
+    display: none;
+  }
+  .about-connection>div:nth-of-type(2) {
+    display: none;
+  }
+  .about-connection>strong {
+    flex-basis: 100%;
+    padding-top: 2px;
+    color: #3569b1;
+  }
+  .expertise {
+    padding-top: 8px;
+  }
+  .expertise>.section-heading {
+    align-items: center;
+  }
+  .expertise .section-title {
+    margin-bottom: 30px;
+  }
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .service-card {
+    padding: 28px;
+    border-radius: 18px;
+  }
+  .service-card__top {
+    display: flex;
+    margin-bottom: 34px;
+  }
+  .service-icon {
+    height: 50px;
+    width: 50px;
+    margin: 0;
+  }
+  .service-domain {
+    font-size: 10px;
+  }
+  .service-card h3 {
+    font-size: 28px;
+  }
+  .service-label {
+    font-size: 12px;
+    min-height: 0;
+    margin-top: 11px;
+  }
+  .service-description {
+    font-size: 14px;
+    min-height: 0;
+    line-height: 1.9;
+    margin-top: 19px;
+  }
+  .service-detail {
+    margin-top: 22px;
+  }
+  .service-detail summary {
+    font-size: 12px;
+    min-height: 55px;
+  }
+  .service-contact {
+    font-size: 12px;
+    min-height: 48px;
+  }
+  .service-detail__body>p {
+    font-size: 13px;
+  }
+  .technology .section-heading {
+    gap: 12px;
+  }
+  .technology .eyebrow {
+    font-size: 10px;
+  }
+  .technology .section-caption {
+    font-size: 8px;
+    max-width: 120px;
+  }
+  .technology-heading {
+    display: block;
+  }
+  .technology-heading>p {
+    font-size: 13px;
+    line-height: 1.9;
+    margin-top: 24px;
+    padding: 0;
+  }
+  .connection-map {
+    margin-top: 35px;
+  }
+  .map-inputs {
+    gap: 8px;
+  }
+  .map-inputs li {
+    padding: 15px 3px;
+    border-radius: 8px;
+  }
+  .map-inputs li>span:nth-child(2) {
+    font-size: 10px;
+    letter-spacing: -.3px;
+    white-space: nowrap;
+  }
+  .map-inputs li>small {
+    font-size: 9px;
+  }
+  .map-hub {
+    height: 108px;
+    width: 108px;
+    border-radius: 22px;
+  }
+  .map-hub svg {
+    height: 60px;
+    width: 60px;
+  }
+  .map-hub>span {
+    font-size: 14px;
+  }
+  .map-output {
+    min-width: 240px;
+  }
+  .technology-principles {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .technology-principles>div {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 7px 17px;
+    padding-top: 20px;
+    border-top: 1px solid #55729c77;
+  }
+  .technology-principles>div>span {
+    font-size: 12px;
+    grid-row: 1/3;
+    padding-top: 3px;
+  }
+  .technology-principles h3 {
+    font-size: 17px;
+    margin: 0;
+  }
+  .technology-principles p {
+    font-size: 12px;
+    margin: 0;
+  }
+  .opensource {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .github-copy>.section-title {
+    margin-block: 24px 20px;
+  }
+  .github-copy>p:not(.eyebrow) {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .button-outline {
+    font-size: 12px;
+  }
+  .github-panel {
+    border-radius: 18px;
+  }
+  .github-panel__header {
+    padding: 15px 23px;
+  }
+  .repo-state {
+    padding: 29px;
+  }
+  .repo-state h3 {
+    font-size: 29px;
+    letter-spacing: -.7px;
+  }
+  .repo-state p {
+    font-size: 12px;
+  }
+  .repo-state .inline-link {
+    font-size: 12px;
+  }
+  .repo-content {
+    min-height: 305px;
+  }
+  .github-panel__footer {
+    min-height: 60px;
+    padding: 11px 23px;
+    font-size: 10px;
+  }
+  .github-panel__footer button {
+    font-size: 11px;
+  }
+  .repo-item {
+    padding-block: 23px;
+  }
+  .repo-item p {
+    font-size: 12px;
+  }
+  .repo-list {
+    padding-inline: 24px;
+  }
+  .contact {
+    padding-top: 45px;
+    padding-bottom: 35px;
+  }
+  .contact-top>.section-caption {
+    font-size: 8px;
+  }
+  .contact-main {
+    gap: 20px;
+    margin-top: 26px;
+  }
+  .contact-title {
+    font-size: clamp(39px,11.6vw,64px);
+    letter-spacing: -1.8px;
+    line-height: 1.33;
+  }
+  .contact-orb {
+    height: 53px;
+    width: 53px;
+    margin-bottom: 8px;
+  }
+  .contact-orb>span {
+    font-size: 33px;
+  }
+  .contact-bottom {
+    display: block;
+    margin-top: 26px;
+  }
+  .contact-bottom>p {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  .phone-link {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+    min-height: 58px;
+    border: 1px solid #d8e4f5;
+    padding: 10px 15px;
+    border-radius: 12px;
+  }
+  .phone-link strong {
+    font-size: 24px;
+  }
+  .phone-link>span:first-child {
+    font-size: 11px;
+  }
+  .site-footer {
+    padding-top: 28px;
+  }
+  .footer-top {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-top>span {
+    order: 2;
+    width: 100%;
+    margin-top: -8px;
+    font-size: 10px;
+  }
+  .footer-top>.brand>.brand-mark {
+    width: 54px;
+    height: 25px;
+  }
+  .footer-top>.brand>span {
+    font-size: 24px;
+  }
+  .footer-top nav {
+    gap: 18px;
+  }
+  .footer-top nav>a:last-child {
+    display: none;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    margin-top: 22px;
+    font-size: 9px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,*::before,*::after {
+    animation: none!important;
+    transition: none!important;
+  }
+  .ribbon-art {
+    transform: none!important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) { .hero-ambient { opacity: 1 !important; transform: none !important; } .hero-scroll-tint { opacity: 0 !important; } }
