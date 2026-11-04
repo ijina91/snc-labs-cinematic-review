@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-05",
+  "timezone": "Asia/Seoul",
+  "state": "REVIEWED_LOCAL_SITE_NOT_DEPLOYED",
+  "provider": "LoreMotion",
+  "model": "MiniMax H3",
+  "displayed_cost": "Free",
+  "cost_credits": 0,
+  "source_stream": {
+    "width": 1280,
+    "height": 704,
+    "fps": 24,
+    "frames_per_source": 124
+  },
+  "sequence": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07"
+  ],
+  "sources": [
+    {
+      "from": "01",
+      "to": "02",
+      "job_id": "25f7a072-a532-4529-8ab8-acaef00e9e4d",
+      "sha256": "23c73485e5edc8826230b40b94c5fd48ffe07a303886491e786f9259b32be50b",
+      "bytes": 7819820,
+      "full_decode": true,
+      "out_seconds": 5.125,
+      "next_start_frame": "continuity/02.png"
+    },
+    {
+      "from": "02",
+      "to": "03",
+      "job_id": "b5b24162-b4e0-40fe-8d12-bc156f73057d",
+      "sha256": "54332d0062365ef3470cea5411792dcb1d9adcba6d3f3cb740d4c43bbe9ff42e",
+      "bytes": 9464098,
+      "full_decode": true,
+      "out_seconds": 5.166667,
+      "start_frame": "continuity/02.png",
+      "next_start_frame": "continuity/03.png"
+    },
+    {
+      "from": "03",
+      "to": "04",
+      "job_id": "e9082e92-0b90-4f72-bb92-c47dd53a7e2a",
+      "sha256": "147ab4ce585f2295beff3591fa63813788fe0b46fd52c82185aa202fba1607f5",
+      "bytes": 12684460,
+      "full_decode": true,
+      "out_seconds": 5.166666666666667,
+      "start_frame": "continuity/03.png",
+      "next_start_frame": "continuity/04.png"
+    },
+    {
+      "from": "04",
+      "to": "05",
+      "job_id": "9948797a-6dc8-47da-a7a1-816ea4b74e92",
+      "sha256": "c3fb9a5a58201234c26075a10846e2a39e2d51db67c6bcf138488bb0f64e4ad8",
+      "bytes": 10084417,
+      "full_decode": true,
+      "out_seconds": 5.166666666666667,
+      "start_frame": "continuity/04.png",
+      "next_start_frame": "continuity/05.png"
+    },
+    {
+      "from": "05",
+      "to": "06",
+      "job_id": "8527b1d2-52c3-49c5-8f2a-9720cb644771",
+      "sha256": "53fca263e389502488fcee8e1895a48cb64cb34c0e00bdf1322d4cd3bd29619e",
+      "bytes": 13652380,
+      "full_decode": true,
+      "out_seconds": 5.166666666666667,
+      "start_frame": "continuity/05.png",
+      "next_start_frame": "continuity/06.png"
+    },
+    {
+      "from": "06",
+      "to": "07",
+      "job_id": "5df2a92c-51bc-461d-945f-01ce755c510b",
+      "sha256": "e07c9e470f1b7aa787de997d64fbddbd8579fa814ccab9fd341242afca50dee3",
+      "bytes": 10124433,
+      "full_decode": true,
+      "out_seconds": 5.166666666666667,
+      "start_frame": "continuity/06.png",
+      "next_start_frame": "continuity/07.png"
+    },
+    {
+      "from": "07",
+      "to": "07",
+      "job_id": "efeee9fb-a1a0-484a-98ba-ee4092b452af",
+      "sha256": "786c1279e04d31c102e02bef226ddb7797a0cf969dc506a7848c3e777015d649",
+      "bytes": 5323189,
+      "full_decode": true,
+      "out_seconds": 5.166666666666667,
+      "start_frame": "continuity/07.png",
+      "next_start_frame": "continuity/07-close.png"
+    }
+  ],
+  "master": {
+    "state": "VISUALLY_REVIEWED_ADOPTED_LOCAL_SITE_NOT_DEPLOYED",
+    "seconds": 35,
+    "fps": 24,
+    "cue_seconds": [
+      0,
+      5,
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "files": [
+      {
+        "file": "snc-blue-glass-v2.mp4",
+        "bytes": 20920820,
+        "sha256": "01372036154bfe389d7080336c3bf63cde8bc1a9de124ebafdaea0291d282234"
+      },
+      {
+        "file": "snc-blue-glass-v2-mobile.mp4",
+        "bytes": 8770205,
+        "sha256": "5b7e1d469a8e00df6c13cc555aef8f592b622f4746d53da5f3cc849804751076"
+      }
+    ],
+    "publish_automatically": false,
+    "review": "Desktop and mobile complete playback reached ended; all six adjacent compressed frame pairs inspected. No enclosing orbit/sphere decoration. Black/blue material, rigid floor, independent cube motion and local glints retained.",
+    "measurements": [
+      {
+        "file": "snc-blue-glass-v2.mp4",
+        "full_decode": true,
+        "frames": 840,
+        "last_frame_pts": 34.958333,
+        "join_rgb_rmse": [
+          5.020454801327122,
+          7.305218163555429,
+          7.390322108638875,
+          7.700601310925938,
+          7.337602626316596,
+          5.3228220383497025
+        ],
+        "audio_stream_present": false
+      },
+      {
+        "file": "snc-blue-glass-v2-mobile.mp4",
+        "full_decode": true,
+        "frames": 840,
+        "last_frame_pts": 34.958333,
+        "join_rgb_rmse": [
+          4.758474796230788,
+          7.30122525001901,
+          7.2986071730616295,
+          7.234832750260535,
+          7.194734238147769,
+          5.0990967708789245
+        ],
+        "audio_stream_present": false
+      }
+    ]
+  },
+  "limitations": [
+    "Native generated source is 1280x704; no 1080p or 4K restoration claimed.",
+    "Visual review is separate from full decoding and final website QA.",
+    "User approval is required before main merge or deployment."
+  ]
+}

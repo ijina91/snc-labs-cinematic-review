@@ -19,11 +19,7 @@ export function initScrollExperience() {
   media.add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)', reduced: '(prefers-reduced-motion: reduce)' }, (context) => {
     if (context.conditions.reduced) return;
     const profile = motionProfile();
-    if (!profile.simple) {
-      const heroScroll = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .7 } });
-      heroScroll.to('.hero-scroll-tint', { opacity: .45, duration: .7, ease: 'none' }, 0);
-
-    }
+    // The continuous film owns the opening stage. No second hero scroll owner.
     // Initialize only nearby sections. Async callbacks are registered with the
     // GSAP context so media changes and pagehide also revert their animations.
     context.add('revealSection', (section) => {

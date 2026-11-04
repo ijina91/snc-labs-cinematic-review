@@ -1,0 +1,267 @@
+[
+  {
+    "width": 390,
+    "cpuSlowdown": 4,
+    "renderer": "video",
+    "unsupported": false,
+    "samples": [
+      {
+        "duration": 16,
+        "type": "keydown",
+        "phase": "journey-navigation"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 40,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 40,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 40,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 48,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 112,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 32,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 32,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 32,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 32,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 88,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 88,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 88,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 48,
+        "type": "keydown",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 48,
+        "type": "keypress",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 48,
+        "type": "click",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 48,
+        "type": "keyup",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 80,
+        "type": "pointerdown",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 80,
+        "type": "pointerup",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 80,
+        "type": "click",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 48,
+        "type": "keydown",
+        "phase": "mobile-menu"
+      },
+      {
+        "duration": 64,
+        "type": "keyup",
+        "phase": "mobile-menu"
+      }
+    ],
+    "maxObservedDurationMs": 112,
+    "note": "Synthetic journey entry/chapter navigation, disclosure and menu click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
+  },
+  {
+    "width": 1440,
+    "cpuSlowdown": 4,
+    "renderer": "video",
+    "unsupported": false,
+    "samples": [
+      {
+        "duration": 16,
+        "type": "keydown",
+        "phase": "journey-navigation"
+      },
+      {
+        "duration": 136,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 136,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 136,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 72,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 48,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 48,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 48,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 48,
+        "type": "keyup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 96,
+        "type": "pointerdown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 88,
+        "type": "pointerup",
+        "phase": "service-details"
+      },
+      {
+        "duration": 88,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 80,
+        "type": "keydown",
+        "phase": "service-details"
+      },
+      {
+        "duration": 80,
+        "type": "keypress",
+        "phase": "service-details"
+      },
+      {
+        "duration": 80,
+        "type": "click",
+        "phase": "service-details"
+      },
+      {
+        "duration": 64,
+        "type": "keyup",
+        "phase": "service-details"
+      }
+    ],
+    "maxObservedDurationMs": 136,
+    "note": "Synthetic journey entry/chapter navigation, disclosure and menu click/key Event Timing samples, not field INP. No entry may mean duration below the 16ms observer threshold."
+  }
+]

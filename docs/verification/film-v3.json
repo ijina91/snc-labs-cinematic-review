@@ -1,0 +1,148 @@
+{
+  "date": "2026-11-05",
+  "timezone": "Asia/Seoul",
+  "state": "REVIEWED_USER_AUTHORIZED_PAGES_RELEASE",
+  "base_manifest": "film-v2.json",
+  "base_sha256": "01372036154bfe389d7080336c3bf63cde8bc1a9de124ebafdaea0291d282234",
+  "requested_intervals": [
+    [
+      10,
+      13
+    ],
+    [
+      21,
+      27
+    ]
+  ],
+  "control_point_seconds": 24,
+  "method": "Frame-accurate replacements within the specified intervals; actual prior decoded endpoint used at the 24-second handoff. Unrelated footage retains its original content and timing, with web re-encoding.",
+  "provider": "LoreMotion",
+  "model": "MiniMax H3",
+  "displayed_cost": "Free",
+  "cost_credits": 0,
+  "patches": [
+    {
+      "start": 10,
+      "end": 13,
+      "job_id": "e6769dd5-03f3-4046-ba05-fcf9770fa8ed",
+      "sha256": "92f8a73e911eb7b7ae5f4487abefd15afb40cf97aea1328ed364dcd148d40c60",
+      "bytes": 11192148,
+      "decoded_frames": 107,
+      "decoded_fps": 24.0,
+      "decoded_seconds": 4.458333333333333,
+      "full_decode": true,
+      "review": {
+        "start_endpoint_rmse": 6.456000328063965,
+        "end_endpoint_rmse": 8.295228958129883,
+        "normalized_frames": 72,
+        "normalized_seconds": 3.0,
+        "browser_playback_ended": true,
+        "browser_duration": 3,
+        "review": "Continuous forward passage of the layered glass modules; independent angular fragments and facet highlights. No dissolve or scene replacement observed in sampled frames. Both exact endpoints compared. Final master joins still pending."
+      }
+    },
+    {
+      "start": 21,
+      "end": 24,
+      "job_id": "e45ff217-6828-4594-91ad-35e4882c1230",
+      "sha256": "c359de659f5a17df449ff79806ded0906e37aa96f30e4394b3a61387bd682a9f",
+      "bytes": 12248847,
+      "decoded_frames": 107,
+      "decoded_fps": 24.0,
+      "decoded_seconds": 4.458333333333333,
+      "full_decode": true,
+      "review": "15 sampled frames: both square modules persist and leave the viewport through camera parallax; no dissolving pillar substitution. Far-right lettering replaced by matching small columns/glass blocks; no rings or pointed crystals. Final playback/joins pending."
+    },
+    {
+      "start": 24,
+      "end": 27,
+      "job_id": "6954b7fa-1065-451e-8abe-7e4c09b4b2c2",
+      "sha256": "c9dd122b941beb45c1d17fc32fda25c625076d5889d97dbea8be18c8d5be2d07",
+      "bytes": 8644880,
+      "decoded_frames": 107,
+      "decoded_fps": 24.0,
+      "decoded_seconds": 4.458333333333333,
+      "full_decode": true,
+      "review": "15 sampled frames: camera passes the same stable blue pillar and attached glass blocks. New distant small blocks remain consistent and disappear behind the foreground naturally. No letter-like cluster, pointed crystals, rings, or dissolve observed. Final master playback/joins pending."
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "file": "repair-21-27.mp4",
+      "job_id": "1e2f2cf1-2627-4151-8869-eff53cded25c",
+      "reason": "0.5-1.0s foreground architecture dissolves into different pillar layout. Fails continuous shot requirement, not adopted."
+    }
+  ],
+  "still_edit": {
+    "mode": "Built-in imagegen",
+    "purpose": "Remove only the distant letter-like clusters and their reflections at the actual 24-second frame; replace with matching small blue pillars/glass blocks. Pointed crystal proposal rejected.",
+    "used_as": "Intermediate video-generation endpoint; no copied reference media."
+  },
+  "master": {
+    "seconds": 35,
+    "fps": 24,
+    "frames": 840,
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "audio": false,
+    "faststart": true,
+    "keyframe_interval": 6,
+    "desktop": [
+      1280,
+      704
+    ],
+    "mobile": [
+      800,
+      440
+    ],
+    "files": [
+      {
+        "file": "snc-blue-glass-v3.mp4",
+        "bytes": 20344370,
+        "sha256": "ccc0607f3eb4f73b1b88c631d0e6fc5319fadb99bf62998499a1786eb7c5ef1a",
+        "frames": 840
+      },
+      {
+        "file": "snc-blue-glass-v3-mobile.mp4",
+        "bytes": 8842486,
+        "sha256": "69c6d70cf41d080ed0076bb1caa704800ac840c883c9da87dbce750f1f950da9",
+        "frames": 840
+      }
+    ],
+    "visual_review": {
+      "sampled_sheet": "final-desktop/time-ranges.jpg",
+      "boundaries_seconds": [
+        10,
+        13,
+        21,
+        24,
+        27
+      ],
+      "result": "No dissolve or cut observed in repaired passages; far-right letter clusters and their reflections replaced by matching pillars/glass blocks. Start SNC logo and unrelated footage retained.",
+      "browser_playback": [
+        {
+          "size": [
+            1280,
+            704
+          ],
+          "duration": 35,
+          "ended": true,
+          "error": null
+        },
+        {
+          "size": [
+            800,
+            440
+          ],
+          "duration": 35,
+          "ended": true,
+          "error": null
+        }
+      ],
+      "private_preview_limit": "Python http.server provides linear playback but not useful byte-range seeking; seek validation belongs to Vite and Pages tests."
+    }
+  },
+  "poster_changes": "New v3 URLs. Only the 25s/06 desktop and mobile stills changed; all other still bytes preserved.",
+  "authorization": "User expressly requested direct github.io deployment after both fixes. Merge only after QA passes.",
+  "web_validation": "See QA_REPORT.md and the latest PR checks. Media decode is not a substitute for web QA."
+}

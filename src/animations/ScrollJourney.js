@@ -7,13 +7,13 @@ export function createScrollJourney(section) {
   const stage = section.querySelector('.journey-stage');
   const panels = [...section.querySelectorAll('.journey-panel')];
   const word = section.querySelector('.journey-word');
-  const progress = section.querySelector('.journey-progress span');
   const status = section.querySelector('.journey-status');
   const content = section.querySelector('.journey-panels');
+  const poster = section.querySelector('.journey-poster');
   const mobile = matchMedia('(max-width: 900px), (hover: none) and (pointer: coarse)');
   const events = new AbortController();
-  let start = 0, span = 1, frame, visible = false, disposed = false, player, current = -1;
-  let target = 0, visual = 0, announce, pinTop = 0, frameHeight = 0, contentHeight = 0, layoutWidth = innerWidth;
+  let start = 0, span = 1, frame, visible = false, disposed = false, player, current = -1, filmLoading = false;
+  let target = 0, visual = 0, moviePosition = 0, announce, pinTop = 0, frameHeight = 0, contentHeight = 0, layoutWidth = innerWidth;
   section.dataset.enhanced = 'true';
   function placeFrame() {
     if (!mobile.matches) {
@@ -55,33 +55,53 @@ export function createScrollJourney(section) {
     const travel = clamp((phase - .3) / (panels.length - 1), 0, 1) * (panels.length - 1);
     if (current !== index) {
       current = index; stage.dataset.chapter = String(index);
+      section.dataset.activeFrame = panels[index].dataset.frame;
+      poster.srcset = `/assets/frames/v3/${section.dataset.activeFrame}-mobile.webp 800w, /assets/frames/v3/${section.dataset.activeFrame}.webp 1280w`;
+      poster.src = `/assets/frames/v3/${section.dataset.activeFrame}.webp`;
       word.textContent = panels[index].dataset.word;
       panels.forEach((panel, i) => { panel.setAttribute('aria-hidden', String(i !== index)); panel.inert = i !== index; });
-      clearTimeout(announce); announce = setTimeout(() => { if (!disposed) status.textContent = panels[index].querySelector('h3').textContent; }, 250);
+      clearTimeout(announce); announce = setTimeout(() => { if (!disposed) status.textContent = panels[index].querySelector('h1,h2,h3').textContent; }, 250);
     }
     const opacity = mobile.matches ? 1 : (index === 0 ? 1 : smooth(0, .14, fraction)) * (index === panels.length - 1 ? 1 : 1 - smooth(.65, .96, fraction));
     panels.forEach((panel, i) => {
       panel.style.opacity = i === index ? String(opacity) : '0';
       panel.style.transform = mobile.matches ? 'none' : i === index ? `translateY(${fraction < .14 ? (1 - opacity) * 26 : -(1 - opacity) * 20}px)` : 'translateY(26px)';
     });
-    progress.style.transform = `scaleX(${visual})`;
-    player?.render(travel / (panels.length - 1));
+    // Six transitions reach 01…07 at their reading positions; the final
+    // interval keeps 07's fragments and light alive beneath the closing CTA.
+    const lastRead = panels.length - 1 + .3;
+    const filmPhase = phase <= lastRead ? Math.max(0, phase - .3)
+      : panels.length - 1 + (phase - lastRead) / (panels.length - lastRead);
+    moviePosition = clamp(filmPhase / panels.length);
+    player?.render(moviePosition, { interacting: target > 0 });
     section.dataset.scenePosition = travel.toFixed(3);
     if (visual !== target) frame = requestAnimationFrame(paint);
   }
   function update() {
     target = clamp((scrollY - start) / span);
+    if (target > 0) player?.suspend();
     if (!frame && visible && !document.hidden) frame = requestAnimationFrame(paint);
   }
-  function initializeFilm() {
-    if (!film.source || motionProfile().simple || !visible || player || disposed) return;
-    player = createFilmPlayer(section.querySelector('video'), film.source,
-      () => { if (!disposed) { section.dataset.renderer = 'video'; update(); } },
-      () => { if (!disposed) section.dataset.renderer = 'poster'; });
+  async function initializeFilm() {
+    if (!film.source || motionProfile().simple || !visible || player || filmLoading || disposed) return;
+    filmLoading = true;
+    try {
+      // Paint the responsive first frame before transferring the larger film.
+      await poster.decode().catch(() => {});
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      if (disposed || !visible) return;
+      const source = innerWidth <= 600 && film.sourceMobile ? film.sourceMobile : film.source;
+      player = createFilmPlayer(section.querySelector('video'), source,
+        () => { if (!disposed) { section.dataset.renderer = 'video'; update(); } },
+        () => { if (!disposed) section.dataset.renderer = 'poster'; },
+        { intro: scrollY <= start + 1 && target === 0, segments: panels.length });
+      player.render(moviePosition, { interacting: target > 0 });
+    } finally { filmLoading = false; }
   }
   const observer = new IntersectionObserver(entries => {
     visible = entries.some(entry => entry.isIntersecting);
     if (!visible) {
+      player?.suspend();
       cancelAnimationFrame(frame); frame = undefined;
       if (mobile.matches) { stage.style.visibility = 'hidden'; stage.inert = true; }
     }
@@ -91,7 +111,7 @@ export function createScrollJourney(section) {
   window.addEventListener('scroll', update, { passive: true, signal: events.signal });
   window.addEventListener('resize', measure, { passive: true, signal: events.signal });
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) { cancelAnimationFrame(frame); frame = undefined; } else update();
+    if (document.hidden) { player?.suspend(); cancelAnimationFrame(frame); frame = undefined; } else update();
   }, { signal: events.signal });
   const size = new ResizeObserver(measure); size.observe(stage);
   measure(); visual = target;
@@ -99,7 +119,7 @@ export function createScrollJourney(section) {
   document.dispatchEvent(new Event('snc:layout'));
   return () => {
     disposed = true; events.abort(); observer.disconnect(); size.disconnect(); cancelAnimationFrame(frame); clearTimeout(announce); player?.dispose();
-    delete section.dataset.enhanced; delete section.dataset.renderer; delete section.dataset.scenePosition;
+    delete section.dataset.enhanced; delete section.dataset.renderer; delete section.dataset.scenePosition; delete section.dataset.activeFrame;
     panels.forEach(panel => { panel.removeAttribute('aria-hidden'); panel.inert = false; panel.style.removeProperty('opacity'); panel.style.removeProperty('transform'); });
     stage.style.removeProperty('background-color');
     stage.style.removeProperty('clip-path'); stage.style.removeProperty('visibility'); stage.inert = false;

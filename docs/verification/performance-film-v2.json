@@ -1,0 +1,276 @@
+{
+  "date": "2026-11-05",
+  "timezone": "Asia/Seoul",
+  "implementation": "Black Blue Glass, integrated actual 35-second desktop/mobile film",
+  "url": "http://127.0.0.1:4180/",
+  "method": "Lighthouse 13.5.0, Windows Edge 156; one benchmark browser at a time; three mobile runs and one desktop run; no parallel QA browser or encoder",
+  "runs": [
+    {
+      "mode": "mobile",
+      "run": 1,
+      "lighthouse": "13.5.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screen": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "performance": 96,
+      "accessibility": 100,
+      "seo": 100,
+      "lcp": 2357.8649999999993,
+      "cls": 0.0003028650178993339,
+      "tbt": 68.49999999999977,
+      "failedAudits": [
+        {
+          "id": "mainthread-work-breakdown",
+          "title": "Minimize main-thread work",
+          "score": 0
+        },
+        {
+          "id": "total-byte-weight",
+          "title": "Avoid enormous network payloads",
+          "score": 0.5
+        },
+        {
+          "id": "forced-reflow-insight",
+          "title": "Forced reflow",
+          "score": 0
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0.5
+        },
+        {
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0.5
+        }
+      ]
+    },
+    {
+      "mode": "mobile",
+      "run": 2,
+      "lighthouse": "13.5.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screen": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "performance": 96,
+      "accessibility": 100,
+      "seo": 100,
+      "lcp": 2237.69,
+      "cls": 0,
+      "tbt": 79.03800000000001,
+      "failedAudits": [
+        {
+          "id": "mainthread-work-breakdown",
+          "title": "Minimize main-thread work",
+          "score": 0
+        },
+        {
+          "id": "total-byte-weight",
+          "title": "Avoid enormous network payloads",
+          "score": 0.5
+        },
+        {
+          "id": "forced-reflow-insight",
+          "title": "Forced reflow",
+          "score": 0
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0
+        },
+        {
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "mode": "mobile",
+      "run": 3,
+      "lighthouse": "13.5.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screen": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "performance": 77,
+      "accessibility": 100,
+      "seo": 100,
+      "lcp": 2919.94175,
+      "cls": 0.0003028650178993339,
+      "tbt": 566.926375,
+      "failedAudits": [
+        {
+          "id": "mainthread-work-breakdown",
+          "title": "Minimize main-thread work",
+          "score": 0
+        },
+        {
+          "id": "total-byte-weight",
+          "title": "Avoid enormous network payloads",
+          "score": 0.5
+        },
+        {
+          "id": "forced-reflow-insight",
+          "title": "Forced reflow",
+          "score": 0
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0.5
+        },
+        {
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0.5
+        }
+      ]
+    },
+    {
+      "mode": "desktop",
+      "run": 1,
+      "lighthouse": "13.5.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "screen": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "performance": 100,
+      "accessibility": 100,
+      "seo": 100,
+      "lcp": 711.8371999999999,
+      "cls": 0.004118489286043653,
+      "tbt": 1.5561999999999898,
+      "failedAudits": [
+        {
+          "id": "total-byte-weight",
+          "title": "Avoid enormous network payloads",
+          "score": 0.5
+        },
+        {
+          "id": "forced-reflow-insight",
+          "title": "Forced reflow",
+          "score": 0
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0
+        }
+      ]
+    }
+  ],
+  "mobile_medians": {
+    "performance": 96,
+    "accessibility": 100,
+    "seo": 100,
+    "lcp": 2357.8649999999993,
+    "cls": 0.0003028650178993339,
+    "tbt": 79.03800000000001
+  },
+  "target_assessment": {
+    "mobile_median_performance_90": true,
+    "mobile_median_lcp_2500ms": true,
+    "mobile_all_runs_performance_90": false,
+    "mobile_all_runs_lcp_2500ms": false,
+    "all_accessibility_95": true,
+    "all_cls_01": true,
+    "field_inp": "NOT_MEASURED"
+  },
+  "limitations": [
+    "The third mobile run missed Performance and LCP targets. Median success is not an all-runs guarantee.",
+    "Lighthouse TBT and synthetic Event Timing are not field INP.",
+    "Actual Android/iOS devices, network conditions and production field traffic are not certified."
+  ]
+}

@@ -3,7 +3,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Native anchor jumps must finish before ScrollTrigger restores measurements. */
+  scroll-behavior: auto;
   scroll-padding-top: 112px;
 }
 

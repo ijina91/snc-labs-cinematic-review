@@ -1,0 +1,30 @@
+{
+  "run_id": 41872642938,
+  "job_id": 126723599289,
+  "url": "https://github.com/snclabs/snclabs.github.io/actions/runs/41872642938",
+  "head_sha": "5a0ef6b9b758f6ad10f26c09ddfc252a35d3b2d6",
+  "browser": "Linux Playwright Chromium",
+  "passed": 87,
+  "failed": 3,
+  "skipped": 30,
+  "conclusion": "failure",
+  "failed_cases": [
+    {
+      "project": "390",
+      "case": "original film loads near the story, seeks both ways and releases media for reduced motion",
+      "failure": "paused:false during valid brief intro; immediate pause assertion"
+    },
+    {
+      "project": "768",
+      "case": "one decorative player owns all seven chapters and never requests a rejected intro",
+      "failure": "1000ms deadline shorter than 1050ms intro"
+    },
+    {
+      "project": "768",
+      "case": "original film loads near the story, seeks both ways and releases media for reduced motion",
+      "failure": "paused:false during valid brief intro; immediate pause assertion"
+    }
+  ],
+  "correction": "Wait for actual data-playback=scroll before pause assertions. Runtime unchanged. Add native scroll-during-intro handoff test using the frame captured at the input event.",
+  "scope": "Historical first CI run; current PR checks show the rerun result."
+}
