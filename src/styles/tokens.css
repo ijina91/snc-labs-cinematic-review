@@ -1,0 +1,41 @@
+/* Brand tokens: the business-card palette, with neutral and blue-tinted surfaces. */
+
+:root {
+  --blue: #216be4;
+  --sky: #36a4ed;
+  --navy: #21386d;
+  --ink: #182334;
+  --white: #fff;
+  --muted: #53647b;
+  --line: #e2e9f2;
+  --surface: #f4f8ff;
+  --font-body: 'SNC Sans',Arial,'Malgun Gothic',sans-serif;
+  --font-display: 'SNC Display','SNC Sans',sans-serif;
+  --radius: 24px;
+  --content: 1280px;
+  --gutter: 64px;
+}
+
+@font-face {
+  font-family: 'SNC Sans';
+  src: url('/assets/fonts/snc-sans-regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SNC Sans';
+  src: url('/assets/fonts/snc-sans-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 600 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SNC Display';
+  src: url('/assets/fonts/snc-display.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+}

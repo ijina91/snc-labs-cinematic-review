@@ -1,0 +1,11 @@
+{
+  "file": "artifacts/cinematic-preview.webm",
+  "durationSeconds": 61,
+  "viewport": {
+    "height": 800,
+    "width": 1280
+  },
+  "sizeBytes": 11143173,
+  "chapters": 6,
+  "note": "Recorded native-scroll walkthrough of the local production build; GitHub empty-state fixture; no reference media copied."
+}
