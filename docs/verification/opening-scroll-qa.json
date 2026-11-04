@@ -1,0 +1,932 @@
+{
+  "date": "2026-11-05",
+  "sourceCommit": "5ae6e690019d2cbebf954090f1b93b715dc3ec27",
+  "environment": "Local Windows / installed Edge / production Vite build",
+  "node": "v24.13.1",
+  "stats": {
+    "startTime": "2026-11-04T23:34:51.027Z",
+    "duration": 576859.192,
+    "expected": 98,
+    "skipped": 30,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "file": "entry.spec.js",
+      "title": "the first scroll stays pinned even when optional entry modules arrive late",
+      "project": "390",
+      "status": "passed",
+      "duration": 5537,
+      "firstScrollDrift": {
+        "stage": 0,
+        "headline": 0,
+        "display": 0
+      }
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "cold mobile enhancement keeps the headline, CTA and next section stationary",
+      "project": "390",
+      "status": "passed",
+      "duration": 6165
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "the first scroll stays pinned even when optional entry modules arrive late",
+      "project": "768",
+      "status": "passed",
+      "duration": 4546,
+      "firstScrollDrift": {
+        "stage": 0,
+        "headline": 0,
+        "display": 0
+      }
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "cold mobile enhancement keeps the headline, CTA and next section stationary",
+      "project": "768",
+      "status": "skipped",
+      "duration": 965
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "the first scroll stays pinned even when optional entry modules arrive late",
+      "project": "1440",
+      "status": "passed",
+      "duration": 4950,
+      "firstScrollDrift": {
+        "stage": 1,
+        "headline": 1,
+        "display": 1
+      }
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "cold mobile enhancement keeps the headline, CTA and next section stationary",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 856
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "the first scroll stays pinned even when optional entry modules arrive late",
+      "project": "1920",
+      "status": "passed",
+      "duration": 5229,
+      "firstScrollDrift": {
+        "stage": 1,
+        "headline": 1,
+        "display": 1
+      }
+    },
+    {
+      "file": "entry.spec.js",
+      "title": "cold mobile enhancement keeps the headline, CTA and next section stationary",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 882
+    },
+    {
+      "file": "film.spec.js",
+      "title": "the opening moves briefly then native scrolling takes over the same muted player",
+      "project": "390",
+      "status": "passed",
+      "duration": 4308
+    },
+    {
+      "file": "film.spec.js",
+      "title": "a film arriving midway through the story reveals the requested frame without a frame-zero flash",
+      "project": "390",
+      "status": "passed",
+      "duration": 3455
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "390",
+      "status": "passed",
+      "duration": 3070
+    },
+    {
+      "file": "film.spec.js",
+      "title": "the opening moves briefly then native scrolling takes over the same muted player",
+      "project": "768",
+      "status": "passed",
+      "duration": 5541
+    },
+    {
+      "file": "film.spec.js",
+      "title": "a film arriving midway through the story reveals the requested frame without a frame-zero flash",
+      "project": "768",
+      "status": "passed",
+      "duration": 2504
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "768",
+      "status": "passed",
+      "duration": 2321
+    },
+    {
+      "file": "film.spec.js",
+      "title": "the opening moves briefly then native scrolling takes over the same muted player",
+      "project": "1440",
+      "status": "passed",
+      "duration": 5438
+    },
+    {
+      "file": "film.spec.js",
+      "title": "a film arriving midway through the story reveals the requested frame without a frame-zero flash",
+      "project": "1440",
+      "status": "passed",
+      "duration": 3449
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "1440",
+      "status": "passed",
+      "duration": 2735
+    },
+    {
+      "file": "film.spec.js",
+      "title": "the opening moves briefly then native scrolling takes over the same muted player",
+      "project": "1920",
+      "status": "passed",
+      "duration": 5188
+    },
+    {
+      "file": "film.spec.js",
+      "title": "a film arriving midway through the story reveals the requested frame without a frame-zero flash",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3183
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "1920",
+      "status": "passed",
+      "duration": 2457
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "a stale fixed frame cannot paint over the next section",
+      "project": "390",
+      "status": "passed",
+      "duration": 2492
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "completed film has no extra large-viewport tail to scroll through",
+      "project": "390",
+      "status": "passed",
+      "duration": 2761
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "fold cover, unfolded screens and rotation preserve the current scene",
+      "project": "390",
+      "status": "passed",
+      "duration": 8421
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "a stale fixed frame cannot paint over the next section",
+      "project": "768",
+      "status": "skipped",
+      "duration": 8
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "completed film has no extra large-viewport tail to scroll through",
+      "project": "768",
+      "status": "skipped",
+      "duration": 5
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "fold cover, unfolded screens and rotation preserve the current scene",
+      "project": "768",
+      "status": "skipped",
+      "duration": 6
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "a stale fixed frame cannot paint over the next section",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 6
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "completed film has no extra large-viewport tail to scroll through",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 5
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "fold cover, unfolded screens and rotation preserve the current scene",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "a stale fixed frame cannot paint over the next section",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "completed film has no extra large-viewport tail to scroll through",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 2
+    },
+    {
+      "file": "fold.spec.js",
+      "title": "fold cover, unfolded screens and rotation preserve the current scene",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "small phones fit the hero and keep captions readable at scroll boundaries",
+      "project": "390",
+      "status": "passed",
+      "duration": 12738
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "browser toolbar sizing keeps the stage and captions stationary and landscape restores normal reading",
+      "project": "390",
+      "status": "passed",
+      "duration": 5087
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "portrait browser height changes never toggle between static and pinned reading",
+      "project": "390",
+      "status": "passed",
+      "duration": 2396
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "rapid touch swipes keep the active stage pinned and never drift horizontally",
+      "project": "390",
+      "status": "passed",
+      "duration": 6545
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "film entrance and exit reveal the frame without translating it vertically",
+      "project": "390",
+      "status": "passed",
+      "duration": 5864
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "small phones fit the hero and keep captions readable at scroll boundaries",
+      "project": "768",
+      "status": "skipped",
+      "duration": 7
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "browser toolbar sizing keeps the stage and captions stationary and landscape restores normal reading",
+      "project": "768",
+      "status": "skipped",
+      "duration": 5
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "portrait browser height changes never toggle between static and pinned reading",
+      "project": "768",
+      "status": "skipped",
+      "duration": 4
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "rapid touch swipes keep the active stage pinned and never drift horizontally",
+      "project": "768",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "film entrance and exit reveal the frame without translating it vertically",
+      "project": "768",
+      "status": "skipped",
+      "duration": 2
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "small phones fit the hero and keep captions readable at scroll boundaries",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "browser toolbar sizing keeps the stage and captions stationary and landscape restores normal reading",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "portrait browser height changes never toggle between static and pinned reading",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 2
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "rapid touch swipes keep the active stage pinned and never drift horizontally",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 2
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "film entrance and exit reveal the frame without translating it vertically",
+      "project": "1440",
+      "status": "skipped",
+      "duration": 1
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "small phones fit the hero and keep captions readable at scroll boundaries",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "browser toolbar sizing keeps the stage and captions stationary and landscape restores normal reading",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "portrait browser height changes never toggle between static and pinned reading",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 3
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "rapid touch swipes keep the active stage pinned and never drift horizontally",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 2
+    },
+    {
+      "file": "mobile.spec.js",
+      "title": "film entrance and exit reveal the frame without translating it vertically",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 2
+    },
+    {
+      "file": "short-desktop.spec.js",
+      "title": "short desktop windows preserve first layout and restore ordinary reading when space is limited",
+      "project": "390",
+      "status": "skipped",
+      "duration": 892
+    },
+    {
+      "file": "short-desktop.spec.js",
+      "title": "short desktop windows preserve first layout and restore ordinary reading when space is limited",
+      "project": "768",
+      "status": "skipped",
+      "duration": 664
+    },
+    {
+      "file": "short-desktop.spec.js",
+      "title": "short desktop windows preserve first layout and restore ordinary reading when space is limited",
+      "project": "1440",
+      "status": "passed",
+      "duration": 2746
+    },
+    {
+      "file": "short-desktop.spec.js",
+      "title": "short desktop windows preserve first layout and restore ordinary reading when space is limited",
+      "project": "1920",
+      "status": "skipped",
+      "duration": 706
+    },
+    {
+      "file": "site.spec.js",
+      "title": "preserved content, assets, links and responsive layout",
+      "project": "390",
+      "status": "passed",
+      "duration": 7278
+    },
+    {
+      "file": "site.spec.js",
+      "title": "keyboard disclosures, inquiry links and mobile navigation",
+      "project": "390",
+      "status": "passed",
+      "duration": 8098
+    },
+    {
+      "file": "site.spec.js",
+      "title": "WCAG automated axe checks, including disclosure and navy diagram",
+      "project": "390",
+      "status": "passed",
+      "duration": 6057
+    },
+    {
+      "file": "site.spec.js",
+      "title": "public GitHub projects: safe rendering and private/fork filtering",
+      "project": "390",
+      "status": "passed",
+      "duration": 4727
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub failure and retry preserve useful content",
+      "project": "390",
+      "status": "passed",
+      "duration": 4876
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub loading and empty states are explicit",
+      "project": "390",
+      "status": "passed",
+      "duration": 2416
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub real request deadline exits loading state",
+      "project": "390",
+      "status": "passed",
+      "duration": 9242
+    },
+    {
+      "file": "site.spec.js",
+      "title": "reduced motion, reverse scrolling and preference changes",
+      "project": "390",
+      "status": "passed",
+      "duration": 2784
+    },
+    {
+      "file": "site.spec.js",
+      "title": "no JavaScript still exposes company content, disclosures and navigation",
+      "project": "390",
+      "status": "passed",
+      "duration": 16997
+    },
+    {
+      "file": "site.spec.js",
+      "title": "optional motion bundle failure does not hide content or break navigation",
+      "project": "390",
+      "status": "passed",
+      "duration": 5144
+    },
+    {
+      "file": "site.spec.js",
+      "title": "SVG connection progresses with native scroll and reverses upward",
+      "project": "390",
+      "status": "passed",
+      "duration": 4196
+    },
+    {
+      "file": "site.spec.js",
+      "title": "black first frame stays readable while the film loads",
+      "project": "390",
+      "status": "passed",
+      "duration": 2310
+    },
+    {
+      "file": "site.spec.js",
+      "title": "one decorative player owns all seven chapters and never requests a rejected intro",
+      "project": "390",
+      "status": "passed",
+      "duration": 3114
+    },
+    {
+      "file": "site.spec.js",
+      "title": "seven-chapter introduction follows native scroll, reverses, and supports keyboard navigation",
+      "project": "390",
+      "status": "passed",
+      "duration": 10403
+    },
+    {
+      "file": "site.spec.js",
+      "title": "missing decorative image retains scroll chapters and reduced motion restores static reading",
+      "project": "390",
+      "status": "passed",
+      "duration": 3213
+    },
+    {
+      "file": "site.spec.js",
+      "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
+      "project": "390",
+      "status": "passed",
+      "duration": 5773
+    },
+    {
+      "file": "site.spec.js",
+      "title": "failed film keeps a readable poster and reduced motion avoids downloading video",
+      "project": "390",
+      "status": "passed",
+      "duration": 2932
+    },
+    {
+      "file": "site.spec.js",
+      "title": "scroll enhancement preserves layout and the fallback never fetches former 3D resources",
+      "project": "390",
+      "status": "passed",
+      "duration": 2647
+    },
+    {
+      "file": "site.spec.js",
+      "title": "preserved content, assets, links and responsive layout",
+      "project": "768",
+      "status": "passed",
+      "duration": 8360
+    },
+    {
+      "file": "site.spec.js",
+      "title": "keyboard disclosures, inquiry links and mobile navigation",
+      "project": "768",
+      "status": "passed",
+      "duration": 6536
+    },
+    {
+      "file": "site.spec.js",
+      "title": "WCAG automated axe checks, including disclosure and navy diagram",
+      "project": "768",
+      "status": "passed",
+      "duration": 5562
+    },
+    {
+      "file": "site.spec.js",
+      "title": "public GitHub projects: safe rendering and private/fork filtering",
+      "project": "768",
+      "status": "passed",
+      "duration": 4399
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub failure and retry preserve useful content",
+      "project": "768",
+      "status": "passed",
+      "duration": 4357
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub loading and empty states are explicit",
+      "project": "768",
+      "status": "passed",
+      "duration": 1847
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub real request deadline exits loading state",
+      "project": "768",
+      "status": "passed",
+      "duration": 9496
+    },
+    {
+      "file": "site.spec.js",
+      "title": "reduced motion, reverse scrolling and preference changes",
+      "project": "768",
+      "status": "passed",
+      "duration": 2979
+    },
+    {
+      "file": "site.spec.js",
+      "title": "no JavaScript still exposes company content, disclosures and navigation",
+      "project": "768",
+      "status": "passed",
+      "duration": 3205
+    },
+    {
+      "file": "site.spec.js",
+      "title": "optional motion bundle failure does not hide content or break navigation",
+      "project": "768",
+      "status": "passed",
+      "duration": 2368
+    },
+    {
+      "file": "site.spec.js",
+      "title": "SVG connection progresses with native scroll and reverses upward",
+      "project": "768",
+      "status": "passed",
+      "duration": 2481
+    },
+    {
+      "file": "site.spec.js",
+      "title": "black first frame stays readable while the film loads",
+      "project": "768",
+      "status": "passed",
+      "duration": 2031
+    },
+    {
+      "file": "site.spec.js",
+      "title": "one decorative player owns all seven chapters and never requests a rejected intro",
+      "project": "768",
+      "status": "passed",
+      "duration": 2964
+    },
+    {
+      "file": "site.spec.js",
+      "title": "seven-chapter introduction follows native scroll, reverses, and supports keyboard navigation",
+      "project": "768",
+      "status": "passed",
+      "duration": 11223
+    },
+    {
+      "file": "site.spec.js",
+      "title": "missing decorative image retains scroll chapters and reduced motion restores static reading",
+      "project": "768",
+      "status": "passed",
+      "duration": 2686
+    },
+    {
+      "file": "site.spec.js",
+      "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
+      "project": "768",
+      "status": "passed",
+      "duration": 5299
+    },
+    {
+      "file": "site.spec.js",
+      "title": "failed film keeps a readable poster and reduced motion avoids downloading video",
+      "project": "768",
+      "status": "passed",
+      "duration": 3092
+    },
+    {
+      "file": "site.spec.js",
+      "title": "scroll enhancement preserves layout and the fallback never fetches former 3D resources",
+      "project": "768",
+      "status": "passed",
+      "duration": 3278
+    },
+    {
+      "file": "site.spec.js",
+      "title": "preserved content, assets, links and responsive layout",
+      "project": "1440",
+      "status": "passed",
+      "duration": 10642
+    },
+    {
+      "file": "site.spec.js",
+      "title": "keyboard disclosures, inquiry links and mobile navigation",
+      "project": "1440",
+      "status": "passed",
+      "duration": 6724
+    },
+    {
+      "file": "site.spec.js",
+      "title": "WCAG automated axe checks, including disclosure and navy diagram",
+      "project": "1440",
+      "status": "passed",
+      "duration": 5915
+    },
+    {
+      "file": "site.spec.js",
+      "title": "public GitHub projects: safe rendering and private/fork filtering",
+      "project": "1440",
+      "status": "passed",
+      "duration": 5400
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub failure and retry preserve useful content",
+      "project": "1440",
+      "status": "passed",
+      "duration": 5506
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub loading and empty states are explicit",
+      "project": "1440",
+      "status": "passed",
+      "duration": 2516
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub real request deadline exits loading state",
+      "project": "1440",
+      "status": "passed",
+      "duration": 9603
+    },
+    {
+      "file": "site.spec.js",
+      "title": "reduced motion, reverse scrolling and preference changes",
+      "project": "1440",
+      "status": "passed",
+      "duration": 2219
+    },
+    {
+      "file": "site.spec.js",
+      "title": "no JavaScript still exposes company content, disclosures and navigation",
+      "project": "1440",
+      "status": "passed",
+      "duration": 3214
+    },
+    {
+      "file": "site.spec.js",
+      "title": "optional motion bundle failure does not hide content or break navigation",
+      "project": "1440",
+      "status": "passed",
+      "duration": 2697
+    },
+    {
+      "file": "site.spec.js",
+      "title": "SVG connection progresses with native scroll and reverses upward",
+      "project": "1440",
+      "status": "passed",
+      "duration": 3055
+    },
+    {
+      "file": "site.spec.js",
+      "title": "black first frame stays readable while the film loads",
+      "project": "1440",
+      "status": "passed",
+      "duration": 1649
+    },
+    {
+      "file": "site.spec.js",
+      "title": "one decorative player owns all seven chapters and never requests a rejected intro",
+      "project": "1440",
+      "status": "passed",
+      "duration": 3560
+    },
+    {
+      "file": "site.spec.js",
+      "title": "seven-chapter introduction follows native scroll, reverses, and supports keyboard navigation",
+      "project": "1440",
+      "status": "passed",
+      "duration": 11256
+    },
+    {
+      "file": "site.spec.js",
+      "title": "missing decorative image retains scroll chapters and reduced motion restores static reading",
+      "project": "1440",
+      "status": "passed",
+      "duration": 2915
+    },
+    {
+      "file": "site.spec.js",
+      "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
+      "project": "1440",
+      "status": "passed",
+      "duration": 7704
+    },
+    {
+      "file": "site.spec.js",
+      "title": "failed film keeps a readable poster and reduced motion avoids downloading video",
+      "project": "1440",
+      "status": "passed",
+      "duration": 3633
+    },
+    {
+      "file": "site.spec.js",
+      "title": "scroll enhancement preserves layout and the fallback never fetches former 3D resources",
+      "project": "1440",
+      "status": "passed",
+      "duration": 4075
+    },
+    {
+      "file": "site.spec.js",
+      "title": "preserved content, assets, links and responsive layout",
+      "project": "1920",
+      "status": "passed",
+      "duration": 10439
+    },
+    {
+      "file": "site.spec.js",
+      "title": "keyboard disclosures, inquiry links and mobile navigation",
+      "project": "1920",
+      "status": "passed",
+      "duration": 5455
+    },
+    {
+      "file": "site.spec.js",
+      "title": "WCAG automated axe checks, including disclosure and navy diagram",
+      "project": "1920",
+      "status": "passed",
+      "duration": 5775
+    },
+    {
+      "file": "site.spec.js",
+      "title": "public GitHub projects: safe rendering and private/fork filtering",
+      "project": "1920",
+      "status": "passed",
+      "duration": 5212
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub failure and retry preserve useful content",
+      "project": "1920",
+      "status": "passed",
+      "duration": 7541
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub loading and empty states are explicit",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3186
+    },
+    {
+      "file": "site.spec.js",
+      "title": "GitHub real request deadline exits loading state",
+      "project": "1920",
+      "status": "passed",
+      "duration": 10961
+    },
+    {
+      "file": "site.spec.js",
+      "title": "reduced motion, reverse scrolling and preference changes",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3023
+    },
+    {
+      "file": "site.spec.js",
+      "title": "no JavaScript still exposes company content, disclosures and navigation",
+      "project": "1920",
+      "status": "passed",
+      "duration": 4519
+    },
+    {
+      "file": "site.spec.js",
+      "title": "optional motion bundle failure does not hide content or break navigation",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3006
+    },
+    {
+      "file": "site.spec.js",
+      "title": "SVG connection progresses with native scroll and reverses upward",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3449
+    },
+    {
+      "file": "site.spec.js",
+      "title": "black first frame stays readable while the film loads",
+      "project": "1920",
+      "status": "passed",
+      "duration": 2154
+    },
+    {
+      "file": "site.spec.js",
+      "title": "one decorative player owns all seven chapters and never requests a rejected intro",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3968
+    },
+    {
+      "file": "site.spec.js",
+      "title": "seven-chapter introduction follows native scroll, reverses, and supports keyboard navigation",
+      "project": "1920",
+      "status": "passed",
+      "duration": 12815
+    },
+    {
+      "file": "site.spec.js",
+      "title": "missing decorative image retains scroll chapters and reduced motion restores static reading",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3020
+    },
+    {
+      "file": "site.spec.js",
+      "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
+      "project": "1920",
+      "status": "passed",
+      "duration": 7775
+    },
+    {
+      "file": "site.spec.js",
+      "title": "failed film keeps a readable poster and reduced motion avoids downloading video",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3911
+    },
+    {
+      "file": "site.spec.js",
+      "title": "scroll enhancement preserves layout and the fallback never fetches former 3D resources",
+      "project": "1920",
+      "status": "passed",
+      "duration": 3755
+    }
+  ]
+}

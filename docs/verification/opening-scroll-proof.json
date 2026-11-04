@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-05",
+  "environment": "http://127.0.0.1:4185/",
+  "rows": [
+    {
+      "width": 390,
+      "height": 844,
+      "scrollY": 40,
+      "overflow": 0,
+      "drift": {
+        "stage": 0,
+        "headline": 0,
+        "display": 0
+      },
+      "errors": [],
+      "failedAssets": []
+    },
+    {
+      "width": 690,
+      "height": 829,
+      "scrollY": 40,
+      "overflow": 0,
+      "drift": {
+        "stage": 0,
+        "headline": 0,
+        "display": 0
+      },
+      "errors": [],
+      "failedAssets": []
+    },
+    {
+      "width": 1440,
+      "height": 1080,
+      "scrollY": 40,
+      "overflow": 0,
+      "drift": {
+        "stage": 1,
+        "headline": 1,
+        "display": 1
+      },
+      "errors": [],
+      "failedAssets": []
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scrollY": 40,
+      "overflow": 0,
+      "drift": {
+        "stage": 1,
+        "headline": 1,
+        "display": 1
+      },
+      "errors": [],
+      "failedAssets": []
+    }
+  ]
+}
