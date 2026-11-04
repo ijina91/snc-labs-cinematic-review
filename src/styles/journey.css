@@ -4,6 +4,8 @@
 }
 .journey {
   --scene-height: calc(100svh - 88px);
+  /* Six captions, half a scene of native scrolling per caption. */
+  --journey-height: calc(var(--scene-height) * 4);
   --journey-ink: #182334;
   --journey-muted: #3c5779;
   position: relative;
@@ -14,7 +16,7 @@
 .journey-visual, .journey-word, .journey-grid, .journey-progress { display: none; }
 .journey-panel {
   position: relative;
-  min-height: calc(var(--scene-height) * 1.1);
+  min-height: calc(var(--journey-height) / 6);
   display: flex; flex-direction: column; justify-content: center;
   padding: 85px max(7vw, 28px);
   color: var(--journey-ink);
@@ -30,7 +32,7 @@
 .journey-panel h3 { font-size: clamp(38px, 4.4vw, 82px); letter-spacing: -.055em; line-height: 1.24; }
 .journey-panel h3 > span { display: block; }
 .journey-description { max-width: 420px; font-size: 16px; line-height: 1.95; margin-top: 29px; color: var(--journey-muted); }
-.journey[data-enhanced='true'] { height: calc(var(--scene-height) * 6.6); }
+.journey[data-enhanced='true'] { height: var(--journey-height); }
 .journey[data-enhanced='true'] .journey-stage {
   position: sticky; top: 88px; height: var(--scene-height);
   background: #f1f7ff; isolation: isolate;
