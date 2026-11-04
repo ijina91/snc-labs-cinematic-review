@@ -7,6 +7,13 @@ html {
   scroll-padding-top: 112px;
 }
 
+/* Touch layouts preserve their native scroll position while viewport metrics
+   change. A smooth root makes library measurement restores animate toward a
+   stale coordinate after a fold or rotation has already finished. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  html { scroll-behavior: auto !important; }
+}
+
 body {
   margin: 0;
   background: var(--white);

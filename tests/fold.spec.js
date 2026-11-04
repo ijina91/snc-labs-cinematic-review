@@ -44,6 +44,17 @@ test('fold cover, unfolded screens and rotation preserve the current scene', asy
     await expect(page.locator('.journey-stage')).toHaveCSS('position', 'fixed');
     await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '2');
     await expect.poll(async () => Math.abs(Number(await page.locator('#journey').getAttribute('data-scene-position')) - 2)).toBeLessThan(.01);
+    // Sample subsequent paint frames too: a delayed smooth restoration can
+    // begin after the first correct scene has already satisfied the assertion.
+    const delayedDrift = await page.locator('#journey').evaluate(el => new Promise(resolve => {
+      let remaining = 18, maximum = 0;
+      const sample = () => {
+        maximum = Math.max(maximum, Math.abs(Number(el.dataset.scenePosition) - 2));
+        if (--remaining) requestAnimationFrame(sample); else resolve(maximum);
+      };
+      requestAnimationFrame(sample);
+    }));
+    expect(delayedDrift).toBeLessThan(.01);
     const fits = await page.locator('.journey-panel').nth(2).evaluate(el => {
       const r = el.querySelector('h3').getBoundingClientRect();
       const bottom = el.querySelector('.journey-description').getBoundingClientRect().bottom;
