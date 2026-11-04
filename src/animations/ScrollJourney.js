@@ -9,6 +9,7 @@ export function createScrollJourney(section) {
   const word = section.querySelector('.journey-word');
   const progress = section.querySelector('.journey-progress span');
   const status = section.querySelector('.journey-status');
+  const mobile = matchMedia('(max-width: 900px)');
   const events = new AbortController();
   let start = 0, span = 1, frame, visible = false, disposed = false, player, current = -1;
   let target = 0, visual = 0, announce;
@@ -22,7 +23,7 @@ export function createScrollJourney(section) {
   function paint() {
     frame = undefined;
     if (disposed || !visible || document.hidden) return;
-    visual += (target - visual) * .16;
+    visual = mobile.matches ? target : visual + (target - visual) * .16;
     if (Math.abs(target - visual) < .0003) visual = target;
     const phase = Math.min(visual * panels.length, panels.length - .0001);
     const index = Math.floor(phase), fraction = phase - index;
@@ -33,10 +34,10 @@ export function createScrollJourney(section) {
       panels.forEach((panel, i) => { panel.setAttribute('aria-hidden', String(i !== index)); panel.inert = i !== index; });
       clearTimeout(announce); announce = setTimeout(() => { if (!disposed) status.textContent = panels[index].querySelector('h3').textContent; }, 250);
     }
-    const opacity = (index === 0 ? 1 : smooth(0, .14, fraction)) * (index === panels.length - 1 ? 1 : 1 - smooth(.65, .96, fraction));
+    const opacity = mobile.matches ? 1 : (index === 0 ? 1 : smooth(0, .14, fraction)) * (index === panels.length - 1 ? 1 : 1 - smooth(.65, .96, fraction));
     panels.forEach((panel, i) => {
       panel.style.opacity = i === index ? String(opacity) : '0';
-      panel.style.transform = i === index ? `translateY(${fraction < .14 ? (1 - opacity) * 26 : -(1 - opacity) * 20}px)` : 'translateY(26px)';
+      panel.style.transform = mobile.matches ? 'none' : i === index ? `translateY(${fraction < .14 ? (1 - opacity) * 26 : -(1 - opacity) * 20}px)` : 'translateY(26px)';
     });
     progress.style.transform = `scaleX(${visual})`;
     player?.render(travel / (panels.length - 1));
