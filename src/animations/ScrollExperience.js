@@ -36,7 +36,9 @@ export function initScrollExperience() {
     document.querySelectorAll('section:has([data-reveal]), .connection-map').forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   });
-  const refresh = () => { if (disposed) return; clearTimeout(refreshTimer); refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 80); };
+  // Wait for native scrolling to settle before refreshing measurements; a
+  // forced refresh can restore a cached position during a preference change.
+  const refresh = () => { if (disposed) return; clearTimeout(refreshTimer); refreshTimer = setTimeout(() => ScrollTrigger.refresh(true), 80); };
   document.addEventListener('snc:layout', refresh); document.fonts?.ready.then(refresh);
   return () => { disposed = true; clearTimeout(refreshTimer); document.removeEventListener('snc:layout', refresh); media.revert(); };
 }
