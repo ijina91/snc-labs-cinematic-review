@@ -1,47 +1,37 @@
-# Implementation report
+# 구현 보고서
 
-> 2026-11-04 변경 상태: 체크마크 3D 연출을 제거하고 외부 무료 영상 제작으로 전환 중입니다. 현재는 새 원본 첫 프레임을 적용한 상태이며, 영상은 사람 인증 대기입니다. 아래 기존 WebGL 구현·60건 QA·Lighthouse 수치는 이전 커밋 cc6a428의 기록입니다. 현재 변경 사항과 실제 생성 상태는 [영상 제작 상태](docs/video/PRODUCTION_STATUS.md)를 확인하세요. 새 검증 결과는 별도로 기록합니다.
+## 구현 결과
 
+SNC의 화이트·블루 브랜드를 유지하면서 전체 화면 원본 공간 배경과 6개 장면의 스크롤 소개를 구현했다. LoreMotion 무료 MiniMax H3로 SNC 전용 이미지를 영상화하고, 각 마지막 프레임에서 이어지는 세 구간을 생성·편집했다. 최종 MP4는 **15.5초 / 1280×704 / 24fps / 약 4.7MB**다. 원본·편집·실제 길이는 [제작 기록](docs/video/PRODUCTION_STATUS.md), 해시는 [미디어 기록](docs/verification/film.json)에 있다.
 
-## Result
+단일 15.5초 생성, 1080p/4K, 5초 반복 영상으로 표현하지 않는다. 초기 왜곡된 LTX 출력은 미채택했다. 장식용 회전 체크마크·외곽 고리, 오른쪽 점·장면 번호, Three.js와 기존 WebGL 장면은 제거했다. 로고의 기존 브랜드 형태는 보존했다.
 
-Rebuilt SNC Labs as a runnable white-based corporate website with a finite white-to-blue entrance, a custom folded SNC check, three verified service components, and a reversible SVG business/system diagram. The fullscreen hero leads into a six-chapter spatial introduction, with larger typography, original blue geometry and reversible camera travel. Kept Vite, semantic HTML, CSS and vanilla JavaScript. No React migration.
+## 구조와 사용자 흐름
 
-After the user opened Instagram, the 12.42-second reel was viewed and sampled across a complete loop. See REFERENCE_ANALYSIS.md for observed frames and actual tool/skill availability. The SNC implementation uses original geometry and keeps its own palette/content; no unavailable skill is recorded as executed.
+Vite + HTML + CSS + Vanilla JS를 유지하고 React로 전환하지 않았다. `src/data/`는 서비스·문구·영상 경로, `src/components/`는 정적 마크업과 탐색·GitHub·서비스, `src/animations/`는 GSAP·SVG·스크롤 영상, `src/styles/`는 토큰과 반응형을 담당한다.
 
-## Preserved behavior
+첫 화면은 화이트에서 2.25초 이내 블루 공간이 드러난다. 데스크톱은 GSAP, 모바일은 브라우저의 합성 가능한 기본 투명도 애니메이션으로 비용을 줄였다. 사용자가 스크롤하면 회사 → ESH → SAP → Web → 기술의 연결 → 문의로 이어지는 6개 장면을 읽는다. 하나의 영상 재생 위치를 스크롤에 연결하고, 역방향 스크롤도 지원한다. About·세 서비스·기술 연결 SVG·공개 GitHub·전화 문의로 이어진다. 모션 목적과 소유권은 MOTION_STORYBOARD.md에 기록했다.
 
-- Exact SNC logo geometry and approved brand colors; company introduction.
-- ESH and safety work-permit system development, SAP & Enterprise, Web Engineering.
-- Public GitHub projects, safe text rendering, metadata and outbound links.
-- Native service disclosures, mobile navigation, Escape/focus behavior and reduced motion.
-- Representative phone, canonical domain, SEO/OG metadata, favicon, robots and sitemap.
-- Main-only GitHub Pages build/deploy workflow. Added explicit main-ref guards.
+영상은 처음부터 자동재생하거나 내려받지 않는다. 사용자 스크롤 후 해당 구간 가까이에서 로딩한다. 재생 위치 요청을 rAF로 합치고 seeked 이후 최신 목표로 이동한다. 정리 시 이벤트·관찰자·rAF·영상 src를 해제한다. 저사양·데이터 절약·미디어 오류는 정지 배경, Reduced Motion·JavaScript 비활성화는 일반 문서 흐름을 유지한다.
 
-## Structure
+## 보존한 내용과 기능
 
-`src/data/services.js` holds verified service data. `ServiceCards.js` and the Vite HTML transform render complete static HTML at build time, including logos and disclosures. `ResponsiveNavigation.js`, `ServiceInteractions.js` and `GithubProjects.js` own independent interactions. `MotionPreferences.js` identifies reduced motion and lightweight-device preferences. `CinematicExperience.js` owns the finite hero timeline; `ScrollExperience.js` owns lazy ScrollTrigger scenes and reversible SVG paths. Styles are split into tokens, site and responsive files.
+- SNC 로고·회사 소개·브랜드 색상과 승인된 대표전화 02-354-5001.
+- ESH·안전작업허가 관련 시스템 개발, SAP & Enterprise, Web Engineering.
+- 공개 GitHub 저장소 목록·설명·언어 등 공개 메타데이터, 로딩·빈 결과·실패·재시도·시간제한, 안전한 텍스트 렌더링.
+- 모바일 메뉴·키보드·Focus·Escape·앵커, 기본 HTML 서비스 상세, 모션 감소·no-JS 경로.
+- canonical·OG·favicon·robots·sitemap·로컬 폰트와 기존 도메인.
 
-`src/data/journey.js` and `JourneyMarkup.js` add six build-time-rendered introduction chapters. `components/ScrollJourney.js` gates initialization on scrolling/proximity/preferences. `animations/ScrollJourney.js` owns the native-scroll chapter controller, keyboard navigation, progress and lifecycle. `JourneyScene.js` owns the lazy Three.js perspective scene. A 6.6-viewport CSS-sticky stage lets users read, travel forward/backward and skip to normal company information or contact. Render only during progress changes and settling, never an endless idle loop.
+미확인 고객명·실적·인증·연락처·미출시 서비스를 추가하지 않았다. GitHub 토큰·비공개 저장소·내부 시스템 코드/주소·사용자 로그인 정보는 프론트엔드에 포함하지 않는다. 타인·스톡·레퍼런스 영상은 사용하지 않는다.
 
-The three business scenes use an asymmetric ESH protective ribbon, interwoven SAP streams and curved Web interface fragments. User review replaced the rigid pillar/board motif. The signature loop is now a continuous smooth surface with joined normals; anti-aliasing and improved pixel density address the initially broken-looking segmented ring. Studio lighting is generated in code. Mobile culls already-passed objects before they obscure the next scene.
+## 검증과 수정
 
-GitHub requests are deferred until the section approaches the viewport. Loading, success, empty, failure, seven-second abort and retry states remain useful. Retry retains keyboard focus with aria-disabled and a guarded request, then moves focus to the resulting link before hiding the button. Responses cannot inject HTML or reveal private repositories. There is no token in runtime code.
+실제 검증 범위와 최초 실패·재검사 모두 QA_REPORT.md에 기록한다. 최종 영상 전체 372프레임 디코딩, 4개 해상도 영상 탐색·모션 설정 변경, 기존 기능·axe·반응형·미디어 실패 경로를 검증했다. 모바일의 모션 설정 변경 후 화면이 소개 구간 밖으로 이동하는 테스트 전제는 실제 trace를 확인해 수정했다. 지연 로딩을 무시하도록 제품 코드를 바꾸지 않았다.
 
-## Motion and resilience
+수동 시각 검토에서 히어로 하단 작은 SNC 문구의 대비를 보완하고, 클릭 링크로 오해할 화살표를 제거했다. 성능 실측과 한계는 PERFORMANCE_REPORT.md에서 별도로 보고한다.
 
-Content is visible before animation loads. Hero text stays readable on white while blue light accumulates over 2.1 seconds; the one-time light sweep ends by 2.25 seconds. The explanatory paragraph is stationary to protect LCP. GSAP loads separately; ScrollTrigger waits for the first native scroll and initializes nearby chapters. Reduced motion, failed animation imports and JavaScript-disabled browsing retain content and phone links. Scoped contexts, observers, fetches and event listeners are disposed on page lifecycle/preference changes.
+## GitHub Pages와 승인 경계
 
-## Assets and dependencies
+작업 브랜치 `feat/cinematic-experience`, 검토 PR https://github.com/snclabs/snclabs.github.io/pull/1 . 조직 저장소 쓰기 권한 제한으로 기존 공개 검토 fork `ijina91/snc-labs-cinematic-review`를 head로 사용한다.
 
-Locally hosted, regenerated OFL font subsets total approximately 124 KB. Reserved font names were replaced with SNC Sans and SNC Display. Source licenses ship beside fonts; see LICENSES.md. Graphics are original SVG/CSS and procedural 3D. Runtime additions are GSAP and **Three.js 0.187.0**, justified by actual spatial camera travel/curved geometry. The Three.js scene is approximately 576KB (147KB gzip), deferred until scrolling near the introduction. The build's >500KB optional-chunk warning is disclosed, not suppressed. Low-core/save-data devices avoid that import; WebGL failure uses the SVG story, and reduced motion/no-JS retain normal reading flow.
-
-Playwright, axe and Lighthouse are development tools. A fresh npm ci completed after releasing this workspace's locked Windows esbuild processes; preview servers were restarted. The tested lockfile audit reports no known vulnerabilities. Rendering resources (including the generated environment texture) are released on lifecycle/preference cleanup and WebGL context loss.
-
-## Delivery boundary
-
-Feature branch: `feat/cinematic-experience`, based on main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Organization write permissions are unavailable to the local authenticated account; review delivery uses the public fork `ijina91/snc-labs-cinematic-review` and a cross-repository PR into `snclabs/snclabs.github.io:main`. No production merge or deployment is authorized by this delivery. The PR workflow builds/tests only; deployment jobs also reject non-main manual dispatch.
-
-Submitted [PR #1](https://github.com/snclabs/snclabs.github.io/pull/1). At initial submission GitHub Actions returned `action_required`: the first external-fork workflow requires repository-maintainer approval. Remote CI has not passed or deployed; local regression evidence remains available. Main was verified unchanged after PR creation.
-
-QA, performance measurements, visual comparison and remaining verification limits are recorded separately. Local ignored artifacts contain raw audit JSON/HTML, test traces and a short walkthrough video.
+기존 main push·수동 GitHub Actions Pages 배포를 유지하고 두 배포 job을 main ref로 제한했다. PR은 검증 전용 workflow이며 배포하지 않는다. **사용자 승인 전 main 병합·운영 배포를 실행하지 않는다.** 로컬 빌드 성공과 GitHub에서의 관리자 workflow 실행 승인을 구분한다.

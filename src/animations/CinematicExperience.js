@@ -1,5 +1,24 @@
-import { gsap } from 'gsap';
-export function initCinematicExperience() {
+export async function initCinematicExperience(isCurrent = () => true) {
+  // On touch-sized screens, let the browser composite the white-to-blue
+  // entrance. Copy stays still and readable; GSAP still owns desktop motion.
+  if (matchMedia('(max-width: 900px)').matches) {
+    const skip = scrollY > innerHeight;
+    const start = document.timeline.currentTime;
+    const animations = [
+      ['.hero-ambient', 0, 2100, 0],
+      ['.hero-art-intro', .08, 1900, 120],
+    ].map(([selector, opacity, duration, delay]) => {
+      const animation = document.querySelector(selector).animate(
+        [{ opacity: skip ? 1 : opacity }, { opacity: 1 }],
+        { duration: skip ? 0 : duration, delay: skip ? 0 : delay, fill: 'both', easing: 'cubic-bezier(.22,1,.36,1)' },
+      );
+      if (start !== null) animation.startTime = start;
+      return animation;
+    });
+    return () => animations.forEach(animation => animation.cancel());
+  }
+  const { gsap } = await import('gsap');
+  if (!isCurrent()) return () => {};
   const media = gsap.matchMedia();
   media.add('(prefers-reduced-motion: no-preference)', () => {
     if (scrollY > innerHeight) {

@@ -15,15 +15,17 @@ for (const width of [390, 1440]) {
   await page.waitForTimeout(1600);
   await page.evaluate(() => { window.sncProbePhase = 'journey-entry'; });
   await page.getByRole('link', {name: 'SNC의 기술 알아보기', exact: true}).click();
-  await page.waitForFunction(() => /video|poster/.test(document.querySelector('#journey').dataset.renderer), null, {timeout:30000});
+  await page.waitForFunction(() => document.querySelector('#journey').dataset.renderer === 'video', null, {timeout:30000});
   await page.waitForTimeout(700);
   const renderer = await page.locator('#journey').getAttribute('data-renderer');
   await page.evaluate(() => { window.sncProbePhase = 'journey-navigation'; });
+  const beforeDown = Number(await page.locator('#journey').getAttribute('data-scene-position'));
   await page.keyboard.press('PageDown');
-  await page.waitForFunction(() => document.querySelector('.journey-stage').dataset.chapter === '2');
+  await page.waitForFunction(before => Number(document.querySelector('#journey').dataset.scenePosition) > before + .1, beforeDown);
   await page.waitForTimeout(700);
+  const beforeUp = Number(await page.locator('#journey').getAttribute('data-scene-position'));
   await page.keyboard.press('PageUp');
-  await page.waitForFunction(() => document.querySelector('.journey-stage').dataset.chapter === '4');
+  await page.waitForFunction(before => Number(document.querySelector('#journey').dataset.scenePosition) < before - .1, beforeUp);
   await page.waitForTimeout(700);
   await page.evaluate(() => { window.sncProbePhase = 'service-details'; });
   for (const summary of await page.locator('.service-detail summary').all()) { await summary.click(); await summary.press('Enter'); }

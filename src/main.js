@@ -32,7 +32,12 @@ async function startMotion() {
     // Let the locally hosted type settle and paint before measuring GSAP transforms.
     await document.fonts.ready;
     await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    if (generation === motionGeneration && !reduced.matches) disposeMotion = initCinematicExperience();
+    const isCurrent = () => generation === motionGeneration && !reduced.matches;
+    if (isCurrent()) {
+      const cleanup = await initCinematicExperience(isCurrent);
+      if (isCurrent()) disposeMotion = cleanup;
+      else cleanup?.();
+    }
   } catch { document.documentElement.dataset.motion = 'static'; }
 }
 function start() {

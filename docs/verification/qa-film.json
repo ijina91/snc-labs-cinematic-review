@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "tooling": "Playwright 1.64.1 / installed Microsoft Edge / axe-core",
+  "viewports": [
+    "390x844",
+    "768x1080",
+    "1440x1080",
+    "1920x1080"
+  ],
+  "runs": [
+    {
+      "scope": "Initial 5-second film media tests",
+      "raw": "artifacts/qa/film-first-shot-results.json",
+      "stats": {
+        "startTime": "2026-11-04T00:00:28.038Z",
+        "duration": 118137.643,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "scope": "Initial full regression, first 5-second film",
+      "raw": "artifacts/qa/film-full-initial-results.json",
+      "stats": {
+        "startTime": "2026-11-04T00:03:46.224Z",
+        "duration": 521296.151,
+        "expected": 67,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "scope": "Recheck after correcting viewport re-entry in test",
+      "raw": "artifacts/qa/film-toggle-recheck-results.json",
+      "stats": {
+        "startTime": "2026-11-04T00:14:03.507Z",
+        "duration": 109104.466,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "scope": "Final 15.5-second media regression",
+      "raw": "artifacts/qa/film-final-media-results.json",
+      "stats": {
+        "startTime": "2026-11-04T00:19:35.064Z",
+        "duration": 104526.806,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "scope": "Final hero contrast/responsive/content/axe/white-entry regression",
+      "raw": "artifacts/qa/film-final-contrast-results.json",
+      "stats": {
+        "startTime": "2026-11-04T00:31:38.694Z",
+        "duration": 419405.564,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "scope": "Final native mobile entrance / lazy GSAP / six motion regressions across four widths",
+      "raw": "artifacts/qa/film-final-motion-results.json",
+      "stats": {
+        "startTime": "2026-11-04T00:52:37.131Z",
+        "duration": 605617.184,
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "initialFailure": "On mobile, Reduced Motion restored static document height and moved viewport to Expertise. Test incorrectly expected lazy video to reload while story was offscreen. Failure trace screenshot confirmed Expertise viewport. No production behavior was changed to force offscreen loading.",
+  "correction": "Test re-enters journey after switching motion back on, then verifies actual video reload, seeks and decoded frames. Related 12 tests pass; final 15.5-second asset passes all 4 viewport media tests.",
+  "coverage": "Initial full run: 67/68; related recheck: 12/12; final media regression: 4/4. Do not present these as one clean 68/68 full run. Final native/lazy-motion regression: 24/24. Separate scoped runs, not a single clean full-suite result.",
+  "criticalUnresolvedInTestedScope": 0,
+  "axe": "Zero violations in full-run scans; covered light/navy/disclosure states.",
+  "limitations": "Desktop Edge with mobile/touch emulation; not a full physical Android/iOS/Safari device matrix. Automated axe is not complete accessibility certification.",
+  "cleanInstall": "Initial EPERM: own live Vite process locked Rollup native module. Stopped only verified task process; retry npm ci passed, 138 packages added, 139 audited, 0 vulnerabilities reported.",
+  "finalBuild": "npm run build and npm run verify passed after native mobile entrance and deferred GSAP import; actual film present in dist."
+}

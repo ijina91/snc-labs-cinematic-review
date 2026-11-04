@@ -7,7 +7,7 @@ const browser = await chromium.launch({ channel: 'msedge', headless: true });
 async function enterJourney(page) {
   await page.locator('#journey').evaluate(el => scrollTo({top: el.getBoundingClientRect().top + scrollY - 70, behavior: 'instant'}));
   await page.waitForFunction(() => document.querySelector('#journey').dataset.enhanced === 'true');
-  await page.waitForFunction(() => /video|poster/.test(document.querySelector('#journey').dataset.renderer), null, {timeout: 20000});
+  await page.waitForFunction(() => document.querySelector('#journey').dataset.renderer === 'video', null, {timeout: 20000});
 }
 async function chapter(page, index, behavior = 'instant') {
   await page.locator('#journey').evaluate((el, options) => {

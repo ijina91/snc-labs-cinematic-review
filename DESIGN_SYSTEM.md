@@ -1,45 +1,33 @@
-# SNC Premium Web Experience design system
+# SNC 디자인 시스템
 
-> 2026-11-04 변경 상태: 체크마크 3D 연출을 제거하고 외부 무료 영상 제작으로 전환 중입니다. 현재는 새 원본 첫 프레임을 적용한 상태이며, 영상은 사람 인증 대기입니다. 아래 기존 WebGL 구현·60건 QA·Lighthouse 수치는 이전 커밋 cc6a428의 기록입니다. 현재 변경 사항과 실제 생성 상태는 [영상 제작 상태](docs/video/PRODUCTION_STATUS.md)를 확인하세요. 새 검증 결과는 별도로 기록합니다.
+기준일: 2026-11-04 (Asia/Seoul). 현재 구현은 화이트 기반의 SNC 공간 영상과 기본 스크롤을 사용한다. 이전 체크마크·고리 중심 3D 시안은 제거했다.
 
+## 색상과 타이포그래피
 
-## Scroll introduction
+| 토큰 | 값 | 역할 |
+|---|---|---|
+| Primary Blue | #216BE4 | CTA, 주요 링크, 강조 |
+| Sky Blue | #36A4ED | 공간의 빛, 연결선, 블루 그라데이션 |
+| Deep Navy | #21386D | 기술 설명과 일부 장면의 대비 |
+| Ink | #182334 | 화이트 화면 본문과 내비게이션 |
+| White | #FFFFFF | 기본 배경과 문구 여백 |
 
-Maintain SNC white/blue/sky/navy/ink while extending the experience through six native-scroll chapters. The visual language is sculptural systems: a smooth signature loop, an asymmetric protective envelope, interwoven data flows and curved interface fragments. Reject repeated pillars/boards, checkerboard ring segments, coarse edges and meaningless particles. Continuous ribbon normals, MSAA and native-or-higher render resolution preserve clean surfaces. Use generated studio reflections rather than external imagery.
+보조 색은 무채색과 블루 계열 명도 변형이다. 그린과 별도 강조색은 사용하지 않는다. 실제 토큰은 `src/styles/tokens.css`에 있다. 영상은 지정 팔레트의 생성물이며 생성 결과의 모든 픽셀이 HEX 값과 일치한다고 주장하지 않는다.
 
-Copy sits left of the 3D view on desktop and below it on mobile. Readable gradient plates, independent chapter-navigation surfaces and a permanent inquiry exit protect usability. Six chapters use explicit sequence indicators; users control their reading time. Two navy scenes give contrast within a white/blue overall site. Reduced-motion/static reading preserves every factual paragraph.
+한글은 로컬 SNC Sans, 영문 디스플레이는 SNC Display를 사용한다. Pretendard·Inter Tight의 허용된 서브셋이며 라이선스와 이름 변경은 LICENSES.md에 기록했다. `font-display: swap`과 시스템 대체 글꼴을 제공한다.
 
-## Fullscreen revision — 2026-11-03
+## 구도
 
-User requests a more spectacular full-screen composition while retaining SNC color. Replace the rounded inset hero with an edge-to-edge, viewport-height stage. Keep white at entry; accumulate sky/primary blue across the full background. Enlarged dimensional brand check occupies the right half, with SNC outline typography and concentric architectural curves behind it. One finite light sweep introduces depth; no infinite particles or neon. Header remains legible. Main headline stays left aligned and immediately readable. Technology chapter also fills at least a viewport. Mobile becomes a vertical text/graphic scene rather than a scaled desktop canvas.
+전체 화면 배경은 콘텐츠 컨테이너 밖까지 펼친다. 데스크톱 문구는 왼쪽의 밝은 공간, 모바일 문구는 하단의 보호 그라데이션 위에 배치한다. 읽기 폭은 최대 1280px이며 모바일은 세로 구도로 재구성한다. 대형 타이틀·넓은 여백·24px 카드 반경과 같은 규칙을 일관되게 사용한다.
 
-Tokens remain #FFFFFF / #216BE4 / #36A4ED / #21386D / #182334, with SNC Sans for Korean and SNC Display for Latin. Scene gutters 6.1vw on desktop, 40/28px on tablet/mobile; hero type 7.4vw desktop and 12.2vw mobile. Layout: `[ full-width header ] / [ large message | oversized check, blue atmosphere ] / [ scene footer ]`. The specific SNC check carries the visual impact; reject a generic globe, stock video or WebGL effect.
+SNC 로고는 기존 형태를 보존한다. 장식용 회전 체크, 외곽 원·고리, 오른쪽 점 내비게이션과 장면 번호는 사용하지 않는다. 새 시각 언어는 비대칭 블루 금속 건축, 투명한 유리, 공간을 따라 흐르는 빛이다. 실제 시스템 UI나 허위 고객 실적으로 오해할 소재는 넣지 않는다.
 
-## Tokens
+## 컴포넌트와 반응
 
-Primary blue `#216BE4`; sky `#36A4ED`; deep navy `#21386D`; ink `#182334`; white `#FFFFFF`. Supporting surfaces are blue/white tints; text uses neutral/slate shades tested for contrast. No green or unrelated accent palette.
+서비스는 ESH Systems / SAP & Enterprise / Web Engineering 데이터에 기반한다. 미출시 서비스는 추가하지 않는다. 각 서비스는 기본 HTML details/summary로 설명을 펼치고 문의로 연결된다. Hover는 테두리·그림자·작은 이동으로 제한하며 키보드 Focus를 별도로 제공한다.
 
-Typography: locally hosted, licensed/subset Korean sans and condensed Latin display. Fullscreen Korean title (desktop 70–145px; mobile 40–68px), section titles 35–56px; body 12–18px depending on viewport. Short readable line lengths. Font fallback and explicit hero/graphic dimensions prevent layout shifts.
+라이트·네이비 장면 모두 문구 보호막을 둔다. 버튼과 주요 링크는 최소 44px 조작 영역을 제공한다. 헤더·모바일 메뉴·전화 CTA·GitHub 상태는 시맨틱 HTML 및 ARIA 상태를 유지한다. 모션 감소·JavaScript 비활성화에서도 회사 소개와 문의를 읽을 수 있다.
 
-Layout: 1280px maximum reading content; 24/40/64px adaptive gutters. The hero deliberately exceeds that grid to fill the viewport width with 6.1vw scene gutters. Open company-introduction grid, three independent service components, a viewport-height navy technology chapter, GitHub editorial/panel split, and large white telephone CTA.
+## 검토 기준
 
-```text
-logo          navigation                 contact
-[ large headline       folded SNC ribbon        ]
-[ description / CTAs              scroll cue     ]
-company idea                  company description
-ESH component       SAP component       Web component
-[ navy: business → SNC → systems → operations    ]
-GitHub introduction                   project panel
-large contact message                 phone link
-```
-
-## Distinctive principle and self-critique
-
-The brand check, rather than a generic globe/server cube, is the central graphic. Its two joined strokes represent the brief's connection between business context and technical implementation. Keep supporting surfaces quiet; avoid repeating the hero animation on every card. Use deep navy only for the explanatory technology chapter rather than converting the whole site to dark mode.
-
-Rejected from the initial plan: identical fade-up effects for all sections and continuous floating graphics. Replace with one finite hero timeline, restrained heading reveals, a scroll-driven SVG explanation, and responsive user-triggered details/hover states.
-
-## Interaction and accessibility
-
-At least 44px interactive targets, visible focus, semantic headings/landmarks, native service disclosures, polite status updates, no hidden-by-default content. The no-JS path retains service content, phone links, navigation links and GitHub fallback. Reduced motion disables decorative entrances/parallax/scrubbing.
+브랜드 15 / 시각 구성 25 / 모션 20 / 반응형 15 / 기능·접근성 15 / 성능 10의 100점 모델을 사용한다. 내부 99점 목표는 실측과 결함 해결을 대체하지 않는다. 사람의 선호나 실기기 전체 품질을 자동 점수로 인증하지 않으며, 실제 검증 결과와 남은 한계는 QA_REPORT.md·PERFORMANCE_REPORT.md에 기록한다.

@@ -26,3 +26,7 @@ Replace the static two-column illustration, uneven service disclosures, minified
 ## Deployment boundary
 
 Work branch: `feat/cinematic-experience`. Production main must remain unchanged until user approval. Keep main deployment; add PR build-only checks and guard manual deployment against non-main refs.
+
+## 2026-11-04 follow-up
+
+The feature implementation now uses a reviewed 15.5-second original spatial film, with native scroll scrubbing and a static fallback. Rotating checks, rings, side dots/counters and the Three.js runtime were removed. Desktop entry uses GSAP; mobile entry uses browser-native opacity animations. The three verified services, company copy, public GitHub integration, phone and SEO assets remain preserved. Current validation and actual failure/recheck scopes are recorded in QA_REPORT.md and docs/verification/qa-film.json. The main/deployment approval boundary is unchanged.

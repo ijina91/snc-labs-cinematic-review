@@ -16,6 +16,10 @@
 }
 .hero-capabilities { padding: 0 18px; border: 1px solid #ffffffb3; border-radius: 24px; background: #ffffffdb; }
 .hero-capabilities a { display: inline-flex; align-items: center; min-height: 44px; }
+.hero--immersive .hero-bottom .hero-signature {
+  padding: 2px 8px; border-radius: 12px;
+  color: var(--white); background: var(--navy);
+}
 .journey[data-enhanced='true'] .journey-stage { --journey-ink: #182334; --journey-muted: #304c70; --journey-hud: #ffffffed; background: #edf5ff; }
 .journey[data-enhanced='true'] .journey-stage:is([data-chapter='2'],[data-chapter='4']) {
   --journey-ink: #fff; --journey-muted: #e3efff; --journey-hud: #182f56ed;

@@ -1,36 +1,31 @@
-# Reference analysis
+# 레퍼런스 분석
 
-> 2026-11-04 변경 상태: 체크마크 3D 연출을 제거하고 외부 무료 영상 제작으로 전환 중입니다. 현재는 새 원본 첫 프레임을 적용한 상태이며, 영상은 사람 인증 대기입니다. 아래 기존 WebGL 구현·60건 QA·Lighthouse 수치는 이전 커밋 cc6a428의 기록입니다. 현재 변경 사항과 실제 생성 상태는 [영상 제작 상태](docs/video/PRODUCTION_STATUS.md)를 확인하세요. 새 검증 결과는 별도로 기록합니다.
+## 실제 확인한 범위
 
+사용자가 열어둔 Instagram 릴 `https://www.instagram.com/reel/DfRaUziOLLU/`를 이전 브라우저 세션에서 실제 재생·확인했다. 관찰된 영상은 12.421223초, 1440×2560이며 모니터에 표시된 공간형 웹사이트를 촬영한 편집 영상이다. 초기 접근 실패와 이후 실제 관찰을 구분한다.
 
-Reference: https://www.instagram.com/reel/DfRaUziOLLU/
-
-## What was actually observed
-
-After the user opened the reel, the in-app browser successfully exposed its playing video. Native media metadata reported **12.421223 seconds**, 1440×2560. Watched one full loop and inspected screenshots at approximately 1.19, 3.88, 4.01, 6.28, 8.80 and 11.14 seconds. Earlier HTTP-only attempts could not play it; the successful browser observation supersedes the earlier unavailable-reference report.
-
-| Playback region | Observed composition |
+| 위치 | 관찰한 구성 |
 |---|---|
-| Around 1.2s | A luminous fragmented ring occupies a large dark canvas; oversized typography anchors the lower view |
-| Around 3.9–4.0s | Blocks/fragments move through depth as the camera approaches the structure |
-| Around 6.3s | Architectural columns and a small central object form a passage |
-| Around 8.8s | Camera travel continues between tall structures; connected elements recede into depth |
-| Around 11.1s | A quieter dark scene introduces a new large message |
+| 약 1.2초 | 어두운 대형 화면, 빛나는 분절 고리, 큰 타이포그래피 |
+| 약 3.9–4.0초 | 블록과 조각 사이로 깊이 방향 카메라 이동 |
+| 약 6.3초 | 기둥과 중앙 오브젝트가 이루는 통로 |
+| 약 8.8초 | 높은 구조물 사이로 이어지는 공간 이동 |
+| 약 11.1초 | 시각적 밀도를 낮추며 새 메시지 등장 |
 
-The reel is a filmed monitor with editorial overlay. Its total duration is measurable; the underlying site's full length, code, frame rate and exact scroll-to-animation implementation are not established by this clip. Do not confuse a twelve-second edited reel with a required twelve-second website.
+편집 영상만으로 원본 사이트의 코드·전체 길이·정확한 스크롤 엔진을 확인했다고 주장하지 않는다. 12.42초는 레퍼런스 릴의 길이이며 웹사이트 읽기 시간을 제한하는 값이 아니다.
 
-## SNC translation
+## SNC에 적용한 원칙
 
-Preserve the reference's large scale, spatial continuity, camera movement and scene-to-scene narrative. Author a six-chapter SNC introduction: company → ESH → SAP → Web → connection → inquiry. A native-scroll stage spans 6.6 viewport heights, with readable holds and camera transitions. The viewer controls pace and can reverse, jump chapters, or skip to normal company information.
+대형 타이포그래피, 전체 화면의 공간감, 연속 카메라 이동과 스크롤에 따른 메시지 전환을 적용한다. 레퍼런스의 레드·블랙, 가상자산 소재, 고리·기둥·모델·영상 파일은 복사하지 않는다. SNC 화이트·블루·스카이·네이비와 실제 세 사업 분야를 유지한다.
 
-Keep SNC white, primary blue, sky blue, navy and ink. Do not copy the red/black palette, crypto subject matter, typography, video/model assets, branding or claims. All geometry is authored in code for SNC. No downloaded reference media enters the repository or deployed site.
+사용자 피드백에 따라 회전 체크마크·외곽 원과 고리·막대에 판자를 끼운 형태·오른쪽 점·장면 번호를 제거했다. 새 원본 장면을 직접 이미지 생성한 뒤 LoreMotion 무료 MiniMax H3의 image-to-video로 세 구간을 순차 생성했다. 각 마지막 프레임을 다음 구간의 시작 이미지로 사용해 연속감을 유지하고, FFmpeg로 웹용 MP4를 만들었다. 최종 파일은 15.5초이며, 단일 15.5초 생성이나 원래 1080p/4K라고 표시하지 않는다. 공급자의 720p 표기와 실제 1280×704를 구분한다. 자세한 출처는 [원본 기록](docs/verification/film.json)에 있다.
 
-User review refined the geometry: replace regular pillars/stacked boards with asymmetric protective curves, interwoven data ribbons and curved interface fragments. Replace the initially segmented signature ring with a seamless smooth ribbon and improve anti-aliasing/render resolution.
+초기 LTX text-to-video 출력은 금속 표면 왜곡과 원형 통로가 강조돼 미채택했다. 스톡·커뮤니티·공급자 예시 영상은 사용하지 않았다. 최종 영상의 사이트 읽기 속도는 사용자 스크롤이 결정한다.
 
-## Skills and actual tools
+## 실제 사용한 스킬과 도구
 
-Installed skills were searched with hidden files/junctions. Applied frontend-design; read agent-browser discovery guidance, related playwright-browser-test/playwright-e2e contracts, and computer-use/browser documentation. Actual reference inspection used the in-app browser. Actual implementation uses GSAP and Three.js; verification uses Playwright, axe and Lighthouse. The agent-browser CLI is absent.
+설치된 frontend-design, agent-browser 관련 안내, computer-use, free-video-studio, ffmpeg-skill 지침을 활용했다. 실제 브라우저 조작·공급자 UI 생성·다운로드, GSAP 구현, FFmpeg 편집·전체 디코딩, Playwright·axe-core·Lighthouse 검증을 구분해 기록한다. agent-browser CLI는 설치되지 않아 실제 실행했다고 하지 않는다.
 
-Exact unavailable skills: cinematic-web-experience, video-to-superprompt, ui-ux-pro-max, impeccable, gsap-skills, scroll-craft, motion-design-agent-skills, threejs-skills, playwright, axe-core, lighthouse. No unavailable skill is claimed as executed. Manual storyboard/design review and real test tools are the alternatives.
+요청한 정확한 스킬 이름 중 cinematic-web-experience, video-to-superprompt, ui-ux-pro-max, impeccable, gsap-skills, scroll-craft, motion-design-agent-skills, threejs-skills, playwright, axe-core, lighthouse 스킬 파일은 탐색 당시 없었다. 수동 스토리보드·서로 다른 기준의 시각 검토와 실제 설치된 테스트 패키지로 대체했다. 스킬 파일 부재와 해당 라이브러리/도구 실행 여부는 다른 사실이다. Impeccable 스킬을 실행했다고 표시하지 않는다.
 
-Three.js is justified by the actual perspective-camera journey and original curved geometry; it loads after scroll near the introduction. No React or animation-plugin-suite migration. Low-power, reduced-motion and WebGL-failure paths keep the introduction accessible.
+현재 구현은 Vite·Vanilla JS·GSAP·SVG·실제 영상이다. Three.js와 이전 WebGL 장면은 제거했다. React로 전환하지 않았다.

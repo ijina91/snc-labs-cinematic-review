@@ -223,6 +223,7 @@ test('six-chapter introduction follows native scroll, reverses, and supports key
 
 test('missing decorative image retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
   await page.route('**/assets/media/snc-spatial-poster.webp',route=>route.abort());
+  await page.route('**/assets/media/snc-spatial-film.mp4',route=>route.abort());
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
@@ -232,6 +233,57 @@ test('missing decorative image retains scroll chapters and reduced motion restor
   expect(await page.locator('.journey-panel[aria-hidden="true"]').count()).toBe(0);
   await expect(page.locator('.journey-nav, .journey-counter')).toHaveCount(0);
   expect(await page.locator('.journey-panel').count()).toBe(6);
+});
+
+test('original film loads near the story, seeks both ways and releases media for reduced motion', async ({ page }) => {
+  test.setTimeout(90000);
+  const mediaRequests=[];
+  page.on('request',request=>{ if(request.url().includes('/assets/media/snc-spatial-film.mp4'))mediaRequests.push(request.url()); });
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.goto('/');
+  await expect(page.getByRole('heading',{level:1})).toBeVisible();
+  expect(mediaRequests).toHaveLength(0);
+  await enterJourney(page);
+  await expect(page.locator('#journey')).toHaveAttribute('data-renderer','video',{timeout:20000});
+  const video=page.locator('.journey-film');
+  expect(await video.evaluate(el=>({paused:el.paused,muted:el.muted,autoplay:el.autoplay,loop:el.loop}))).toEqual({paused:true,muted:true,autoplay:false,loop:false});
+  const expectFrame=async index=>{
+    await journeyChapter(page,index);
+    await expect.poll(()=>video.evaluate((el,chapter)=>Math.abs(el.currentTime-(el.duration-.08)*chapter/5),index),{timeout:15000}).toBeLessThan(.12);
+    await expect.poll(()=>video.evaluate(el=>el.seeking)).toBe(false);
+  };
+  await expectFrame(4);
+  await expectFrame(1);
+  await expectFrame(3);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced','true');
+  await expect(video).not.toHaveAttribute('src');
+  await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  // The static layout can move the viewport past the story on mobile.
+  // Re-enter it before expecting its deliberately lazy video to reload.
+  await enterJourney(page);
+  await expect(page.locator('#journey')).toHaveAttribute('data-renderer','video',{timeout:20000});
+  await expectFrame(1);
+});
+
+test('failed film keeps a readable poster and reduced motion avoids downloading video', async ({ page }) => {
+  test.setTimeout(90000);
+  let mediaRequests=0;
+  await page.route('**/assets/media/snc-spatial-film.mp4',route=>{mediaRequests++; return route.abort();});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  await page.locator('#journey').scrollIntoViewIfNeeded();
+  await expect(page.locator('.journey-panel')).toHaveCount(6);
+  expect(mediaRequests).toBe(0);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await enterJourney(page);
+  await expect.poll(()=>mediaRequests).toBeGreaterThan(0);
+  await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
+  await journeyChapter(page,2);
+  await expect(page.locator('.journey-panel').nth(2).locator('h3')).toBeInViewport();
+  await expect(page.locator('.journey-poster')).toHaveCSS('opacity','1');
+  await expect(page.locator('.journey-bottom a')).toHaveAttribute('href','#contact');
 });
 
 test('scroll enhancement preserves layout and the fallback never fetches former 3D resources', async ({ page }) => {
