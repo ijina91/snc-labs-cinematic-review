@@ -30,7 +30,9 @@ export function createScrollJourney(section) {
   }
   function measure() {
     if (disposed) return;
-    const preserve = innerWidth !== layoutWidth && visible && target > 0 && target < 1;
+    // Resize may arrive before the scroll event/observer catches up. Check
+    // the actual scroll position too, so folding cannot pull Contact back in.
+    const preserve = innerWidth !== layoutWidth && visible && target > 0 && target < 1 && scrollY >= start && scrollY <= start + span;
     const readingPosition = target;
     const headerHeight = document.querySelector('.site-header').getBoundingClientRect().height;
     start = section.getBoundingClientRect().top + scrollY - headerHeight;
