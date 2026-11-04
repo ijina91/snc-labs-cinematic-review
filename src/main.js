@@ -3,19 +3,21 @@ import { initNavigation } from './components/ResponsiveNavigation.js';
 import { initGithubProjects } from './components/GithubProjects.js';
 import { initServiceInteractions } from './components/ServiceInteractions.js';
 import { initScrollJourney } from './components/ScrollJourney.js';
+import { initHeroFilm } from './components/HeroFilm.js';
 let cleanups = [];
-let disposeMotion, disposeScroll, scrollEvents;
+let disposeMotion, disposeScroll, disposeHero, scrollEvents;
 let motionGeneration = 0;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 function stopMotion() {
   motionGeneration++;
-  scrollEvents?.abort(); disposeMotion?.(); disposeScroll?.();
-  disposeMotion = undefined; disposeScroll = undefined;
+  scrollEvents?.abort(); disposeMotion?.(); disposeScroll?.(); disposeHero?.();
+  disposeMotion = undefined; disposeScroll = undefined; disposeHero = undefined;
 }
 async function startMotion() {
   stopMotion();
   const generation = motionGeneration;
   if (reduced.matches) return;
+  disposeHero = initHeroFilm();
   scrollEvents = new AbortController();
   const startScroll = async () => {
     if (scrollY < 2) return;

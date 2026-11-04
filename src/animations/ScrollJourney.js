@@ -10,6 +10,7 @@ export function createScrollJourney(section) {
   const progress = section.querySelector('.journey-progress span');
   const status = section.querySelector('.journey-status');
   const content = section.querySelector('.journey-panels');
+  const poster = section.querySelector('.journey-poster');
   const mobile = matchMedia('(max-width: 900px), (hover: none) and (pointer: coarse)');
   const events = new AbortController();
   let start = 0, span = 1, frame, visible = false, disposed = false, player, current = -1;
@@ -55,6 +56,8 @@ export function createScrollJourney(section) {
     const travel = clamp((phase - .3) / (panels.length - 1), 0, 1) * (panels.length - 1);
     if (current !== index) {
       current = index; stage.dataset.chapter = String(index);
+      section.dataset.activeFrame = String(index + 2).padStart(2, '0');
+      poster.src = `/assets/frames/${section.dataset.activeFrame}.webp`;
       word.textContent = panels[index].dataset.word;
       panels.forEach((panel, i) => { panel.setAttribute('aria-hidden', String(i !== index)); panel.inert = i !== index; });
       clearTimeout(announce); announce = setTimeout(() => { if (!disposed) status.textContent = panels[index].querySelector('h3').textContent; }, 250);
@@ -65,7 +68,8 @@ export function createScrollJourney(section) {
       panel.style.transform = mobile.matches ? 'none' : i === index ? `translateY(${fraction < .14 ? (1 - opacity) * 26 : -(1 - opacity) * 20}px)` : 'translateY(26px)';
     });
     progress.style.transform = `scaleX(${visual})`;
-    player?.render(travel / (panels.length - 1));
+    // Each ordered source clip occupies exactly one caption interval.
+    player?.render(visual);
     section.dataset.scenePosition = travel.toFixed(3);
     if (visual !== target) frame = requestAnimationFrame(paint);
   }
@@ -99,7 +103,7 @@ export function createScrollJourney(section) {
   document.dispatchEvent(new Event('snc:layout'));
   return () => {
     disposed = true; events.abort(); observer.disconnect(); size.disconnect(); cancelAnimationFrame(frame); clearTimeout(announce); player?.dispose();
-    delete section.dataset.enhanced; delete section.dataset.renderer; delete section.dataset.scenePosition;
+    delete section.dataset.enhanced; delete section.dataset.renderer; delete section.dataset.scenePosition; delete section.dataset.activeFrame;
     panels.forEach(panel => { panel.removeAttribute('aria-hidden'); panel.inert = false; panel.style.removeProperty('opacity'); panel.style.removeProperty('transform'); });
     stage.style.removeProperty('background-color');
     stage.style.removeProperty('clip-path'); stage.style.removeProperty('visibility'); stage.inert = false;

@@ -1,6 +1,6 @@
 # SNC Labs
 
-SNC 전용 원본 이미지로 무료 영상을 순차 생성·편집해 15.5초 스크롤 배경에 적용했습니다. [제작 기록과 실제 사양](docs/video/PRODUCTION_STATUS.md). 운영 배포는 승인 대기입니다.
+사용자 제공 01~07 프레임을 기준으로 검은 배경의 Blue Glass 디자인을 제작 중입니다. [디자인 방향](docs/BLUE_GLASS_DESIGN.md), [현재 검증 상태](docs/BLUE_GLASS_QA.md). 이전 운영 버전의 제작 기록과 새 제작의 완료 여부를 구분합니다.
 
 SNC의 회사 소개와 ESH·안전작업허가 관련 시스템 개발, SAP & Enterprise, Web Engineering, 공개 GitHub 활동을 소개하는 Vite + Vanilla JS 웹사이트입니다.
 

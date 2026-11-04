@@ -159,14 +159,14 @@ test('SVG connection progresses with native scroll and reverses upward', async (
   await expect.poll(() => path.evaluate((el) => parseFloat(getComputedStyle(el).strokeDashoffset))).toBeGreaterThan(10);
 });
 
-test('white first frame progressively gains brand-blue background', async ({ page }) => {
+test('black first frame stays readable while brand motion loads', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' }); let release;
   const ready = new Promise((resolve) => { release = resolve; });
   await page.route('**/assets/CinematicExperience-*.js', async (route) => { await ready; await route.continue(); });
   await page.goto('/');
-  await expect(page.locator('.hero-stage')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
-  await expect(page.locator('.hero-ambient')).toHaveCSS('opacity', '0');
-  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '0.08');
+  await expect(page.locator('.hero-stage')).toHaveCSS('background-color', 'rgb(0, 0, 0)');
+  await expect(page.locator('.hero-ambient')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   release();
   await expect.poll(() => page.locator('.hero-ambient').evaluate((el) => Number(getComputedStyle(el).opacity))).toBeGreaterThan(.99);
@@ -189,8 +189,11 @@ async function journeyChapter(page, index) {
 test('six-chapter introduction follows native scroll, reverses, and supports keyboard navigation', async ({ page }) => {
   test.setTimeout(90000);
   await page.goto('/'); await enterJourney(page);
+  await expect(page.locator('.hero')).toHaveAttribute('data-frame','01');
+  expect(await page.locator('.journey-panel').evaluateAll(panels => panels.map(panel => panel.dataset.frame))).toEqual(['02','03','04','05','06','07']);
   for (let index = 0; index < 6; index++) {
     await journeyChapter(page, index);
+    await expect(page.locator('#journey')).toHaveAttribute('data-active-frame',String(index + 2).padStart(2,'0'));
     await expect(page.locator('.journey-panel').nth(index).locator('h3')).toBeInViewport();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     if (index === 1 || index === 2) expect((await new AxeBuilder({ page }).include('.journey-stage').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
@@ -222,8 +225,8 @@ test('six-chapter introduction follows native scroll, reverses, and supports key
 });
 
 test('missing decorative image retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
-  await page.route('**/assets/media/snc-spatial-poster.webp',route=>route.abort());
-  await page.route('**/assets/media/snc-spatial-film.mp4',route=>route.abort());
+  await page.route('**/assets/frames/02.webp',route=>route.abort());
+  await page.route('**/assets/media/snc-blue-glass-journey.mp4',route=>route.abort());
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
@@ -238,7 +241,7 @@ test('missing decorative image retains scroll chapters and reduced motion restor
 test('original film loads near the story, seeks both ways and releases media for reduced motion', async ({ page }) => {
   test.setTimeout(90000);
   const mediaRequests=[];
-  page.on('request',request=>{ if(request.url().includes('/assets/media/snc-spatial-film.mp4'))mediaRequests.push(request.url()); });
+  page.on('request',request=>{ if(request.url().includes('/assets/media/snc-blue-glass-journey.mp4'))mediaRequests.push(request.url()); });
   await page.emulateMedia({reducedMotion:'no-preference'});
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
@@ -249,7 +252,7 @@ test('original film loads near the story, seeks both ways and releases media for
   expect(await video.evaluate(el=>({paused:el.paused,muted:el.muted,autoplay:el.autoplay,loop:el.loop}))).toEqual({paused:true,muted:true,autoplay:false,loop:false});
   const expectFrame=async index=>{
     await journeyChapter(page,index);
-    await expect.poll(()=>video.evaluate((el,chapter)=>Math.abs(el.currentTime-(el.duration-.08)*chapter/5),index),{timeout:15000}).toBeLessThan(.12);
+    await expect.poll(()=>video.evaluate((el,chapter)=>Math.abs(el.currentTime-(el.duration-.08)*(chapter+.3)/6),index),{timeout:15000}).toBeLessThan(.12);
     await expect.poll(()=>video.evaluate(el=>el.seeking)).toBe(false);
   };
   await expectFrame(4);
@@ -258,6 +261,7 @@ test('original film loads near the story, seeks both ways and releases media for
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced','true');
   await expect(video).not.toHaveAttribute('src');
+  await expect(page.locator('.hero-brand-film')).not.toHaveAttribute('src');
   await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
   await page.emulateMedia({reducedMotion:'no-preference'});
   // The static layout can move the viewport past the story on mobile.
@@ -270,7 +274,7 @@ test('original film loads near the story, seeks both ways and releases media for
 test('failed film keeps a readable poster and reduced motion avoids downloading video', async ({ page }) => {
   test.setTimeout(90000);
   let mediaRequests=0;
-  await page.route('**/assets/media/snc-spatial-film.mp4',route=>{mediaRequests++; return route.abort();});
+  await page.route('**/assets/media/snc-blue-glass-journey.mp4',route=>{mediaRequests++; return route.abort();});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
   await page.locator('#journey').scrollIntoViewIfNeeded();
@@ -299,5 +303,5 @@ test('scroll enhancement preserves layout and the fallback never fetches former 
   await expect(page.locator('.journey-canvas')).toHaveCount(0);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer',/video|poster/,{timeout:20000});
   await journeyChapter(page,4);
-  await expect(page.locator('.journey-panel').nth(4).locator('h3')).toHaveText('각각의 기술이 만나,하나의 흐름이 됩니다.');
+  await expect(page.locator('.journey-panel').nth(4).locator('h3')).toHaveText('복잡한 기능을,명확한 경험으로.');
 });
