@@ -183,7 +183,8 @@ test('one decorative player owns all seven chapters and never requests a rejecte
   const video=page.locator('.journey-film');
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer', 'video', {timeout:20000});
   expect(await video.evaluate(el=>el.duration)).toBeCloseTo(35, 1);
-  await expect.poll(()=>video.evaluate(el=>el.paused), {timeout:1000}).toBe(true);
+  await expect(video).toHaveAttribute('data-playback', 'scroll');
+  expect(await video.evaluate(el=>el.paused)).toBe(true);
   expect(await video.evaluate(el => ({muted:el.muted,loop:el.loop,autoplay:el.autoplay}))).toEqual({muted:true,loop:false,autoplay:false});
   await journeyChapter(page,6); await journeyChapter(page,0);
   expect(rejected).toEqual([]);
@@ -277,6 +278,7 @@ test('original film loads near the story, seeks both ways and releases media for
   await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','video',{timeout:20000});
   const video=page.locator('.journey-film');
+  await expect(video).toHaveAttribute('data-playback', 'scroll');
   expect(await video.evaluate(el=>({paused:el.paused,muted:el.muted,autoplay:el.autoplay,loop:el.loop}))).toEqual({paused:true,muted:true,autoplay:false,loop:false});
   const expectFrame=async index=>{
     await journeyChapter(page,index);

@@ -64,3 +64,30 @@ test('a film arriving midway through the story reveals the requested frame witho
   expect(await page.evaluate(() => window.sncFirstRevealedTimeError)).toBeLessThan(.12);
   expect(await page.locator('.journey-film').evaluate(el => el.paused)).toBe(true);
 });
+
+test('native scrolling interrupts the opening and preserves the frame in the same player', async ({ page }) => {
+  let release;
+  const ready = new Promise(resolve => { release = resolve; });
+  await page.route('**/assets/media/snc-blue-glass-v2*.mp4', async route => { await ready; await route.continue(); });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#journey')).toHaveAttribute('data-enhanced', 'true');
+  release();
+  const video=page.locator('.journey-film');
+  await expect(video).toHaveAttribute('data-playback', 'intro');
+  const before=await video.evaluate(el=>{
+    window.sncOpeningInputFrame=null;
+    addEventListener('scroll',()=>{ window.sncOpeningInputFrame={time:el.currentTime,phase:el.dataset.playback}; },{once:true,capture:true,passive:true});
+    return {time:el.currentTime,src:el.getAttribute('src')};
+  });
+  await page.mouse.wheel(0,100);
+  await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(0);
+  await expect(video).toHaveAttribute('data-playback', 'scroll');
+  await expect.poll(()=>video.evaluate(el=>el.paused)).toBe(true);
+  const after=await video.evaluate(el=>({time:el.currentTime,src:el.getAttribute('src')}));
+  const atInput=await page.evaluate(()=>window.sncOpeningInputFrame);
+  expect(after.src).toBe(before.src);
+  expect(atInput.phase).toBe('intro');
+  // Compare the actual input frame, excluding browser command scheduling.
+  expect(Math.abs(after.time-atInput.time)).toBeLessThan(.08);
+  expect(after.time).toBeLessThan(1);
+});

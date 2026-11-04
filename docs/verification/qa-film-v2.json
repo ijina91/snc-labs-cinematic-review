@@ -26,12 +26,12 @@
     "flaky": 0
   },
   "latest_case_results": {
-    "passed": 90,
+    "passed": 94,
     "failed": 0,
     "skipped": 30,
     "timedOut": 0
   },
-  "aggregation_note": "The full local run initially had 85 passes, 5 failures, 30 applicability skips. After the loaded-GitHub contrast fix and correcting the opening-boundary test for the unified hero, all 5 failing cases and four global WCAG cases passed in the 9-case targeted recheck. This aggregation is not presented as a single clean local full run. The PR workflow runs the entire suite again.",
+  "aggregation_note": "The full local run had85 passes/5 failures/30 applicability skips. After the GitHub contrast and opening-boundary correction,9 related checks passed. First Linux CI had87 passes/3 failures because older pause assertions observed the valid1050ms opening or imposed a1000ms deadline. Waiting for actual scroll mode and adding four real input-frame handoff cases yielded12 local passes. Latest-case aggregation is94 passes/30 applicability skips, not a single clean local full run. Current PR CI reruns the entire124 definitions.",
   "ci": "Check the pull request workflow for a fresh complete run.",
   "cases": [
     {
@@ -459,7 +459,7 @@
       "title": "one decorative player owns all seven chapters and never requests a rejected intro",
       "project": "390",
       "status": "passed",
-      "duration_ms": 2959
+      "duration_ms": 4434
     },
     {
       "file": "site.spec.js",
@@ -480,7 +480,7 @@
       "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
       "project": "390",
       "status": "passed",
-      "duration_ms": 3752
+      "duration_ms": 4850
     },
     {
       "file": "site.spec.js",
@@ -585,7 +585,7 @@
       "title": "one decorative player owns all seven chapters and never requests a rejected intro",
       "project": "768",
       "status": "passed",
-      "duration_ms": 2646
+      "duration_ms": 3784
     },
     {
       "file": "site.spec.js",
@@ -606,7 +606,7 @@
       "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
       "project": "768",
       "status": "passed",
-      "duration_ms": 4065
+      "duration_ms": 5897
     },
     {
       "file": "site.spec.js",
@@ -711,7 +711,7 @@
       "title": "one decorative player owns all seven chapters and never requests a rejected intro",
       "project": "1440",
       "status": "passed",
-      "duration_ms": 4544
+      "duration_ms": 4654
     },
     {
       "file": "site.spec.js",
@@ -732,7 +732,7 @@
       "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
       "project": "1440",
       "status": "passed",
-      "duration_ms": 7504
+      "duration_ms": 6535
     },
     {
       "file": "site.spec.js",
@@ -837,7 +837,7 @@
       "title": "one decorative player owns all seven chapters and never requests a rejected intro",
       "project": "1920",
       "status": "passed",
-      "duration_ms": 4156
+      "duration_ms": 4492
     },
     {
       "file": "site.spec.js",
@@ -858,7 +858,7 @@
       "title": "original film loads near the story, seeks both ways and releases media for reduced motion",
       "project": "1920",
       "status": "passed",
-      "duration_ms": 6535
+      "duration_ms": 9936
     },
     {
       "file": "site.spec.js",
@@ -873,11 +873,77 @@
       "project": "1920",
       "status": "passed",
       "duration_ms": 4981
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "390",
+      "status": "passed",
+      "duration_ms": 5019
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "768",
+      "status": "passed",
+      "duration_ms": 3576
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "1440",
+      "status": "passed",
+      "duration_ms": 5683
+    },
+    {
+      "file": "film.spec.js",
+      "title": "native scrolling interrupts the opening and preserves the frame in the same player",
+      "project": "1920",
+      "status": "passed",
+      "duration_ms": 4688
     }
   ],
   "limitations": [
     "Viewport, Fold and touch emulation are not a physical Android/iOS device certification.",
     "Axe checks do not replace all manual accessibility review.",
     "No deployment or main merge is authorized by this QA record."
-  ]
+  ],
+  "intro_phase_recheck": {
+    "startTime": "2026-11-04T17:07:09.589Z",
+    "duration": 111209.838,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "first_ci": {
+    "run_id": 41872642938,
+    "job_id": 126723599289,
+    "url": "https://github.com/snclabs/snclabs.github.io/actions/runs/41872642938",
+    "head_sha": "5a0ef6b9b758f6ad10f26c09ddfc252a35d3b2d6",
+    "browser": "Linux Playwright Chromium",
+    "passed": 87,
+    "failed": 3,
+    "skipped": 30,
+    "conclusion": "failure",
+    "failed_cases": [
+      {
+        "project": "390",
+        "case": "original film loads near the story, seeks both ways and releases media for reduced motion",
+        "failure": "paused:false during valid brief intro; immediate pause assertion"
+      },
+      {
+        "project": "768",
+        "case": "one decorative player owns all seven chapters and never requests a rejected intro",
+        "failure": "1000ms deadline shorter than 1050ms intro"
+      },
+      {
+        "project": "768",
+        "case": "original film loads near the story, seeks both ways and releases media for reduced motion",
+        "failure": "paused:false during valid brief intro; immediate pause assertion"
+      }
+    ],
+    "correction": "Wait for actual data-playback=scroll before pause assertions. Runtime unchanged. Add native scroll-during-intro handoff test using the frame captured at the input event.",
+    "scope": "Historical first CI run; current PR checks show the rerun result."
+  }
 }
