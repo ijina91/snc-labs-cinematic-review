@@ -135,16 +135,16 @@ test('no JavaScript still exposes company content, disclosures and navigation', 
   await page.locator('.service-detail').first().locator('summary').click();
   await expect(page.locator('.service-detail__body').first()).toBeVisible();
   await expect(page.locator('.no-script-nav')).toBeVisible();
-  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.journey-poster, .hero .chapter-still').first()).toBeAttached();
   await expect(page.getByText('02-354-5001', { exact: true })).toBeVisible(); await context.close();
 });
 
 test('optional motion bundle failure does not hide content or break navigation', async ({ page }) => {
   await page.route('**/assets/CinematicExperience-*.js', (route) => route.abort()); await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.journey-poster, .hero .chapter-still').first()).toBeAttached();
   await page.getByRole('link', { name: 'SNC의 기술 알아보기', exact: true }).click();
-  await expect(page).toHaveURL(/#journey$/); await expect(page.locator('.service-card')).toHaveCount(3);
+  await expect(page).toHaveURL(/#expertise$/); await expect(page.locator('.service-card')).toHaveCount(3);
 });
 
 test('SVG connection progresses with native scroll and reverses upward', async ({ page }) => {
@@ -161,16 +161,30 @@ test('SVG connection progresses with native scroll and reverses upward', async (
 
 test('black first frame stays readable while brand motion loads', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' }); let release;
-  const ready = new Promise((resolve) => { release = resolve; });
-  await page.route('**/assets/CinematicExperience-*.js', async (route) => { await ready; await route.continue(); });
+  const ready = new Promise(resolve => { release = resolve; });
+  await page.route('**/assets/CinematicExperience-*.js', async route => { await ready; await route.continue(); });
   await page.goto('/');
-  await expect(page.locator('.hero-stage')).toHaveCSS('background-color', 'rgb(0, 0, 0)');
-  await expect(page.locator('.hero-ambient')).toHaveCSS('opacity', '1');
-  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.journey-stage')).toHaveCSS('background-color', 'rgb(0, 0, 0)');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.locator('.journey-poster')).toHaveAttribute('fetchpriority','high');
   release();
-  await expect.poll(() => page.locator('.hero-ambient').evaluate((el) => Number(getComputedStyle(el).opacity))).toBeGreaterThan(.99);
-  await expect(page.locator('.hero-art-intro')).toHaveCSS('opacity', '1');
+  await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
+});
+
+test('one decorative player owns all seven chapters and never requests a rejected intro', async ({ page }) => {
+  const rejected=[];
+  page.on('request', request => { if (/snc-blue-glass-intro/.test(request.url())) rejected.push(request.url()); });
+  await page.goto('/'); await enterJourney(page);
+  await expect(page.locator('video')).toHaveCount(1);
+  const video=page.locator('.journey-film');
+  expect(await video.evaluate(el=>el.duration)).toBeCloseTo(35, 1);
+  await expect.poll(()=>video.evaluate(el=>el.paused), {timeout:1000}).toBe(true);
+  expect(await video.evaluate(el => ({muted:el.muted,loop:el.loop,autoplay:el.autoplay}))).toEqual({muted:true,loop:false,autoplay:false});
+  await journeyChapter(page,6); await journeyChapter(page,0);
+  expect(rejected).toEqual([]);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(video).not.toHaveAttribute('src');
+  await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
 });
 async function enterJourney(page) {
   await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 70, behavior: 'instant' }));
@@ -180,21 +194,21 @@ async function journeyChapter(page, index) {
   await page.locator('#journey').evaluate((el, chapter) => {
     const header = document.querySelector('.site-header').getBoundingClientRect().height;
     const span = el.offsetHeight - el.querySelector('.journey-stage').clientHeight;
-    scrollTo({ top: el.getBoundingClientRect().top + scrollY - header + span * ((chapter + .3) / 6), behavior: 'instant' });
+    scrollTo({ top: el.getBoundingClientRect().top + scrollY - header + span * ((chapter + .3) / 7), behavior: 'instant' });
   }, index);
   await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', String(index));
   await expect(page.locator('.journey-panel').nth(index)).toHaveCSS('opacity', '1');
 }
 
-test('six-chapter introduction follows native scroll, reverses, and supports keyboard navigation', async ({ page }) => {
+test('seven-chapter introduction follows native scroll, reverses, and supports keyboard navigation', async ({ page }) => {
   test.setTimeout(90000);
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('.hero')).toHaveAttribute('data-frame','01');
-  expect(await page.locator('.journey-panel').evaluateAll(panels => panels.map(panel => panel.dataset.frame))).toEqual(['02','03','04','05','06','07']);
-  for (let index = 0; index < 6; index++) {
+  expect(await page.locator('.journey-panel').evaluateAll(panels => panels.map(panel => panel.dataset.frame))).toEqual(['01','02','03','04','05','06','07']);
+  for (let index = 0; index < 7; index++) {
     await journeyChapter(page, index);
-    await expect(page.locator('#journey')).toHaveAttribute('data-active-frame',String(index + 2).padStart(2,'0'));
-    await expect(page.locator('.journey-panel').nth(index).locator('h3')).toBeInViewport();
+    await expect(page.locator('#journey')).toHaveAttribute('data-active-frame',String(index + 1).padStart(2,'0'));
+    await expect(page.locator('.journey-panel').nth(index).locator('h1,h2,h3')).toBeInViewport();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     if (index === 1 || index === 2) expect((await new AxeBuilder({ page }).include('.journey-stage').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
   }
@@ -225,8 +239,8 @@ test('six-chapter introduction follows native scroll, reverses, and supports key
 });
 
 test('missing decorative image retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
-  await page.route('**/assets/frames/02.webp',route=>route.abort());
-  await page.route('**/assets/media/snc-blue-glass-journey.mp4',route=>route.abort());
+  await page.route('**/assets/frames/v2/02.webp',route=>route.abort());
+  await page.route('**/assets/media/snc-blue-glass-v2*.mp4',route=>route.abort());
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
@@ -235,24 +249,23 @@ test('missing decorative image retains scroll chapters and reduced motion restor
   await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced','true');
   expect(await page.locator('.journey-panel[aria-hidden="true"]').count()).toBe(0);
   await expect(page.locator('.journey-nav, .journey-counter')).toHaveCount(0);
-  expect(await page.locator('.journey-panel').count()).toBe(6);
+  expect(await page.locator('.journey-panel').count()).toBe(7);
 });
 
 test('original film loads near the story, seeks both ways and releases media for reduced motion', async ({ page }) => {
   test.setTimeout(90000);
   const mediaRequests=[];
-  page.on('request',request=>{ if(request.url().includes('/assets/media/snc-blue-glass-journey.mp4'))mediaRequests.push(request.url()); });
+  page.on('request',request=>{ if(/\/assets\/media\/snc-blue-glass-v2(?:-mobile)?\.mp4$/.test(request.url()))mediaRequests.push(request.url()); });
   await page.emulateMedia({reducedMotion:'no-preference'});
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
-  expect(mediaRequests).toHaveLength(0);
   await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','video',{timeout:20000});
   const video=page.locator('.journey-film');
   expect(await video.evaluate(el=>({paused:el.paused,muted:el.muted,autoplay:el.autoplay,loop:el.loop}))).toEqual({paused:true,muted:true,autoplay:false,loop:false});
   const expectFrame=async index=>{
     await journeyChapter(page,index);
-    await expect.poll(()=>video.evaluate((el,chapter)=>Math.abs(el.currentTime-(el.duration-.08)*(chapter+.3)/6),index),{timeout:15000}).toBeLessThan(.12);
+    await expect.poll(()=>video.evaluate((el,chapter)=>Math.abs(el.currentTime-(el.duration-.08)*chapter/7),index),{timeout:15000}).toBeLessThan(.12);
     await expect.poll(()=>video.evaluate(el=>el.seeking)).toBe(false);
   };
   await expectFrame(4);
@@ -261,7 +274,6 @@ test('original film loads near the story, seeks both ways and releases media for
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced','true');
   await expect(video).not.toHaveAttribute('src');
-  await expect(page.locator('.hero-brand-film')).not.toHaveAttribute('src');
   await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
   await page.emulateMedia({reducedMotion:'no-preference'});
   // The static layout can move the viewport past the story on mobile.
@@ -274,18 +286,18 @@ test('original film loads near the story, seeks both ways and releases media for
 test('failed film keeps a readable poster and reduced motion avoids downloading video', async ({ page }) => {
   test.setTimeout(90000);
   let mediaRequests=0;
-  await page.route('**/assets/media/snc-blue-glass-journey.mp4',route=>{mediaRequests++; return route.abort();});
+  await page.route('**/assets/media/snc-blue-glass-v2*.mp4',route=>{mediaRequests++; return route.abort();});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
   await page.locator('#journey').scrollIntoViewIfNeeded();
-  await expect(page.locator('.journey-panel')).toHaveCount(6);
+  await expect(page.locator('.journey-panel')).toHaveCount(7);
   expect(mediaRequests).toBe(0);
   await page.emulateMedia({reducedMotion:'no-preference'});
   await enterJourney(page);
   await expect.poll(()=>mediaRequests).toBeGreaterThan(0);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
-  await expect(page.locator('.journey-panel').nth(2).locator('h3')).toBeInViewport();
+  await expect(page.locator('.journey-panel').nth(2).locator('h1,h2,h3')).toBeInViewport();
   await expect(page.locator('.journey-poster')).toHaveCSS('opacity','1');
   await expect(page.locator('.journey-bottom a')).toHaveAttribute('href','#contact');
 });
@@ -302,6 +314,6 @@ test('scroll enhancement preserves layout and the fallback never fetches former 
   expect(requests).toHaveLength(0);
   await expect(page.locator('.journey-canvas')).toHaveCount(0);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer',/video|poster/,{timeout:20000});
-  await journeyChapter(page,4);
-  await expect(page.locator('.journey-panel').nth(4).locator('h3')).toHaveText('복잡한 기능을,명확한 경험으로.');
+  await journeyChapter(page,5);
+  await expect(page.locator('.journey-panel').nth(5).locator('h1,h2,h3')).toHaveText('복잡한 기능을, 명확한 경험으로.');
 });

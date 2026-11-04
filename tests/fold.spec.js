@@ -24,8 +24,8 @@ test('completed film has no extra large-viewport tail to scroll through', async 
   await page.goto('/');
   await page.addStyleTag({ content: '.journey { --scene-height: 766px !important; --large-viewport-height: 924px; }' });
   await enter(page);
-  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + 3 * 766, behavior: 'instant' }));
-  await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '5');
+  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + 3.5 * 766, behavior: 'instant' }));
+  await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '6');
   expect(await page.locator('#about').evaluate(el => el.getBoundingClientRect().top)).toBeLessThanOrEqual(845);
   await expect(page.locator('.journey-stage')).not.toHaveAttribute('inert');
 });
@@ -36,7 +36,7 @@ test('fold cover, unfolded screens and rotation preserve the current scene', asy
   await page.goto('/'); await page.evaluate(() => document.fonts.ready); await enter(page);
   await page.locator('#journey').evaluate(el => {
     const span = el.offsetHeight - el.querySelector('.journey-panels').clientHeight;
-    scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + span * 2.3 / 6, behavior: 'instant' });
+    scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + span * 2.3 / 7, behavior: 'instant' });
   });
   await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '2');
   for (const [width, height] of [[690, 829], [829, 690], [768, 1024], [1024, 768], [344, 882], [280, 653]]) {
@@ -56,7 +56,7 @@ test('fold cover, unfolded screens and rotation preserve the current scene', asy
     }));
     expect(delayedDrift).toBeLessThan(.01);
     const fits = await page.locator('.journey-panel').nth(2).evaluate(el => {
-      const r = el.querySelector('h3').getBoundingClientRect();
+      const r = el.querySelector('h1,h2,h3').getBoundingClientRect();
       const bottom = el.querySelector('.journey-description').getBoundingClientRect().bottom;
       const stage = el.closest('.journey-stage');
       return r.left >= 0 && r.right <= innerWidth + 1 && r.top > stage.querySelector('.journey-top').getBoundingClientRect().bottom && bottom < stage.querySelector('.journey-bottom').getBoundingClientRect().top;

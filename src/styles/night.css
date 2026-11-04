@@ -18,7 +18,7 @@ body { overflow-x: clip; }
 .desktop-nav a:hover { color: #fff; }
 .header-contact { border: 1px solid #ffffff38; background: transparent; border-radius: 5px; }
 .header-contact:hover { background: #216be4; border-color: #216be4; }
-.menu-toggle { border-color: #ffffff38; background: #000; }
+.menu-toggle { border-color: #ffffff38; background: #000; border-radius: 5px; }
 .menu-toggle span { background: #fff; }
 .mobile-nav { background: #000; }
 .mobile-nav a { color: #ecf2ff; }
@@ -107,6 +107,7 @@ body { overflow-x: clip; }
   object-fit: cover; object-position: center; transform: none;
 }
 .journey-film { opacity: 0; transition: opacity .35s; }
+.journey-poster { opacity: 1; }
 .journey[data-renderer='video'] .journey-film { opacity: 1; }
 .journey[data-renderer='video'] .journey-poster { opacity: 0; }
 .journey[data-enhanced='true'] .journey-visual::after {
@@ -202,6 +203,8 @@ body { overflow-x: clip; }
 .github-panel__footer button { color: #b4d9ff; }
 .commit-graphic > i { background: #29466f; }
 .commit-graphic > span { background: #0b1c36; border-color: #36a4ed; }
+.commit-graphic > span, .signal-dot, .map-dot { border-radius: 0; }
+.commit-graphic > span:last-child { box-shadow: none; }
 
 .contact { position: relative; isolation: isolate; overflow: clip; border-top: 1px solid #ffffff24; }
 .contact-scene {
@@ -242,7 +245,7 @@ body { overflow-x: clip; }
     inset: 22% 0 0; background: linear-gradient(0deg,#000 5%,#000e 45%,#0000);
   }
   .journey[data-enhanced='true'] .journey-poster, .journey-film { object-position: center; }
-  .journey[data-enhanced='true'] .journey-panel h3 { color: #fff; }
+  .journey[data-enhanced='true'] .journey-panel :is(h2,h3) { color: #fff; }
   .journey-top a { border-radius: 4px; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; padding-top: 25px; }
   .about-copy > p { font-size: 14px; }
@@ -283,4 +286,49 @@ body { overflow-x: clip; }
   .hero-brand-film { display: none; }
   .hero--immersive .hero-art-intro { opacity: 1; }
   .journey-film { display: none; }
+}
+
+/* One 01–07 film. No separate intro player or chapter counter. */
+.journey-panel.hero--film { padding: 70px 7vw 80px; justify-content: flex-end; }
+.hero--film .hero-display { max-width: none; font-size: clamp(42px,6.3vw,120px); margin: 0 0 22px; }
+.hero--film h1 { display: flex; flex-wrap: wrap; gap: .3em; font-size: clamp(20px,2vw,34px); line-height: 1.35; letter-spacing: -.045em; }
+.hero--film .journey-label { margin-bottom: 20px; }
+.hero--film .journey-description { max-width: 480px; margin-top: 16px; }
+.hero--film .hero-actions { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+.journey[data-enhanced='true'] .hero--film { min-height: 0; }
+.journey[data-enhanced='true'] .journey-panel[aria-hidden='false'] { pointer-events: auto; }
+.journey[data-enhanced='true'] .journey-stage[data-chapter='0'] .hero--film::before { inset: 30% 0 0; background: linear-gradient(0deg,#000f 2%,#000b 48%,transparent); }
+.journey[data-enhanced='true'] .journey-stage[data-chapter='0'] .journey-top { visibility: hidden; pointer-events: none; }
+.journey:not([data-enhanced='true']) .hero--film .chapter-still { object-position: center 20%; }
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .journey[data-enhanced='true'] .journey-poster, .journey-film { object-fit: contain; object-position: center 14%; }
+  .journey-poster, .journey-film { transition: none; }
+  .hero--film .chapter-still { object-fit: contain; object-position: center 14%; }
+}
+@media (max-width: 900px) {
+  .journey-panel.hero--film { padding: 38px 7vw 84px; }
+  .hero--film .hero-display { font-size: clamp(32px,8.5vw,66px); line-height: 1.02; margin-bottom: 16px; }
+  .hero--film h1 { font-size: clamp(17px,3.4vw,25px); }
+  .hero--film .journey-label { font-size: 10px; margin-bottom: 14px; }
+  .hero--film .journey-description { font-size: 12px; line-height: 1.8; max-width: 38em; margin-top: 12px; }
+  .hero--film .hero-actions { gap: 16px; margin-top: 20px; }
+  .hero--film .hero-actions .button { padding-inline: 16px; gap: 12px; font-size: 12px; }
+  .hero--film .hero-actions .quiet-link { font-size: 12px; }
+}
+@media (max-width: 600px) and (max-height: 700px) {
+  .journey-panel.hero--film { padding-bottom: 76px; }
+  .hero--film .hero-display { font-size: clamp(28px,8.5vw,42px); margin-bottom: 10px; }
+  .hero--film .journey-label { margin-bottom: 9px; }
+  .hero--film .journey-description { font-size: 11px; margin-top: 8px; }
+  .hero--film .hero-actions { margin-top: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-panel:not(.hero--film) { min-height: 0; }
+}
+
+@media (min-width: 901px) and (max-height: 800px) {
+  .journey-panel :is(h2,h3) { font-size: clamp(36px,4vw,52px); line-height: 1.2; }
+  .journey-label { margin-bottom: 16px; font-size: 12px; }
+  .journey-description { font-size: 13px; line-height: 1.7; margin-top: 16px; }
+  .hero--film .hero-display { font-size: clamp(42px,5vw,80px); }
 }

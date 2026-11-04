@@ -1,5 +1,9 @@
 # 전후 비교와 시각 검토
 
+> 2026-11-04 최신 작업 상태: 최신 비교 대상은 이전 운영 화이트·블루 사이트와 제작 중인 검은 배경 Blue Glass v2다. v2의 실제 디자인·모션 기준은 docs/BLUE_GLASS_MOTION_V2.md와 docs/REFERENCE_MOODBOARD_V2.md에 기록한다. 아래 비교표는 이전 리디자인 이력이며 새 7구간의 완료 결과로 표시하지 않는다.
+
+자세한 현황: [Blue Glass QA](docs/BLUE_GLASS_QA.md).
+
 기준: 운영 main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Before는 이전에 캡처한 변경 전 운영 사이트, After는 로컬 배포용 빌드다. GitHub 프로젝트 캡처는 빈 결과 fixture로 제어했으며 가짜 공개 프로젝트를 만들지 않았다.
 
 | 구분 | 변경 전 | 현재 결과 |

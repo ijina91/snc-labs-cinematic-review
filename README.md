@@ -1,6 +1,6 @@
 # SNC Labs
 
-사용자 제공 01~07 프레임을 기준으로 검은 배경의 Blue Glass 디자인을 제작 중입니다. [디자인 방향](docs/BLUE_GLASS_DESIGN.md), [현재 검증 상태](docs/BLUE_GLASS_QA.md). 이전 운영 버전의 제작 기록과 새 제작의 완료 여부를 구분합니다.
+사용자 제공 01~07 프레임을 기준으로 검은 배경의 Blue Glass 디자인을 제작 중입니다. [디자인 방향](docs/BLUE_GLASS_DESIGN.md), [현재 검증 상태](docs/BLUE_GLASS_QA.md), [Pinterest·코드 모션 참고 기록](docs/REFERENCE_MOODBOARD_V2.md). 이전 운영 버전의 제작 기록과 새 제작의 완료 여부를 구분합니다.
 
 SNC의 회사 소개와 ESH·안전작업허가 관련 시스템 개발, SAP & Enterprise, Web Engineering, 공개 GitHub 활동을 소개하는 Vite + Vanilla JS 웹사이트입니다.
 

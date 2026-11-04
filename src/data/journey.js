@@ -1,4 +1,5 @@
 export const journey = [
+  { id: 'intro', word: 'SNC', label: 'Systems. People. Possibilities.', title: ['SNC, 기술로', '가능성을 잇다.'], description: '기업의 업무를 이해하고, 필요한 시스템을 만듭니다. SAP부터 웹 개발과 운영까지, 현장과 기술 사이를 연결합니다.' },
   { id: 'snc', word: 'SNC', label: '업무에서 시작하는 기술', title: ['업무를 이해하고,', '가능성을 설계합니다.'], description: '에스앤씨는 기업의 업무 환경을 이해하고, 필요한 시스템을 개발하고 운영합니다. 기술과 현장 사이의 연결을 만듭니다.' },
   { id: 'engineering', word: 'ENGINEERING', label: 'Thoughtful engineering', title: ['업무의 맥락에서,', '시스템의 완성까지.'], description: '현장의 흐름과 사용자의 일을 이해하는 것에서 시작합니다. 필요한 기능을 설계하고, 개발과 운영까지 이어갑니다.' },
   { id: 'esh', word: 'ESH', label: 'ESH Systems', title: ['현장의 일을,', '시스템의 언어로.'], description: 'ESH와 안전작업허가 관련 시스템을 개발합니다. 현장의 업무 흐름을 살피고 필요한 기능을 구현합니다.' },

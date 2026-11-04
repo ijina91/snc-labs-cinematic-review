@@ -22,11 +22,11 @@ test('small phones fit the hero and keep captions readable at scroll boundaries'
     const beforeEntry = await aboutTop();
     await enter(page);
     expect(Math.abs(await aboutTop() - beforeEntry)).toBeLessThanOrEqual(1);
-    for (let index = 0; index < 6; index++) {
+    for (let index = 0; index < 7; index++) {
       // A paused gesture near the old fade-out boundary must still show copy.
       await page.locator('#journey').evaluate((el, i) => {
         const span = el.offsetHeight - el.querySelector('.journey-stage').clientHeight;
-        scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + span * ((i + .98) / 6), behavior: 'instant' });
+        scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + span * ((i + .98) / 7), behavior: 'instant' });
       }, index);
       await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', String(index));
       const panel = page.locator('.journey-panel').nth(index);
@@ -37,7 +37,7 @@ test('small phones fit the hero and keep captions readable at scroll boundaries'
         const bottom = el.querySelector('.journey-description').getBoundingClientRect().bottom;
         const hud = stage.querySelector('.journey-top').getBoundingClientRect().bottom;
         const footer = stage.querySelector('.journey-bottom').getBoundingClientRect().top;
-        const range = document.createRange(); range.selectNodeContents(el.querySelector('h3'));
+        const range = document.createRange(); range.selectNodeContents(el.querySelector('h1,h2,h3'));
         return { top: top >= hud + 8, bottom: bottom <= footer - 8,
           width: [...range.getClientRects()].every(r => r.left >= 0 && r.right <= innerWidth + 1) };
       });
@@ -54,7 +54,7 @@ test('browser toolbar sizing keeps the stage and captions stationary and landsca
   await page.addStyleTag({ content: `.journey { --scene-height: 766px !important; --large-viewport-height: 924px; }
     .hero--immersive .hero-stage { min-height: 766px !important; }
     .hero--immersive .hero-layout { min-height: 710px !important; }` });
-  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + (el.offsetHeight - el.querySelector('.journey-stage').clientHeight) * 2.3 / 6, behavior: 'instant' }));
+  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + (el.offsetHeight - el.querySelector('.journey-stage').clientHeight) * 2.3 / 7, behavior: 'instant' }));
   await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '2');
   await expect(page.locator('.journey-panel').nth(2)).toHaveCSS('opacity', '1');
   const geometry = () => page.locator('#journey').evaluate(el => ({ height: el.offsetHeight,
@@ -76,7 +76,7 @@ test('browser toolbar sizing keeps the stage and captions stationary and landsca
   await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced', 'true');
   await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
   await expect(page.locator('.journey-film')).not.toHaveAttribute('src');
-  const last = page.locator('.journey-panel').last().locator('h3');
+  const last = page.locator('.journey-panel').last().locator('h1,h2,h3');
   await last.scrollIntoViewIfNeeded(); await expect(last).toBeInViewport();
   await page.setViewportSize({ width: 390, height: 844 });
   await enter(page);

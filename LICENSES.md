@@ -2,6 +2,8 @@
 
 | Asset | Source | License / use |
 |---|---|---|
+| Blue Glass 01–07 frames | User-provided SNC_Labs_3D_Frames_01-07.zip | User-supplied design source. Built-in image editing removed flat UI and incompatible spherical decoration; no Pinterest or GitHub example assets copied into the site. |
+| Blue Glass v2 motion and matching posters | LoreMotion / MiniMax H3, user-authorized free generation | Provider UI states no watermark and commercial use. Actual job IDs and review state are recorded separately; incomplete or rejected clips are not adopted as the master. |
 | SNC logo and check motif | User-provided business card / existing site | Retain existing company identity. All ribbon and connection SVGs authored for this site; no reference-video assets copied. |
 | Korean text font | [Pretendard 1.3.9](https://github.com/orioncactus/pretendard/tree/v1.3.9) / npm distribution | SIL OFL 1.1. Local subsets renamed **SNC Sans** (including internal font names) because Pretendard is a reserved font name. Full copyright/license notice in `public/assets/fonts/OFL-Pretendard.txt`. |
 | Latin display font | [Inter Tight / Google Fonts](https://github.com/google/fonts/tree/main/ofl/intertight) | SIL OFL 1.1. Local subset renamed **SNC Display**; full notice in `public/assets/fonts/OFL-InterTight.txt`. |

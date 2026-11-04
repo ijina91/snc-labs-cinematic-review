@@ -1,6 +1,7 @@
 // Only a downloaded, reviewed original may be linked here. No demo footage.
 export const film = Object.freeze({
-  intro: '/assets/media/snc-blue-glass-intro.mp4',
-  poster: '/assets/frames/02.webp',
-  source: '', // Filled only after all ordered 02–07 originals pass review.
+  poster: '/assets/frames/v2/01.webp',
+  posterMobile: '/assets/frames/v2/01-mobile.webp',
+  source: '', // v1 rejected. Populate only after the complete v2 film passes visual review.
+  sourceMobile: '',
 });

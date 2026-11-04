@@ -6,7 +6,7 @@ for (const text of ['SNC, 기술로', 'ESH Systems', 'SAP &amp; Enterprise', 'We
 assert(!html.includes('<!-- SNC_'), 'Build-time content marker not rendered');
 assert.deepEqual([...html.matchAll(/data-frame="(\d{2})"/g)].map(match => match[1]), ['01','02','03','04','05','06','07'], 'The cinematic sequence must remain 01 through 07');
 assert(!/hynix|sk하이닉스|shcho@|010.?8745|\bSHE\b/i.test(html), 'Unapproved/removed content');
-for (const file of ['favicon.svg', 'robots.txt', 'sitemap.xml', 'social-cover.png', 'assets/fonts/snc-sans-regular.woff2', 'assets/fonts/snc-sans-bold.woff2', 'assets/fonts/snc-display.woff2']) await fs.access(path.join('dist', file));
+for (const file of ['favicon.svg', 'robots.txt', 'sitemap.xml', 'social-cover.png', 'social-cover-v2.png', 'assets/fonts/snc-sans-regular.woff2', 'assets/fonts/snc-sans-bold.woff2', 'assets/fonts/snc-display.woff2']) await fs.access(path.join('dist', file));
 for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)/g)) await fs.access(path.join('dist', match[1]));
 const deploy = await fs.readFile('.github/workflows/deploy.yml', 'utf8');
 assert.equal((deploy.match(/if: github.ref == 'refs\/heads\/main'/g) || []).length, 2, 'Both deployment jobs must reject feature refs');

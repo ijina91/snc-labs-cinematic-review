@@ -1,5 +1,9 @@
 # 성능 보고서
 
+> 2026-11-04 최신 작업 상태: 최신 검은 배경 01~07 v2의 최종 성능은 아직 측정하지 않았다. 이전 블랙 v1 초기 화면 실험은 Performance 83 / Accessibility 100 / SEO 100, LCP 3.23초로 Performance 90·LCP 2.5초 목표를 달성하지 못했다. 아래 15.5초 화이트·블루 디자인 측정은 과거 버전의 이력이며 현재 v2 성능으로 사용하지 않는다.
+
+자세한 현황: [Blue Glass QA](docs/BLUE_GLASS_QA.md).
+
 2026-11-04, 최종 15.5초 영상 및 모바일 네이티브 opacity 진입을 적용한 Vite 빌드. http://127.0.0.1:4180/ 에서 Lighthouse 13.5.0 / Windows Microsoft Edge 156으로 순차 측정했다. 모바일은 기본 4배 CPU·약 1.6Mbps 프로필, 데스크톱은 실제 desktop 설정·1배 CPU다. 브라우저 QA를 동시에 실행하지 않았다. 운영 사이트의 실제 사용자 측정이 아니다.
 
 ## 최종 측정
