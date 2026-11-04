@@ -18,7 +18,10 @@ test('small phones fit the hero and keep captions readable at scroll boundaries'
     await page.evaluate(() => document.fonts.ready);
     const heroHeight = await page.locator('.hero').evaluate(el => el.clientHeight + document.querySelector('.site-header').clientHeight);
     expect(heroHeight).toBeLessThanOrEqual(height + 1);
+    const aboutTop = () => page.locator('#about').evaluate(el => el.getBoundingClientRect().top + scrollY);
+    const beforeEntry = await aboutTop();
     await enter(page);
+    expect(Math.abs(await aboutTop() - beforeEntry)).toBeLessThanOrEqual(1);
     for (let index = 0; index < 6; index++) {
       // A paused gesture near the old fade-out boundary must still show copy.
       await page.locator('#journey').evaluate((el, i) => {

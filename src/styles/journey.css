@@ -95,6 +95,8 @@
     --scene-height: calc(100svh - 78px);
     --stage-height: calc(var(--large-viewport-height, 100lvh) - 78px);
   }
+  /* Static content must fit the reserved chapter height before lazy loading. */
+  .journey-panel { padding-block: 32px; }
   .journey[data-enhanced='true'] .journey-stage { top: 78px; }
   .journey[data-enhanced='true'] .journey-panels { bottom: auto; height: var(--scene-height); }
   .journey[data-enhanced='true'] .journey-panel {
