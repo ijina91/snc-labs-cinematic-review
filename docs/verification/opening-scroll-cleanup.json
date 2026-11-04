@@ -1,0 +1,28 @@
+{
+  "removedVerifiedExternalDuplicatesThisPass": 0,
+  "removedBytesThisPass": 739155663,
+  "scope": "Only generated SNC intermediates and hash-matched copies. Original attachments, fonts, runtime v3 assets, browser and remote-access configuration excluded. Counts cover this completed pass; matching copies were also removed before an earlier locked-log interruption.",
+  "date": "2026-11-05",
+  "removedWorkspaceFolders": [
+    "before",
+    "boundary-recording",
+    "design-v1",
+    "design-v2",
+    "frame-redesign",
+    "frame-redesign-v2",
+    "journey",
+    "performance",
+    "qa",
+    "recordings",
+    "time-edit-v3",
+    "video-source"
+  ],
+  "removedIntermediateFiles": 652,
+  "runtimeMovieHashesUnchanged": true,
+  "keptActivePreviewLogs": [
+    "preview-4180-error.log",
+    "preview-4180.log",
+    "preview-5173-error.log",
+    "preview-5173.log"
+  ]
+}

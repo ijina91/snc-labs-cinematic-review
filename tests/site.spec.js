@@ -144,11 +144,13 @@ test('no JavaScript still exposes company content, disclosures and navigation', 
 });
 
 test('optional motion bundle failure does not hide content or break navigation', async ({ page }) => {
-  await page.route('**/assets/CinematicExperience-*.js', (route) => route.abort()); await page.goto('/');
+  let blocked = 0;
+  await page.route('**/assets/ScrollExperience-*.js', (route) => { blocked++; return route.abort(); }); await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.locator('.journey-poster, .hero .chapter-still').first()).toBeAttached();
   await page.getByRole('link', { name: 'SNC의 기술 알아보기', exact: true }).click();
   await expect(page).toHaveURL(/#expertise$/); await expect(page.locator('.service-card')).toHaveCount(3);
+  await expect.poll(() => blocked).toBeGreaterThan(0);
 });
 
 test('SVG connection progresses with native scroll and reverses upward', async ({ page }) => {
@@ -163,11 +165,11 @@ test('SVG connection progresses with native scroll and reverses upward', async (
   await expect.poll(() => path.evaluate((el) => parseFloat(getComputedStyle(el).strokeDashoffset))).toBeGreaterThan(10);
 });
 
-test('black first frame stays readable while brand motion loads', async ({ page }) => {
+test('black first frame stays readable while the film loads', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' }); let release;
   const ready = new Promise(resolve => { release = resolve; });
-  await page.route('**/assets/CinematicExperience-*.js', async route => { await ready; await route.continue(); });
-  await page.goto('/');
+  await page.route('**/assets/media/snc-blue-glass-v3*.mp4', async route => { await ready; await route.continue(); });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('.journey-stage')).toHaveCSS('background-color', 'rgb(0, 0, 0)');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.locator('.journey-poster')).toHaveAttribute('fetchpriority','high');

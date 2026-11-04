@@ -53,6 +53,8 @@ npm run capture
 
 ## GitHub Pages
 
+첫 스크롤 시 아래로 움직이던 현상과 제작 중간 파일 정리는 [수정·검증 기록](docs/OPENING_SCROLL_FIX.md)을 참고하세요. 현재 v3 영상은 그대로 보존하며 사용하지 않는 이전 미디어는 제거했습니다.
+
 운영 주소: https://snclabs.github.io/
 
 Pages Source는 GitHub Actions입니다. 기존 `main` push/수동 배포를 유지하며 두 배포 job 모두 main ref로 제한합니다. 작업 브랜치와 PR에서는 검증만 수행합니다. 사용자가 이번 지정 구간 수정 완료 후 즉시 운영 반영을 명시적으로 승인했습니다. 최종 QA와 PR 검증이 통과한 결과를 main으로 병합해 기존 Pages workflow로 배포합니다.

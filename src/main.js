@@ -4,15 +4,15 @@ import { initGithubProjects } from './components/GithubProjects.js';
 import { initServiceInteractions } from './components/ServiceInteractions.js';
 import { initScrollJourney } from './components/ScrollJourney.js';
 let cleanups = [];
-let disposeMotion, disposeScroll, scrollEvents;
+let disposeScroll, scrollEvents;
 let motionGeneration = 0;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 function stopMotion() {
   motionGeneration++;
-  scrollEvents?.abort(); disposeMotion?.(); disposeScroll?.();
-  disposeMotion = undefined; disposeScroll = undefined;
+  scrollEvents?.abort(); disposeScroll?.();
+  disposeScroll = undefined;
 }
-async function startMotion() {
+function startMotion() {
   stopMotion();
   const generation = motionGeneration;
   if (reduced.matches) return;
@@ -27,18 +27,8 @@ async function startMotion() {
   };
   window.addEventListener('scroll', startScroll, { passive: true, signal: scrollEvents.signal });
   if (scrollY >= 2) startScroll();
-  try {
-    const { initCinematicExperience } = await import('./animations/CinematicExperience.js');
-    // Let the locally hosted type settle and paint before measuring GSAP transforms.
-    await document.fonts.ready;
-    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    const isCurrent = () => generation === motionGeneration && !reduced.matches;
-    if (isCurrent()) {
-      const cleanup = await initCinematicExperience(isCurrent);
-      if (isCurrent()) disposeMotion = cleanup;
-      else cleanup?.();
-    }
-  } catch { document.documentElement.dataset.motion = 'static'; }
+  // The film owns the entrance. A second, late GSAP text entrance would move
+  // an already visible headline down after the user's first scroll.
 }
 function start() {
   reduced.addEventListener('change', startMotion);

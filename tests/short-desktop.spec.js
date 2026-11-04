@@ -6,8 +6,10 @@ test('short desktop windows preserve first layout and restore ordinary reading w
   await page.setViewportSize({ width: 1280, height: 720 });
   let release;
   const ready = new Promise(resolve => { release = resolve; });
-  await page.route('**/assets/ScrollJourney-*.js', async route => { await ready; await route.continue(); });
-  await page.goto('/'); await page.evaluate(() => document.fonts.ready);
+  await page.route('**/assets/*.js', async route => { await ready; await route.continue(); });
+  await page.goto('/', { waitUntil: 'commit' });
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
   const aboutTop = () => page.locator('#about').evaluate(el => el.getBoundingClientRect().top + scrollY);
   const before = await aboutTop(); release();
   await expect(page.locator('#journey')).toHaveAttribute('data-enhanced', 'true');
