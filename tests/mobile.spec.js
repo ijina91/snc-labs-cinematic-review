@@ -145,7 +145,7 @@ test('film entrance and exit reveal the frame without translating it vertically'
     await expect.poll(() => page.locator('.journey-film').evaluate(el => Math.abs(el.getBoundingClientRect().top - 78))).toBeLessThanOrEqual(1);
     await expect(page.locator('.journey-stage')).toHaveCSS('visibility', 'visible');
     await expect(page.locator('.journey-stage')).toHaveAttribute('inert', '');
-    expect(await page.locator('.journey-stage').evaluate(el => getComputedStyle(el).clipPath)).not.toBe('none');
+    expect(await page.locator('#journey').evaluate(el => getComputedStyle(el).clipPath)).not.toBe('none');
   }
   await page.locator('#about').scrollIntoViewIfNeeded();
   await expect(page.locator('#about')).toBeInViewport();
