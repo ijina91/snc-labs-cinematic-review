@@ -97,7 +97,10 @@
   }
   /* Static content must fit the reserved chapter height before lazy loading. */
   .journey-panel { padding-block: 32px; }
-  .journey[data-enhanced='true'] .journey-stage { top: 78px; }
+  .journey[data-enhanced='true'] .journey-stage {
+    position: fixed; top: 78px; inset-inline: 0; z-index: 2;
+    clip-path: inset(100% 0 0); visibility: hidden;
+  }
   .journey[data-enhanced='true'] .journey-panels { bottom: auto; height: var(--scene-height); }
   .journey[data-enhanced='true'] .journey-panel {
     justify-content: flex-end; padding: 80px 7vw calc(100px + env(safe-area-inset-bottom));

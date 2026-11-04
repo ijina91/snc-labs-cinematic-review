@@ -12,17 +12,35 @@ export function createScrollJourney(section) {
   const mobile = matchMedia('(max-width: 900px)');
   const events = new AbortController();
   let start = 0, span = 1, frame, visible = false, disposed = false, player, current = -1;
-  let target = 0, visual = 0, announce;
+  let target = 0, visual = 0, announce, pinTop = 0, frameHeight = 0;
   section.dataset.enhanced = 'true';
+  function placeFrame() {
+    if (!mobile.matches) {
+      stage.style.removeProperty('clip-path'); stage.style.removeProperty('visibility'); stage.inert = false;
+      return;
+    }
+    // Reveal a stationary frame through the section's visible intersection.
+    // Native scroll still moves the document; the film never rides in or out.
+    const bounds = section.getBoundingClientRect();
+    const top = clamp(bounds.top - pinTop, 0, frameHeight);
+    const bottom = clamp(pinTop + frameHeight - bounds.bottom, 0, frameHeight);
+    const shown = top + bottom < frameHeight && bounds.top < innerHeight;
+    stage.style.clipPath = `inset(${top}px 0 ${bottom}px)`;
+    stage.style.visibility = shown ? 'visible' : 'hidden';
+    stage.inert = !shown || top > 1 || bottom > 1;
+  }
   function measure() {
     const headerHeight = document.querySelector('.site-header').getBoundingClientRect().height;
     start = section.getBoundingClientRect().top + scrollY - headerHeight;
     span = Math.max(1, section.offsetHeight - stage.clientHeight);
+    pinTop = parseFloat(getComputedStyle(stage).top) || 0; frameHeight = stage.clientHeight;
+    placeFrame();
     update();
   }
   function paint() {
     frame = undefined;
     if (disposed || !visible || document.hidden) return;
+    placeFrame();
     visual = mobile.matches ? target : visual + (target - visual) * .16;
     if (Math.abs(target - visual) < .0003) visual = target;
     const phase = Math.min(visual * panels.length, panels.length - .0001);
@@ -56,7 +74,10 @@ export function createScrollJourney(section) {
   }
   const observer = new IntersectionObserver(entries => {
     visible = entries.some(entry => entry.isIntersecting);
-    if (!visible) { cancelAnimationFrame(frame); frame = undefined; }
+    if (!visible) {
+      cancelAnimationFrame(frame); frame = undefined;
+      if (mobile.matches) { stage.style.visibility = 'hidden'; stage.inert = true; }
+    }
     else { initializeFilm(); update(); }
   });
   observer.observe(section);
@@ -74,6 +95,7 @@ export function createScrollJourney(section) {
     delete section.dataset.enhanced; delete section.dataset.renderer; delete section.dataset.scenePosition;
     panels.forEach(panel => { panel.removeAttribute('aria-hidden'); panel.inert = false; panel.style.removeProperty('opacity'); panel.style.removeProperty('transform'); });
     stage.style.removeProperty('background-color');
+    stage.style.removeProperty('clip-path'); stage.style.removeProperty('visibility'); stage.inert = false;
     status.textContent = ''; document.dispatchEvent(new Event('snc:layout'));
   };
 }

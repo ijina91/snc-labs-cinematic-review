@@ -134,3 +134,22 @@ test('rapid touch swipes keep the active stage pinned and never drift horizontal
   expect(Math.max(...samples.map(sample => Math.abs(sample.x)))).toBe(0);
   expect(Math.max(...samples.filter(sample => sample.inRange).map(sample => sample.drift))).toBeLessThanOrEqual(1);
 });
+
+test('film entrance and exit reveal the frame without translating it vertically', async ({ page }) => {
+  await page.goto('/'); await enter(page);
+  const geometry = await page.locator('#journey').evaluate(el => ({ top: el.getBoundingClientRect().top + scrollY,
+    height: el.offsetHeight, stage: el.querySelector('.journey-stage').clientHeight }));
+  for (const y of [geometry.top - 78 - 180, geometry.top + geometry.height - geometry.stage - 78 + 180]) {
+    await page.evaluate(y => scrollTo({ top: y, behavior: 'instant' }), y);
+    await expect.poll(() => page.locator('.journey-stage').evaluate(el => Math.abs(el.getBoundingClientRect().top - 78))).toBeLessThanOrEqual(1);
+    await expect.poll(() => page.locator('.journey-film').evaluate(el => Math.abs(el.getBoundingClientRect().top - 78))).toBeLessThanOrEqual(1);
+    await expect(page.locator('.journey-stage')).toHaveCSS('visibility', 'visible');
+    await expect(page.locator('.journey-stage')).toHaveAttribute('inert', '');
+    expect(await page.locator('.journey-stage').evaluate(el => getComputedStyle(el).clipPath)).not.toBe('none');
+  }
+  await page.locator('#about').scrollIntoViewIfNeeded();
+  await expect(page.locator('#about')).toBeInViewport();
+  await page.locator('#contact').scrollIntoViewIfNeeded();
+  await expect(page.locator('.journey-stage')).toHaveCSS('visibility', 'hidden');
+  await expect(page.locator('.journey-stage')).toHaveAttribute('inert', '');
+});
