@@ -24,3 +24,7 @@ No stock photos, external illustrations, customer logos, social-video clips or u
 ## Blue Glass 원본 프레임과 영상
 
 최신 01~07 프레임은 사용자가 이번 SNC 웹사이트 제작을 위해 제공한 ZIP의 이미지입니다. 해당 원본의 색감·형태를 기준으로 LoreMotion의 무료 이미지-영상 모델을 사용하며 현재 생성 화면의 무료·무제한 및 상업 이용 안내를 확인했습니다. 모델별 생성 완료·원본 파일·해시·시각 검수는 새 제작 원장에서 구분합니다. 현재 7개 채택 원본을 실제로 생성·다운로드·전체 디코딩·시각 검수했으며, 이전 끝 프레임을 다음 시작으로 사용해 35초 마스터로 편집했습니다. 공개 웹용 파일에서는 음성과 생성 프롬프트 메타데이터를 제거합니다. 최신 작업 ID·사양·해시는 [v2 미디어 원장](docs/verification/film-v2.json), 실제 채택 및 제외 경위는 [제작 기록](docs/video/PRODUCTION_STATUS.md)을 확인하세요.
+
+## 지정 시간 수정 v3
+
+기존 SNC 마스터의 10–13초·21–27초를 무료 LoreMotion MiniMax H3에서 다시 연결했다. 실제 24초 프레임의 먼 글자 모양은 내장 imagegen으로 주변과 같은 기둥·유리 블록으로 교체해 생성 기준으로 사용했다. 새 결정 조형과 디졸브가 생긴 영상은 미채택했다. 공급자 UI의 무료·워터마크 없음·상업 이용 안내를 확인했으며 새로운 외부 예시 자산·유료 API·의존성은 추가하지 않았다. [최신 기록](docs/video/TIMED_REPAIRS.md), [v3 원장](docs/verification/film-v3.json).

@@ -1,5 +1,7 @@
 # SNC Labs 전후 비교
 
+후속 v3 수정은 기존 검은 디자인을 유지하며 원본의 10–13초와 21–27초만 교체한다. 새 먼 배경은 주변과 같은 작은 청색 기둥·유리 블록이다. 시작 SNC 로고·구간 밖 화면·35초 길이·모바일/Fold 구조는 유지한다. [시간 구간별 비교와 제작 기록](docs/video/TIMED_REPAIRS.md), [실제 파일 원장](docs/verification/film-v3.json).
+
 비교 기준은 운영 `main`의 `7cdbcca`와 새 `design/blue-glass-frames` 구현이다. 최초 감사 당시의 정적 사이트와 예전 생성 시안은 역사적 기록이며 현재 결과의 검증으로 사용하지 않는다.
 
 | 항목 | 이전 운영 디자인 | 현재 Blue Glass |
@@ -30,3 +32,14 @@
 검은 공간·각진 유리·블루 빛을 중심으로 브랜드를 통일하고, 실제 회사 소개와 문의는 HTML로 유지했다. 결함 관점에서는 카메라에 편중된 이전 시도, 원형 궤도, 초기 CLS, 폴드 경계, 지연 로딩 및 GitHub 목록 대비를 검토했다. 구체적인 원인·조치와 100점 모델은 [교차 검토](docs/BLUE_GLASS_REVIEW.md)에 기록한다. 같은 구현 에이전트의 두 관점 검토이며 외부 심사나 설치되지 않은 Impeccable 스킬 실행을 주장하지 않는다.
 
 실제 통과와 남은 한계는 [QA](QA_REPORT.md) 및 [성능 보고서](PERFORMANCE_REPORT.md)에 기재한다. 주관적인 99점으로 미검증 항목을 덮지 않는다.
+
+## 지정 시간 수정 v3 화면
+
+실제 새 영상의 약25초를 표시한 화면이다. 캡처에서는 공개 저장소 목록을 재현 가능한 빈 응답으로 고정했으며 해당 API의 실제 상태는 별도 기능 검사로 검증했다. 영상은 현재 프레임의 탐색·디코딩 완료를 기다린 뒤 캡처했다.
+
+- [데스크톱 1440px](docs/previews/time-repair-desktop.png)
+- [휴대폰 390px](docs/previews/time-repair-mobile.png)
+- [펼친 폴드 690px](docs/previews/time-repair-fold.png)
+- [10·13·21·24·27초의 앞뒤 프레임](docs/previews/film-v3-contact-sheet.jpg)
+
+구간 밖의 화면·35초 길이·스크롤 구조는 유지했고, 먼 글자 조형을 주변과 같은 기둥·유리 블록으로 교체했다. 전체 파일의 실제 사양과 해시는 [v3 원장](docs/verification/film-v3.json)에 있다.

@@ -9,11 +9,24 @@ test.beforeEach(async ({ page }) => {
 test('the opening moves briefly then native scrolling takes over the same muted player', async ({ page }) => {
   await page.addInitScript(() => {
     window.sncPlayingEvents = 0;
-    document.addEventListener('playing', event => { if (event.target.matches?.('.journey-film')) window.sncPlayingEvents++; }, true);
+    window.sncPlayCalls = 0;
+    window.sncFilmLifecycle = [];
+    const nativePlay = HTMLMediaElement.prototype.play;
+    HTMLMediaElement.prototype.play = function (...args) {
+      if (this.matches('.journey-film')) window.sncPlayCalls++;
+      return nativePlay.apply(this, args);
+    };
+    for (const type of ['play', 'playing', 'waiting', 'pause']) {
+      document.addEventListener(type, event => {
+        if (!event.target.matches?.('.journey-film')) return;
+        if (type === 'playing') window.sncPlayingEvents++;
+        window.sncFilmLifecycle.push({ type, time: event.target.currentTime, phase: event.target.dataset.playback, paused: event.target.paused });
+      }, true);
+    }
   });
   await page.goto('/');
   const video = page.locator('.journey-film');
-  await expect.poll(() => page.evaluate(() => window.sncPlayingEvents)).toBe(1);
+  await expect.poll(() => page.evaluate(() => window.sncPlayingEvents)).toBeGreaterThan(0);
   await expect(video).toHaveAttribute('data-playback', 'scroll');
   const opening = await video.evaluate(el => ({ time: el.currentTime, paused: el.paused, muted: el.muted, loop: el.loop, source: el.getAttribute('src') }));
   expect(opening.time).toBeGreaterThan(.8); expect(opening.time).toBeLessThan(1.3);
@@ -29,7 +42,11 @@ test('the opening moves briefly then native scrolling takes over the same muted 
   };
   await visit(3); await visit(1);
   await expect(video).toHaveAttribute('src', opening.source);
-  expect(await page.evaluate(() => window.sncPlayingEvents)).toBe(1);
+  // A buffer refill can emit another `playing` event without a new play()
+  // call. Count the actual calls to enforce a single entrance and no replay.
+  const lifecycle = await page.evaluate(() => ({ playCalls: window.sncPlayCalls, playingEvents: window.sncPlayingEvents, events: window.sncFilmLifecycle }));
+  await test.info().attach('film-playback-lifecycle.json', { body: JSON.stringify(lifecycle, null, 2), contentType: 'application/json' });
+  expect(lifecycle.playCalls).toBe(1);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(video).not.toHaveAttribute('src');
   await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
@@ -38,7 +55,7 @@ test('the opening moves briefly then native scrolling takes over the same muted 
 test('a film arriving midway through the story reveals the requested frame without a frame-zero flash', async ({ page }) => {
   let release;
   const ready = new Promise(resolve => { release = resolve; });
-  await page.route('**/assets/media/snc-blue-glass-v2*.mp4', async route => { await ready; await route.continue(); });
+  await page.route('**/assets/media/snc-blue-glass-v3*.mp4', async route => { await ready; await route.continue(); });
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#journey')).toHaveAttribute('data-enhanced', 'true');
   await page.locator('#journey').evaluate(el => {
@@ -68,7 +85,7 @@ test('a film arriving midway through the story reveals the requested frame witho
 test('native scrolling interrupts the opening and preserves the frame in the same player', async ({ page }) => {
   let release;
   const ready = new Promise(resolve => { release = resolve; });
-  await page.route('**/assets/media/snc-blue-glass-v2*.mp4', async route => { await ready; await route.continue(); });
+  await page.route('**/assets/media/snc-blue-glass-v3*.mp4', async route => { await ready; await route.continue(); });
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#journey')).toHaveAttribute('data-enhanced', 'true');
   release();

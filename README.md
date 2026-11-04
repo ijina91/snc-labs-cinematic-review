@@ -47,10 +47,14 @@ npm run capture
 - [전후 비교](BEFORE_AFTER_COMPARISON.md)
 - [자산 라이선스](LICENSES.md)
 
+## 지정 시간 구간 수정
+
+35초 마스터의 10–13초 연결과 21–27초 먼 배경만 수정한 v3를 사용합니다. 먼 글자 모양은 주변과 같은 기둥·유리 블록으로 바꿨고, 24초의 실제 중간 프레임으로 연결을 고정했습니다. 그 밖의 화면과 스크롤 구조를 유지합니다. [수정·실제 생성·제외 기록](docs/video/TIMED_REPAIRS.md), [v3 사양·해시](docs/verification/film-v3.json).
+
 ## GitHub Pages
 
 운영 주소: https://snclabs.github.io/
 
-Pages Source는 GitHub Actions입니다. 기존 `main` push/수동 배포를 유지하며 두 배포 job 모두 main ref로 제한합니다. 작업 브랜치와 PR에서는 검증만 수행합니다. **이 리디자인은 사용자 승인 전 main 병합 및 운영 배포를 하지 않습니다.**
+Pages Source는 GitHub Actions입니다. 기존 `main` push/수동 배포를 유지하며 두 배포 job 모두 main ref로 제한합니다. 작업 브랜치와 PR에서는 검증만 수행합니다. 사용자가 이번 지정 구간 수정 완료 후 즉시 운영 반영을 명시적으로 승인했습니다. 최종 QA와 PR 검증이 통과한 결과를 main으로 병합해 기존 Pages workflow로 배포합니다.
 
 `docs/previews/`는 검토용 캡처입니다. `artifacts/`의 원본 QA/성능 결과와 영상, 폰트 제작 환경은 무시되며 커밋이나 배포에 포함하지 않습니다. 폰트 재생성은 일반 빌드에 필요하지 않습니다. 절차는 LICENSES.md와 `scripts/prepare-fonts.py`를 참고하세요.

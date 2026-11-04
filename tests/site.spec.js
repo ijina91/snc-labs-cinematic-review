@@ -253,8 +253,8 @@ test('seven-chapter introduction follows native scroll, reverses, and supports k
 
 test('missing decorative image retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
   let failedImages = 0;
-  await page.route('**/assets/frames/v2/03*.webp',route=>{ failedImages++; return route.abort(); });
-  await page.route('**/assets/media/snc-blue-glass-v2*.mp4',route=>route.abort());
+  await page.route('**/assets/frames/v3/03*.webp',route=>{ failedImages++; return route.abort(); });
+  await page.route('**/assets/media/snc-blue-glass-v3*.mp4',route=>route.abort());
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
@@ -271,7 +271,7 @@ test('missing decorative image retains scroll chapters and reduced motion restor
 test('original film loads near the story, seeks both ways and releases media for reduced motion', async ({ page }) => {
   test.setTimeout(90000);
   const mediaRequests=[];
-  page.on('request',request=>{ if(/\/assets\/media\/snc-blue-glass-v2(?:-mobile)?\.mp4$/.test(request.url()))mediaRequests.push(request.url()); });
+  page.on('request',request=>{ if(/\/assets\/media\/snc-blue-glass-v3(?:-mobile)?\.mp4$/.test(request.url()))mediaRequests.push(request.url()); });
   await page.emulateMedia({reducedMotion:'no-preference'});
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
@@ -303,7 +303,7 @@ test('original film loads near the story, seeks both ways and releases media for
 test('failed film keeps a readable poster and reduced motion avoids downloading video', async ({ page }) => {
   test.setTimeout(90000);
   let mediaRequests=0;
-  await page.route('**/assets/media/snc-blue-glass-v2*.mp4',route=>{mediaRequests++; return route.abort();});
+  await page.route('**/assets/media/snc-blue-glass-v3*.mp4',route=>{mediaRequests++; return route.abort();});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
   await page.locator('#journey').scrollIntoViewIfNeeded();

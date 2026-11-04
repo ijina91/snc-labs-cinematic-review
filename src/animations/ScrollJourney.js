@@ -56,8 +56,8 @@ export function createScrollJourney(section) {
     if (current !== index) {
       current = index; stage.dataset.chapter = String(index);
       section.dataset.activeFrame = panels[index].dataset.frame;
-      poster.srcset = `/assets/frames/v2/${section.dataset.activeFrame}-mobile.webp 800w, /assets/frames/v2/${section.dataset.activeFrame}.webp 1280w`;
-      poster.src = `/assets/frames/v2/${section.dataset.activeFrame}.webp`;
+      poster.srcset = `/assets/frames/v3/${section.dataset.activeFrame}-mobile.webp 800w, /assets/frames/v3/${section.dataset.activeFrame}.webp 1280w`;
+      poster.src = `/assets/frames/v3/${section.dataset.activeFrame}.webp`;
       word.textContent = panels[index].dataset.word;
       panels.forEach((panel, i) => { panel.setAttribute('aria-hidden', String(i !== index)); panel.inert = i !== index; });
       clearTimeout(announce); announce = setTimeout(() => { if (!disposed) status.textContent = panels[index].querySelector('h1,h2,h3').textContent; }, 250);

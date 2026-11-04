@@ -8,7 +8,7 @@ function renderChapter(chapter, index) {
     ? `<p class="hero-display" aria-hidden="true"><span>Engineering</span><span>possibility.</span></p><h1 id="hero-title">${chapter.title.map(line => `<span class="hero-line">${line}</span>`).join(' ')}</h1>`
     : `<h2>${chapter.title.map(line => `<span>${line}</span>`).join(' ')}</h2>`;
   return `<article class="journey-panel${hero ? ' hero hero--film' : ''}" id="story-${chapter.id}" data-word="${chapter.word}" data-index="${index}" data-frame="${frame}">
-    <img class="chapter-still" src="/assets/frames/v2/${frame}.webp" srcset="/assets/frames/v2/${frame}-mobile.webp 800w, /assets/frames/v2/${frame}.webp 1280w" sizes="100vw" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} width="1280" height="704" alt="" decoding="async">
+    <img class="chapter-still" src="/assets/frames/v3/${frame}.webp" srcset="/assets/frames/v3/${frame}-mobile.webp 800w, /assets/frames/v3/${frame}.webp 1280w" sizes="100vw" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} width="1280" height="704" alt="" decoding="async">
     <p class="journey-label"><span aria-hidden="true"></span>${chapter.label}</p>
     ${heading}<p class="journey-description">${chapter.description}</p>
     ${hero ? '<div class="hero-actions"><a class="button button-blue" href="#expertise">SNC의 기술 알아보기 <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#about">회사 소개 <span aria-hidden="true">↗</span></a></div>' : ''}
