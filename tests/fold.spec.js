@@ -53,6 +53,7 @@ test('fold cover, unfolded screens and rotation preserve the current scene', asy
     expect(fits).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     expect(await page.locator('.hero-actions').evaluate(el => [...el.querySelectorAll('a')].every(a => a.getBoundingClientRect().left >= 0 && a.getBoundingClientRect().right <= innerWidth + 1))).toBe(true);
+    expect(await page.locator('.hero').evaluate(el => el.clientHeight + document.querySelector('.site-header').clientHeight)).toBeLessThanOrEqual(height + 1);
   }
   await page.locator('#contact').scrollIntoViewIfNeeded();
   for (const [width, height] of [[690, 829], [1024, 768], [344, 882]]) {

@@ -176,6 +176,9 @@ html[data-motion='static'] .hero--immersive .hero-art-intro { opacity: 1; }
   .hero--immersive .hero-bottom { font-size: 9px; }
   .hero--immersive .hero-bottom > span:nth-child(2) { display: none; }
 }
+@media (min-width: 901px) and (hover: none) and (pointer: coarse) {
+  .hero--immersive .hero-layout { min-height: calc(100svh - 146px); }
+}
 @media (prefers-reduced-motion: reduce) {
   .hero-light-sweep { display: none; }
   .hero--immersive .hero-art-intro { opacity: 1; }
