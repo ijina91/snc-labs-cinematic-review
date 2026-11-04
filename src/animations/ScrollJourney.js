@@ -9,31 +9,38 @@ export function createScrollJourney(section) {
   const word = section.querySelector('.journey-word');
   const progress = section.querySelector('.journey-progress span');
   const status = section.querySelector('.journey-status');
-  const mobile = matchMedia('(max-width: 900px)');
+  const content = section.querySelector('.journey-panels');
+  const mobile = matchMedia('(max-width: 900px), (hover: none) and (pointer: coarse)');
   const events = new AbortController();
   let start = 0, span = 1, frame, visible = false, disposed = false, player, current = -1;
-  let target = 0, visual = 0, announce, pinTop = 0, frameHeight = 0;
+  let target = 0, visual = 0, announce, pinTop = 0, frameHeight = 0, contentHeight = 0, layoutWidth = innerWidth;
   section.dataset.enhanced = 'true';
   function placeFrame() {
     if (!mobile.matches) {
       stage.style.removeProperty('clip-path'); stage.style.removeProperty('visibility'); stage.inert = false;
       return;
     }
-    // Reveal a stationary frame through the section's visible intersection.
-    // Native scroll still moves the document; the film never rides in or out.
+    // The parent clips paint natively. JS only controls activity and focus.
     const bounds = section.getBoundingClientRect();
     const top = clamp(bounds.top - pinTop, 0, frameHeight);
     const bottom = clamp(pinTop + frameHeight - bounds.bottom, 0, frameHeight);
     const shown = top + bottom < frameHeight && bounds.top < innerHeight;
-    stage.style.clipPath = `inset(${top}px 0 ${bottom}px)`;
     stage.style.visibility = shown ? 'visible' : 'hidden';
-    stage.inert = !shown || top > 1 || bottom > 1;
+    stage.inert = !shown || top > 1 || bounds.bottom < pinTop + contentHeight - 1;
   }
   function measure() {
+    if (disposed) return;
+    // Resize may arrive before the scroll event/observer catches up. Check
+    // the actual scroll position too, so folding cannot pull Contact back in.
+    const preserve = innerWidth !== layoutWidth && visible && target > 0 && target < 1 && scrollY >= start && scrollY <= start + span;
+    const readingPosition = target;
     const headerHeight = document.querySelector('.site-header').getBoundingClientRect().height;
     start = section.getBoundingClientRect().top + scrollY - headerHeight;
-    span = Math.max(1, section.offsetHeight - stage.clientHeight);
+    contentHeight = content.clientHeight;
+    span = Math.max(1, section.offsetHeight - contentHeight);
     pinTop = parseFloat(getComputedStyle(stage).top) || 0; frameHeight = stage.clientHeight;
+    layoutWidth = innerWidth;
+    if (preserve) scrollTo({ top: start + readingPosition * span, behavior: 'instant' });
     placeFrame();
     update();
   }

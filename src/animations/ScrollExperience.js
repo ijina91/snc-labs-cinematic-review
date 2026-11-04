@@ -4,6 +4,18 @@ import { motionProfile } from '../utils/MotionPreferences.js';
 gsap.registerPlugin(ScrollTrigger);
 export function initScrollExperience() {
   const media = gsap.matchMedia(); let refreshTimer; let disposed = false;
+  // These triggers never pin or change document height. A refresh must not
+  // expose its temporary scroll-to-zero to the native film's position owner.
+  const refreshPositions = [];
+  const beforeRefresh = () => refreshPositions.push({ left: scrollX, top: scrollY });
+  const afterRefresh = () => {
+    const position = refreshPositions.pop();
+    if (disposed || !position) return;
+    if (scrollX !== position.left || scrollY !== position.top) scrollTo({ ...position, behavior: 'instant' });
+    ScrollTrigger.update();
+  };
+  ScrollTrigger.addEventListener('refreshInit', beforeRefresh);
+  ScrollTrigger.addEventListener('refresh', afterRefresh);
   media.add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)', reduced: '(prefers-reduced-motion: reduce)' }, (context) => {
     if (context.conditions.reduced) return;
     const profile = motionProfile();
@@ -40,5 +52,10 @@ export function initScrollExperience() {
   // forced refresh can restore a cached position during a preference change.
   const refresh = () => { if (disposed) return; clearTimeout(refreshTimer); refreshTimer = setTimeout(() => ScrollTrigger.refresh(true), 80); };
   document.addEventListener('snc:layout', refresh); document.fonts?.ready.then(refresh);
-  return () => { disposed = true; clearTimeout(refreshTimer); document.removeEventListener('snc:layout', refresh); media.revert(); };
+  return () => {
+    disposed = true; clearTimeout(refreshTimer); document.removeEventListener('snc:layout', refresh);
+    ScrollTrigger.removeEventListener('refreshInit', beforeRefresh);
+    ScrollTrigger.removeEventListener('refresh', afterRefresh); refreshPositions.length = 0;
+    media.revert();
+  };
 }

@@ -1,7 +1,7 @@
 export function initScrollJourney() {
   const section = document.querySelector('#journey');
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
-  const compact = matchMedia('(max-width: 900px) and (max-height: 500px) and (orientation: landscape)');
+  const compact = matchMedia('(max-width: 900px) and (max-height: 500px) and (orientation: landscape), (hover: none) and (pointer: coarse) and (max-height: 500px) and (orientation: landscape)');
   const events = new AbortController();
   let near = false, eligible = scrollY > 20, disposed = false, loading = false, generation = 0, cleanup;
   async function start() {
