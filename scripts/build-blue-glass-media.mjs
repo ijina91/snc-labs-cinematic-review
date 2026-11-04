@@ -12,6 +12,12 @@ const hash = file => createHash('sha256').update(fs.readFileSync(file)).digest('
 const run = args => {
   const result = spawnSync(ffmpeg, ['-hide_banner','-loglevel','error',...args], {encoding:'utf8',timeout:240000});
   if (result.error || result.status !== 0) throw Error(result.error?.message || result.stderr);
+  return result;
+};
+const verifyFrames = (file, expected) => {
+  const result=run(['-threads','1','-i',file,'-map','0:v:0','-progress','pipe:1','-nostats','-f','null','-']);
+  const counts=[...result.stdout.matchAll(/^frame=(\d+)\s*$/gm)];
+  if (Number(counts.at(-1)?.[1]) !== expected) throw Error(`Unexpected decoded frame count for ${path.basename(file)}: expected ${expected}.`);
 };
 if (manifest.version !== 2 || /REJECTED/.test(manifest.state)) throw Error('Only the current accepted v2 source set may be prepared.');
 const inputs = pairs.map(([from,to],i) => {
@@ -30,9 +36,11 @@ const normalized=inputs.map(({file,record},i) => {
   const start=record.in_seconds || 0, length=record.out_seconds-start;
   const target=path.join(output,`${pairs[i].join('-')}.mp4`);
   run(['-threads','1','-ss',String(start),'-i',file,'-an','-map_metadata','-1',
-    '-vf',`trim=duration=${length},setpts=${5/length}*(PTS-STARTPTS),scale=1280:704:flags=lanczos,setsar=1,fps=24,format=yuv420p`,
+    // fps needs an EOF tail to emit the final sampled frame. The 120-frame
+    // limit discards the tail while retaining an exact five-second interval.
+    '-vf',`trim=duration=${length},setpts=${5/length}*(PTS-STARTPTS),tpad=stop_mode=clone:stop=24,scale=1280:704:flags=lanczos,setsar=1,fps=24,format=yuv420p`,
     '-frames:v','120','-c:v','libx264','-preset','fast','-crf','18','-threads','2','-g','6','-sc_threshold','0','-movflags','+faststart','-y',target]);
-  return target;
+  verifyFrames(target,120); return target;
 });
 const master=path.join(output,'snc-blue-glass-v2.mp4');
 // True adjacent-frame joins. No crossfade that could conceal unrelated shots.
@@ -41,7 +49,7 @@ run(['-filter_complex_threads','1',...normalized.flatMap(file=>['-threads','1','
   '-map','[v]','-an','-map_metadata','-1','-c:v','libx264','-preset','fast','-crf','21','-threads','2','-g','6','-sc_threshold','0','-movflags','+faststart','-y',master]);
 const phone=path.join(output,'snc-blue-glass-v2-mobile.mp4');
 run(['-threads','1','-i',master,'-an','-map_metadata','-1','-vf','scale=800:440:flags=lanczos','-c:v','libx264','-preset','fast','-crf','22','-threads','2','-g','6','-sc_threshold','0','-movflags','+faststart','-y',phone]);
-for (const file of [master,phone]) run(['-threads','1','-i',file,'-f','null','-']);
+for (const file of [master,phone]) verifyFrames(file,840);
 fs.writeFileSync(path.join(output,'review.json'),JSON.stringify({
   state:'ENCODED_DECODED_REQUIRES_FINAL_PLAYBACK_AND_JOIN_REVIEW',
   seconds:35,fps:24,cue_seconds:[0,5,10,15,20,25,30],

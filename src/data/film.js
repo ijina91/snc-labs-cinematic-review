@@ -2,6 +2,6 @@
 export const film = Object.freeze({
   poster: '/assets/frames/v2/01.webp',
   posterMobile: '/assets/frames/v2/01-mobile.webp',
-  source: '', // v1 rejected. Populate only after the complete v2 film passes visual review.
-  sourceMobile: '',
+  source: '/assets/media/snc-blue-glass-v2.mp4',
+  sourceMobile: '/assets/media/snc-blue-glass-v2-mobile.mp4',
 });

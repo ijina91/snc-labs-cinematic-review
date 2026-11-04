@@ -67,6 +67,10 @@
   background: transparent; opacity: 0;
 }
 .journey[data-enhanced='true'] .journey-panel:first-child { opacity: 1; }
+/* Do not fade offscreen static chapters into the opening when they become
+   absolute. The active panel is made visible in the same paint as its state. */
+.journey[data-enhanced='true'] .journey-panel:not(:first-child):not([aria-hidden='false']),
+.journey[data-enhanced='true'] .journey-panel[aria-hidden='true'] { visibility: hidden; }
 .journey[data-enhanced='true'] .journey-panel :is(h2,h3) { max-width: 650px; }
 .journey[data-enhanced='true'] .journey-panel :is(h2,h3) > span { white-space: nowrap; }
 .journey[data-enhanced='true'] .journey-panel::before {

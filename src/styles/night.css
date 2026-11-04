@@ -199,6 +199,7 @@ body { overflow-x: clip; }
 .repo-state p, .repo-item p, .repo-meta { color: #adbed6; }
 .repo-state .inline-link { color: #83caff; }
 .repo-item { color: #fff; border-color: #ffffff24; }
+.repo-item h3 { color: #a9d6ff; }
 .repo-item:hover { background: #0d1829; }
 .github-panel__footer button { color: #b4d9ff; }
 .commit-graphic > i { background: #29466f; }
@@ -289,7 +290,7 @@ body { overflow-x: clip; }
 }
 
 /* One 01–07 film. No separate intro player or chapter counter. */
-.journey-panel.hero--film { padding: 70px 7vw 80px; justify-content: flex-end; }
+.journey .journey-panel.hero--film { padding: 70px 7vw calc(110px + env(safe-area-inset-bottom)); justify-content: flex-end; }
 .hero--film .hero-display { max-width: none; font-size: clamp(42px,6.3vw,120px); margin: 0 0 22px; }
 .hero--film h1 { display: flex; flex-wrap: wrap; gap: .3em; font-size: clamp(20px,2vw,34px); line-height: 1.35; letter-spacing: -.045em; }
 .hero--film .journey-label { margin-bottom: 20px; }
@@ -306,7 +307,7 @@ body { overflow-x: clip; }
   .hero--film .chapter-still { object-fit: contain; object-position: center 14%; }
 }
 @media (max-width: 900px) {
-  .journey-panel.hero--film { padding: 38px 7vw 84px; }
+  .journey .journey-panel.hero--film { padding: 38px 7vw calc(100px + env(safe-area-inset-bottom)); }
   .hero--film .hero-display { font-size: clamp(32px,8.5vw,66px); line-height: 1.02; margin-bottom: 16px; }
   .hero--film h1 { font-size: clamp(17px,3.4vw,25px); }
   .hero--film .journey-label { font-size: 10px; margin-bottom: 14px; }
@@ -316,11 +317,19 @@ body { overflow-x: clip; }
   .hero--film .hero-actions .quiet-link { font-size: 12px; }
 }
 @media (max-width: 600px) and (max-height: 700px) {
-  .journey-panel.hero--film { padding-bottom: 76px; }
+  .journey .journey-panel.hero--film { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
   .hero--film .hero-display { font-size: clamp(28px,8.5vw,42px); margin-bottom: 10px; }
   .hero--film .journey-label { margin-bottom: 9px; }
   .hero--film .journey-description { font-size: 11px; margin-top: 8px; }
   .hero--film .hero-actions { margin-top: 13px; }
+}
+@media (max-width: 360px) {
+  .contact-main { flex-wrap: wrap; gap: 16px; }
+  .contact-title { flex-basis: 100%; word-break: keep-all; }
+  .contact-orb { margin-left: auto; }
+  .phone-link { gap: 10px; padding-inline: 12px; }
+  .phone-link > span:first-child { display: none; }
+  .phone-link strong { font-size: 20px; white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
   .journey-panel:not(.hero--film) { min-height: 0; }

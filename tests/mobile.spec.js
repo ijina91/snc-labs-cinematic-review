@@ -25,7 +25,7 @@ test('small phones fit the hero and keep captions readable at scroll boundaries'
     for (let index = 0; index < 7; index++) {
       // A paused gesture near the old fade-out boundary must still show copy.
       await page.locator('#journey').evaluate((el, i) => {
-        const span = el.offsetHeight - el.querySelector('.journey-stage').clientHeight;
+        const span = el.offsetHeight - el.querySelector('.journey-panels').clientHeight;
         scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + span * ((i + .98) / 7), behavior: 'instant' });
       }, index);
       await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', String(index));
@@ -51,17 +51,15 @@ test('browser toolbar sizing keeps the stage and captions stationary and landsca
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/'); await enter(page);
   // Model stable svh with a taller dynamic viewport when browser bars hide.
-  await page.addStyleTag({ content: `.journey { --scene-height: 766px !important; --large-viewport-height: 924px; }
-    .hero--immersive .hero-stage { min-height: 766px !important; }
-    .hero--immersive .hero-layout { min-height: 710px !important; }` });
-  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + (el.offsetHeight - el.querySelector('.journey-stage').clientHeight) * 2.3 / 7, behavior: 'instant' }));
+  await page.addStyleTag({ content: `.journey { --scene-height: 766px !important; --large-viewport-height: 924px; }` });
+  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 78 + (el.offsetHeight - el.querySelector('.journey-panels').clientHeight) * 2.3 / 7, behavior: 'instant' }));
   await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '2');
   await expect(page.locator('.journey-panel').nth(2)).toHaveCSS('opacity', '1');
   const geometry = () => page.locator('#journey').evaluate(el => ({ height: el.offsetHeight,
     stage: el.querySelector('.journey-stage').clientHeight,
-    captionTop: el.querySelector('.journey-panel[aria-hidden="false"] h3').getBoundingClientRect().top, y: scrollY }));
+    captionTop: el.querySelector('.journey-panel[aria-hidden="false"] :is(h1,h2,h3)').getBoundingClientRect().top, y: scrollY }));
   const geometryBefore = await geometry();
-  const distance = () => page.locator('#journey').evaluate(el => el.offsetHeight - el.querySelector('.journey-stage').clientHeight);
+  const distance = () => page.locator('#journey').evaluate(el => el.offsetHeight - el.querySelector('.journey-panels').clientHeight);
   const before = await distance();
   await page.setViewportSize({ width: 390, height: 924 });
   await expect.poll(distance).toBe(before);
@@ -139,12 +137,16 @@ test('film entrance and exit reveal the frame without translating it vertically'
   await page.goto('/'); await enter(page);
   const geometry = await page.locator('#journey').evaluate(el => ({ top: el.getBoundingClientRect().top + scrollY,
     height: el.offsetHeight, stage: el.querySelector('.journey-stage').clientHeight }));
-  for (const y of [geometry.top - 78 - 180, geometry.top + geometry.height - geometry.stage - 78 + 180]) {
+  // 01 is now the first screen: there is no preceding hero to scroll into it
+  // from. Its fully visible opening must remain interactive; only the partially
+  // clipped exit becomes inert.
+  for (const [y, partial] of [[0, false], [geometry.top + geometry.height - geometry.stage - 78 + 180, true]]) {
     await page.evaluate(y => scrollTo({ top: y, behavior: 'instant' }), y);
     await expect.poll(() => page.locator('.journey-stage').evaluate(el => Math.abs(el.getBoundingClientRect().top - 78))).toBeLessThanOrEqual(1);
     await expect.poll(() => page.locator('.journey-film').evaluate(el => Math.abs(el.getBoundingClientRect().top - 78))).toBeLessThanOrEqual(1);
     await expect(page.locator('.journey-stage')).toHaveCSS('visibility', 'visible');
-    await expect(page.locator('.journey-stage')).toHaveAttribute('inert', '');
+    if (partial) await expect(page.locator('.journey-stage')).toHaveAttribute('inert', '');
+    else await expect(page.locator('.journey-stage')).not.toHaveAttribute('inert');
     expect(await page.locator('#journey').evaluate(el => getComputedStyle(el).clipPath)).not.toBe('none');
   }
   await page.locator('#about').scrollIntoViewIfNeeded();

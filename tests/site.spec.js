@@ -10,8 +10,9 @@ test('preserved content, assets, links and responsive layout', async ({ page }, 
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('response', (response) => { if (response.url().startsWith('http://127.0.0.1') && response.status() >= 400) failed.push(response.url()); });
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('SNC, 기술로가능성을 잇다.');
-  const stage = await page.locator('.hero-stage').boundingBox();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('SNC, 기술로 가능성을 잇다.');
+  await expect(page.locator('#journey')).toHaveAttribute('data-enhanced', 'true');
+  const stage = await page.locator('.journey-stage').boundingBox();
   const header = await page.locator('.site-header').boundingBox();
   expect(stage.x).toBe(0);
   expect(Math.abs(stage.width - page.viewportSize().width)).toBeLessThan(1);
@@ -26,7 +27,10 @@ test('preserved content, assets, links and responsive layout', async ({ page }, 
     await page.locator(`#${id}`).scrollIntoViewIfNeeded();
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
   }
-  await page.getByRole('heading', { level: 1 }).scrollIntoViewIfNeeded();
+  // Inactive cinematic chapters are hidden from accessibility until visited.
+  // Return through the actual home link rather than scrolling a hidden H1.
+  await page.getByRole('link', { name: 'SNC Labs 홈', exact: true }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
   await page.evaluate(() => document.fonts.ready);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
@@ -177,6 +181,7 @@ test('one decorative player owns all seven chapters and never requests a rejecte
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('video')).toHaveCount(1);
   const video=page.locator('.journey-film');
+  await expect(page.locator('#journey')).toHaveAttribute('data-renderer', 'video', {timeout:20000});
   expect(await video.evaluate(el=>el.duration)).toBeCloseTo(35, 1);
   await expect.poll(()=>video.evaluate(el=>el.paused), {timeout:1000}).toBe(true);
   expect(await video.evaluate(el => ({muted:el.muted,loop:el.loop,autoplay:el.autoplay}))).toEqual({muted:true,loop:false,autoplay:false});
@@ -187,13 +192,13 @@ test('one decorative player owns all seven chapters and never requests a rejecte
   await expect(page.locator('.journey-panel[aria-hidden="true"]')).toHaveCount(0);
 });
 async function enterJourney(page) {
-  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - 70, behavior: 'instant' }));
+  await page.locator('#journey').evaluate(el => scrollTo({ top: el.getBoundingClientRect().top + scrollY - document.querySelector('.site-header').clientHeight + 8, behavior: 'instant' }));
   await expect(page.locator('#journey')).toHaveAttribute('data-enhanced', 'true', { timeout: 15000 });
 }
 async function journeyChapter(page, index) {
   await page.locator('#journey').evaluate((el, chapter) => {
     const header = document.querySelector('.site-header').getBoundingClientRect().height;
-    const span = el.offsetHeight - el.querySelector('.journey-stage').clientHeight;
+    const span = el.offsetHeight - el.querySelector('.journey-panels').clientHeight;
     scrollTo({ top: el.getBoundingClientRect().top + scrollY - header + span * ((chapter + .3) / 7), behavior: 'instant' });
   }, index);
   await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', String(index));
@@ -219,6 +224,13 @@ test('seven-chapter introduction follows native scroll, reverses, and supports k
   const previous = await page.evaluate(() => scrollY);
   await page.keyboard.press('PageDown');
   await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(previous);
+  // Finish this native animated input before asking the browser to reverse it.
+  await page.evaluate(() => new Promise(resolve => {
+    let quiet;
+    const done = () => { removeEventListener('scroll', wait); resolve(); };
+    const wait = () => { clearTimeout(quiet); quiet = setTimeout(done, 200); };
+    addEventListener('scroll', wait, { passive: true }); wait();
+  }));
   await page.keyboard.press('PageUp');
   await expect(page.locator('.journey-stage')).toHaveAttribute('data-chapter', '1');
   // PageUp uses the browser's own animated scroll. Let that input finish
@@ -239,11 +251,14 @@ test('seven-chapter introduction follows native scroll, reverses, and supports k
 });
 
 test('missing decorative image retains scroll chapters and reduced motion restores static reading', async ({ page }) => {
-  await page.route('**/assets/frames/v2/02.webp',route=>route.abort());
+  let failedImages = 0;
+  await page.route('**/assets/frames/v2/03*.webp',route=>{ failedImages++; return route.abort(); });
   await page.route('**/assets/media/snc-blue-glass-v2*.mp4',route=>route.abort());
   await page.goto('/'); await enterJourney(page);
   await expect(page.locator('#journey')).toHaveAttribute('data-renderer','poster');
   await journeyChapter(page,2);
+  await expect.poll(() => failedImages).toBeGreaterThan(0);
+  await expect(page.locator('.journey-panel').nth(2).locator('h2')).toBeInViewport();
   await expect(page.locator('.journey-poster')).toBeVisible();
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(page.locator('#journey')).not.toHaveAttribute('data-enhanced','true');

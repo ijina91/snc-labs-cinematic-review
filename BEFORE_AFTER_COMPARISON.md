@@ -1,42 +1,32 @@
-# 전후 비교와 시각 검토
+# SNC Labs 전후 비교
 
-> 2026-11-04 최신 작업 상태: 최신 비교 대상은 이전 운영 화이트·블루 사이트와 제작 중인 검은 배경 Blue Glass v2다. v2의 실제 디자인·모션 기준은 docs/BLUE_GLASS_MOTION_V2.md와 docs/REFERENCE_MOODBOARD_V2.md에 기록한다. 아래 비교표는 이전 리디자인 이력이며 새 7구간의 완료 결과로 표시하지 않는다.
+비교 기준은 운영 `main`의 `7cdbcca`와 새 `design/blue-glass-frames` 구현이다. 최초 감사 당시의 정적 사이트와 예전 생성 시안은 역사적 기록이며 현재 결과의 검증으로 사용하지 않는다.
 
-자세한 현황: [Blue Glass QA](docs/BLUE_GLASS_QA.md).
-
-기준: 운영 main `b9b4a4617af3229f1951c48b8b862830730e4ed0`. Before는 이전에 캡처한 변경 전 운영 사이트, After는 로컬 배포용 빌드다. GitHub 프로젝트 캡처는 빈 결과 fixture로 제어했으며 가짜 공개 프로젝트를 만들지 않았다.
-
-| 구분 | 변경 전 | 현재 결과 |
+| 항목 | 이전 운영 디자인 | 현재 Blue Glass |
 |---|---|---|
-| 첫 화면 | 정적 화이트·블루 2열 구성 | 전체 화면의 화이트→블루 공간과 2.25초 이내 GSAP 진입 |
-| 회사 소개 | 회사·서비스 텍스트 중심 | 회사→ESH→SAP→Web→연결→문의의 여섯 스크롤 장면 |
-| 배경 | 별도 정적 일러스트 | SNC 전용 원본에서 생성한 15.5초 공간 영상, 양방향 스크롤 탐색 |
-| 장식 | 중간 시안의 회전 체크·고리·개별 3D 오브젝트 | 비대칭 블루 금속·유리·빛의 연속 공간, Three.js 제거 |
-| 화면 조작 | 중간 시안의 오른쪽 점·장면 번호 | 점·번호 제거, 기본 스크롤과 바로 읽기·문의 링크 |
-| 서비스 | 세 실제 분야의 기본 소개 | 데이터 기반 상세 컴포넌트와 분야별 문의 링크 |
-| 기술 설명 | 별도 기술 서사 없음 | 업무·시스템·운영의 관계를 양방향 SVG로 설명 |
-| GitHub | 실패 상태 구분 부족 | 로딩·성공·빈 결과·시간제한·실패·재시도, 공개 데이터만 표시 |
-| 문의 | 기존 대표전화 | 같은 전화의 대형 CTA·터치 조작 영역 |
-| 회복력 | 기본 모션 감소·메뉴 | no-JS·영상/모션 실패·저사양 대체·실시간 모션 설정 변경 |
-| 배포 | main Pages workflow | 기존 방식 유지, main ref 가드와 PR 검증 전용 workflow |
+| 배경 | 화이트에서 블루가 나타나는 진입 | 처음부터 검정·블루 유리 건축 공간 |
+| 첫 화면과 소개 | 히어로와 후속 여섯 장면 | 첫 화면을 포함한 일곱 패널·하나의 플레이어 |
+| 영상 | 15.5초 공간 영상 | 사용자 01~07에 기반한 일곱 실제 생성 구간·35초 마스터 |
+| 조각 | 카메라 이동의 비중이 큼 | 개별 부유·미세 기울기·유리 면 하이라이트를 원본별 검수 |
+| 연결 | 이전 공간 영상의 시간축 | 직전 실제 마지막 프레임에서 다음 구간 생성, 여섯 압축 접합 검수 |
+| 금지 요소 | 이전 사용자 지시에 따라 고리·회전 체크·측면 안내 제거 | 동일 기준 유지, 입력 이미지의 구체·큰 타원 궤도까지 수정 |
+| 서비스 | 세 서비스의 카드 구성 | ESH·SAP·Web을 각각 넓은 이미지 영역과 기본 상세 펼침으로 구성 |
+| 모바일·폴드 | 운영에서 수정한 클리핑·높이 처리 | 기존 경계 규칙 보존, 일곱 패널·단일 진입 영상·폭 전환에 적용 |
+| 오류·정적 읽기 | 기존 대체 화면·no-JS | 일곱 정적 프레임, 늦은 영상 로딩과 오류에서도 실제 문구 유지 |
+| 회사 정보 | 승인된 세 사업 분야·전화·공개 GitHub | 같은 내용과 링크 보존, 미확인 고객·실적·서비스 추가 없음 |
+| 배포 | main 기반 GitHub Pages | 같은 방식, PR 검증과 main ref 가드 유지 |
 
-## 현재 캡처
+## 검토 화면
 
-- [변경 전 데스크톱](docs/previews/before-desktop.png), [변경 전 모바일](docs/previews/before-mobile.png).
-- [현재 데스크톱](docs/previews/desktop.png), [현재 모바일](docs/previews/mobile.png).
-- [SNC 소개](docs/previews/journey-snc.png), [ESH](docs/previews/journey-esh.png), [SAP](docs/previews/journey-sap.png), [Web](docs/previews/journey-web.png), [연결](docs/previews/journey-connect.png), [문의 전환](docs/previews/journey-next.png).
-- [모바일 소개](docs/previews/journey-mobile.png), [기술 설명](docs/previews/technology.png), [실제 영상 프레임](docs/previews/film-contact-sheet.png).
+- 운영 기준: [데스크톱](docs/previews/baseline-main-desktop.png), [모바일](docs/previews/baseline-main-mobile.png).
+- 새 첫 화면: [데스크톱](docs/previews/desktop.png), [모바일](docs/previews/mobile.png), [폴드](docs/previews/fold.png).
+- 새 흐름: [SNC 소개](docs/previews/journey-about.png), [ESH](docs/previews/journey-esh.png), [SAP](docs/previews/journey-sap.png), [Web](docs/previews/journey-web.png), [마무리](docs/previews/journey-next.png).
+- 실제 압축 영상의 [여섯 접합 프레임](docs/previews/film-v2-contact-sheet.jpg).
 
-스크롤 walkthrough는 ignored `artifacts/cinematic-preview.webm`, 실제 배경 MP4는 `public/assets/media/snc-spatial-film.mp4`다. 화면 녹화와 생성 배경 영상을 혼동하지 않는다. 정지 캡처가 영상 타이밍이나 모든 프레임의 품질을 증명하는 것으로 표시하지 않는다.
+캡처는 정지 화면이며 영상의 모든 타이밍이나 실기기 전체 품질을 인증하지 않는다. 공개 GitHub 영역 캡처는 재현 가능한 빈 목록 응답을 사용한다. 목록·실패·재시도·텍스트 안전성은 별도 자동 검사로 확인한다. 화면 walkthrough 녹화와 실제 35초 생성 배경 영상을 구분한다.
 
-## 긍정 검토 — 시각 목표 확인
+## 장점·결함 검토
 
-1440px 첫 화면과 SAP 장면, 390px 첫 화면과 소개 장면을 별도로 확인했다. 흰색 여백·대형 한글 타이틀·SNC 블루의 관계가 유지되고 배경이 콘텐츠 컨테이너 밖으로 펼쳐진다. 네이비 장면은 본문 대비를 보호하며 모바일은 문구를 하단으로 재배치한다. 회사 소개·기술 분야·실제 대표전화로 이어지는 경로를 유지했다. 프레임 시트에서 공간 이동과 일관된 재질·색상을 확인했다.
+검은 공간·각진 유리·블루 빛을 중심으로 브랜드를 통일하고, 실제 회사 소개와 문의는 HTML로 유지했다. 결함 관점에서는 카메라에 편중된 이전 시도, 원형 궤도, 초기 CLS, 폴드 경계, 지연 로딩 및 GitHub 목록 대비를 검토했다. 구체적인 원인·조치와 100점 모델은 [교차 검토](docs/BLUE_GLASS_REVIEW.md)에 기록한다. 같은 구현 에이전트의 두 관점 검토이며 외부 심사나 설치되지 않은 Impeccable 스킬 실행을 주장하지 않는다.
 
-## 부정 검토 — 결함 찾기
-
-초기 LTX 출력의 주름진 금속·원형 공간은 미채택하고 원본 이미지 기반 생성으로 교체했다. 이전 이미지 컨테이너 경계와 모바일 relative 배치를 바로잡았다. 최종 히어로 오른쪽 아래 작은 SNC 문구가 블루 배경에 묻혀 네이비 바탕·화이트 글자로 바꾸고 비링크의 화살표를 제거했다. 영상 연결부·모바일 문구·가로 넘침·키보드·오류 대체는 실제 프레임과 자동 검사로 확인했다.
-
-모션 감소 후 모바일 화면이 일반 서비스 구간으로 이동한 trace도 확인했다. 영상은 화면 밖에서 일부러 로딩하지 않으므로 테스트가 소개 구간으로 재진입하도록 수정하고 관련 검사를 다시 실행했다. 기능 실패를 성공으로 덮거나 offscreen 영상 강제 로딩을 추가하지 않았다.
-
-두 검토는 같은 구현 에이전트가 서로 다른 기준으로 수행한 별도 검토이며 독립된 사람/에이전트의 인증 또는 Impeccable 스킬 실행이 아니다. 자동 QA의 실제 결과·최초 실패·재검사는 QA_REPORT.md에, 성능과 해상도 한계는 PERFORMANCE_REPORT.md에 공개한다. 주관적 99점·완벽함·모든 실기기 품질을 인증하지 않는다.
+실제 통과와 남은 한계는 [QA](QA_REPORT.md) 및 [성능 보고서](PERFORMANCE_REPORT.md)에 기재한다. 주관적인 99점으로 미검증 항목을 덮지 않는다.

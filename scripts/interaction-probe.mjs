@@ -14,7 +14,6 @@ for (const width of [390, 1440]) {
   await page.goto(process.env.PERFORMANCE_URL || 'http://127.0.0.1:4173/');
   await page.waitForTimeout(1600);
   await page.evaluate(() => { window.sncProbePhase = 'journey-entry'; });
-  await page.getByRole('link', {name: 'SNC의 기술 알아보기', exact: true}).click();
   await page.waitForFunction(() => document.querySelector('#journey').dataset.renderer === 'video', null, {timeout:30000});
   await page.waitForTimeout(700);
   const renderer = await page.locator('#journey').getAttribute('data-renderer');
