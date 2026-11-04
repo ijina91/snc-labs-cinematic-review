@@ -89,9 +89,14 @@
 .journey-progress span { display: block; height: 100%; background: #216be4; transform-origin: left; transform: scaleX(0); }
 @media (max-width: 1200px) { .journey-panel h3 { font-size: 4.5vw; } .journey-description { font-size: 14px; max-width: 350px; } }
 @media (max-width: 900px) {
-  /* Toolbar changes resize the visible stage, not the scroll distance. */
-  .journey { --scene-height: calc(100svh - 78px); --stage-height: calc(100dvh - 78px); }
+  /* Browser bars must not resize the sticky box or move bottom-aligned copy.
+     Cover the largest viewport; keep copy and controls inside the smallest. */
+  .journey {
+    --scene-height: calc(100svh - 78px);
+    --stage-height: calc(var(--large-viewport-height, 100lvh) - 78px);
+  }
   .journey[data-enhanced='true'] .journey-stage { top: 78px; }
+  .journey[data-enhanced='true'] .journey-panels { bottom: auto; height: var(--scene-height); }
   .journey[data-enhanced='true'] .journey-panel {
     justify-content: flex-end; padding: 80px 7vw calc(100px + env(safe-area-inset-bottom));
     transition: opacity .18s ease;
@@ -108,7 +113,8 @@
   .journey-poster { width: 100%; height: 60%; top: 0; }
   .journey[data-enhanced='true'] .journey-top { top: 20px; font-size: 10px; }
   .journey[data-enhanced='true'] .journey-top > span { max-width: 130px; }
-  .journey[data-enhanced='true'] .journey-bottom { bottom: calc(20px + env(safe-area-inset-bottom)); }
+  .journey[data-enhanced='true'] .journey-bottom { bottom: calc(var(--stage-height) - var(--scene-height) + 20px + env(safe-area-inset-bottom)); }
+  .journey[data-enhanced='true'] .journey-progress { bottom: calc(var(--stage-height) - var(--scene-height)); }
   .journey-scroll-hint { display: none; }
   .journey[data-enhanced='true'] .journey-word { font-size: 27vw; bottom: 50%; left: 3vw; }
 }
@@ -116,7 +122,7 @@
   .journey-panel h3 { font-size: clamp(27px, 7.1vw, 41px); letter-spacing: -.06em; }
   .journey-description { font-size: 12px; }
 }
-@media (max-width: 900px) and (max-height: 500px) {
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
   .journey-panel { min-height: 0; padding-block: 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
